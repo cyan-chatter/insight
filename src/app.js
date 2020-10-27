@@ -2,19 +2,27 @@ const path = require('path')
 const hbs = require('hbs')
 require('./db/mongoose')
 const express = require('express')
-const app = express()
 const userRouter = require('./routers/students')
-app.use(express.json())
-app.use(userRouter)
-//const utils = require('../utils')
-// const bodyParser = require('body-parser')
-// app.use(bodyParser.urlencoded({extended:false}))
-// app.use(bodyParser.json())
+const auth = require('./middleware/authStudent')
+const isloggedin = require('./middleware/isloggedin')
+const app = express()
 
+
+const cookieParser= require('cookie-parser')
+
+
+//body Parser for parsing form data
+const bodyParser = require('body-parser')
+
+app.use(express.json())
+app.use(bodyParser.urlencoded({extended:true}))
+
+app.use(cookieParser())
+app.use(userRouter)
 
 
 //port value
-const port = process.env.PORT || 3000
+const port = process.env.PORT
 
 // paths
 const publicDirectoryPath = path.join(__dirname, '../public')
@@ -32,14 +40,18 @@ app.use(express.static(publicDirectoryPath))
 
 
 //home routes
-app.get('/',(req, res) => {
+app.get('/', isloggedin, (req, res) => {
+    
+    
     res.render('face', {
         title: 'INSIGHT',
         subtitle: 'Stream Analysis by Online Aptitude Tests'
     })
+   
+  
 })
 
-app.get('/students',(req,res) =>{
+app.get('/students',isloggedin,(req,res) =>{
     res.render('entry',{
         title: 'Students',
         login:'Student Login',
@@ -67,12 +79,14 @@ app.get('/admins',(req,res) =>{
     })
 })
 
-app.get('/students/register', (req,res)=>{
+app.get('/students/register',isloggedin, (req,res)=>{
     res.render('register',{
         title: 'Student Registeration',
         goto: '/students/register'
     })
 })
+
+
 
 app.get('/teachers/register', (req,res)=>{
     res.render('register',{
@@ -81,7 +95,7 @@ app.get('/teachers/register', (req,res)=>{
     })
 })
 
-app.get('/students/login', (req,res)=>{
+app.get('/students/login',isloggedin, (req,res)=>{
     res.render('login',{
         title: 'Student Login',
         goto: '/students/login'
@@ -95,6 +109,18 @@ app.get('/teachers/login', (req,res)=>{
     })
 })
 
+app.get('/clcookie',(req,res) => {
+    res.clearCookie('token')
+    
+
+    res.json({name:"sanu"})
+}
+)
+
+app.get('/cookie',(req,res)=> {
+    console.log(req.cookies)
+    res.send("succes")
+})
 
 app.get('*',(req,res)=>{
     res.render('error404',{
@@ -102,6 +128,7 @@ app.get('*',(req,res)=>{
         message: 'Page Not Found' 
     })
 })
+
 
 
 app.listen(port, () => {

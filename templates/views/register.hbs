@@ -5,6 +5,7 @@
         
         <title>Insight</title>
         <link rel="icon" href="../../utils/img/searchW2.png">
+       
     </head>
     <body>
         <div class= "header">
@@ -12,22 +13,25 @@
         </div>
         <div class="main-content">
                 <br>
-                <form id="registerForm" method ="POST" action = "{{goto}}">
+                <form id="registerForm" method ="post" action = {{goto}}>
+                    
                     <label for="name">Name</label><br>
-                    <input type="text" id="name"><br>
+                    <input type="text" name="name" id="name" required><br>
                     <label for="age">Age</label><br>
-                    <input type="number" id="age"><br>
+                    <input type="number" name="age" id="age" required><br>
                     <label for="email">Email</label><br>
-                    <input type="text" id="email"><br>
+                    <input type="email" name="email" id="email" required><br>
                     <label for="password">Password</label><br>
-                    <input type="text" id="password"><br>
-                    <button type="submit" form="registerForm" value="Submit">Submit</button>
+                    <input type="password" name="password" id="password" minlength=6 required><br>
+                    <label for="confirmpass">Confirm Password</label><br>
+                    <input type="password" id="confirmpass" required><br><br>
+                    <input type="submit" form="registerForm" id="submit" value="Submit">
                 </form>
                 
                 <br>
         </div>
         
-        
+     <script src="/js/confirmpass.js" ></script>
    <!-- <div><script src="/js/face.js"></script></div> -->
     
     </body>

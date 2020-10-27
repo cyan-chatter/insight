@@ -4,16 +4,19 @@ const User = require('../db/student')
 const auth = require('../middleware/authStudent')
 const multer = require('multer')
 const sharp = require('sharp')
-//const bodyParser = require('body-parser')
+
 const parser = require('../middleware/parser')
+const bodyParser = require('body-parser')
 //const { sendWelcomeEmail, sendCancellationEmail} = require('../emails/account')
 ////////////////////////
 
 //public
 
-router.post('/students/register', parser.registerStudentParseData, async (req, res)=>{
-   
-   console.log(req.body) 
+
+
+router.post('/students/register', async (req, res)=>{
+  
+
    const alreadyPresent = await User.findOne({email: req.body.email})
    if(alreadyPresent){
       return res.status(400).render('error404',{
@@ -23,17 +26,18 @@ router.post('/students/register', parser.registerStudentParseData, async (req, r
    }
    try{
       const user = new User(req.body)
-      user.body = req.body.name
-      user.age = req.body.age
-      user.email = req.body.email
-      user.password = req.body.password
-   
+      
+      
       await user.save() 
       //sendWelcomeEmail(user.email, user.name)
       const token = await user.generateAuthToken()
+      res.cookie('token',token,{
+         maxAge:1000*60*60,
+         httpOnly:true
+
+      })
       res.status(201).render('studentHome',{
-         user, 
-         token,
+         
          message: 'You are successfully Registered as a Student.'
       })
    }catch(e){
@@ -45,15 +49,15 @@ router.post('/students/register', parser.registerStudentParseData, async (req, r
 
  })
 
- router.post('/students/login', parser.registerStudentParseData, async (req,res)=>{
+ router.post('/students/login', async (req,res)=>{
    try{    
       const user = await User.findByCredentials(req.body.email, req.body.password)  
       const token = await user.generateAuthToken()
-      res.status(200).render('studentHome',{
-         user, 
-         token,
-         message:'You are Logged in'
+      res.cookie('token',token,{
+         maxAge:3600000,
+         httpOnly:true
       })
+      res.redirect('/students/dashboard')
     }catch(e){
       const E = e.toString() 
       res.status(400).render('error404',{
@@ -74,6 +78,7 @@ router.post('/students/logout', auth, async (req,res)=>{
          return t.token !== req.token
       })
       await req.user.save()
+      res.clearCookie('token')
       res.send('You have logged out successfully') 
    }catch(e){
       res.status(500).send()
@@ -85,6 +90,7 @@ router.post('/students/logoutAll', auth, async(req,res)=>{
    try{
       req.user.tokens = []
       await req.user.save()
+      res.clearCookie('token')
       res.send('You have successfully Logged Out from All your Devices')
    }catch(e){
       res.status(500).send()
@@ -140,6 +146,9 @@ router.post('/students/logoutAll', auth, async(req,res)=>{
    }
 })
 
+router.get('/students/dashboard',auth ,async (req,res)=> {
+    res.render('dashboard', { name: req.user.name})
+})
 ////////////////////////////////////
 // FILE UPLOADS
 

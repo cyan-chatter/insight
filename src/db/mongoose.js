@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 
 const MongoClient = mongodb.MongoClient
 const dbName = 'insight-base' 
-const connectionURL = process.env.MONGODB_URL || 'mongodb://127.0.0.1:27017/' + dbName 
+const connectionURL = process.env.MONGODB_URL+ dbName
 
 mongoose.connect(connectionURL,{
     useNewUrlParser: true,

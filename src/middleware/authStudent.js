@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken')
 const User = require('../db/student')
-const secretKey = process.env.JWT_SECRET || 'TotalOverdose'
+const cookieParser= require('cookie-parser')
+
+const secretKey = process.env.JWT_SECRET
 // app.use((req,res,next)=>{
 //     if(req.method === 'GET' || req.method === 'POST' || req.method === 'PATCH' || req.method === 'DELETE'){
 //         res.status(503).end('Request Temporarily Disabled. Server is Under Maintainance')
@@ -12,7 +14,7 @@ const secretKey = process.env.JWT_SECRET || 'TotalOverdose'
 
 const auth = async(req, res, next)=>{
     try{ 
-        const token = req.header('Authorization').replace('Bearer ','')
+        const token = req.cookies.token
         const decoded = jwt.verify(token, secretKey)
         const user = await User.findOne({_id: decoded._id, 'tokens.token':token})
         
@@ -27,5 +29,7 @@ const auth = async(req, res, next)=>{
         res.status(401).send('error: Please authenticate.')
     }
 }
+
+
 
 module.exports = auth

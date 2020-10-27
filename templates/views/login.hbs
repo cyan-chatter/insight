@@ -14,10 +14,10 @@
                 <br>
                 <form id="loginForm" method ="POST" action = "{{goto}}">
                     <label for="email">Email</label><br>
-                    <input type="text" id="email"><br>
+                    <input type="email" name="email" required><br>
                     <label for="password">Password</label><br>
-                    <input type="text" id="password"><br>
-                    <button type="submit" form="loginForm" value="Submit">Submit</button>
+                    <input type="password" name="password" required><br>
+                    <input type="submit" form="loginForm" value="Login">
                 </form>
                 
                 <br>
