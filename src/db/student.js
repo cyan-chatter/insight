@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const secretKey = process.env.JWT_SECRET
+const secretKey = process.env.JWT_SECRET||'TotalOverdose'
 
 const studentSchema = new mongoose.Schema({
     name: {
@@ -80,7 +80,7 @@ studentSchema.statics.findByCredentials = async (email, password) =>{
 
 studentSchema.methods.generateAuthToken = async function (){
     const student = this
-    const token = jwt.sign({_id: student._id.toString()},secretKey,{expiresIn:60})
+    const token = jwt.sign({_id: student._id.toString()},secretKey)
     student.tokens = student.tokens.concat({token})
     await student.save()
     return token 
