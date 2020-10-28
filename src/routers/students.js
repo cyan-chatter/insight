@@ -36,9 +36,12 @@ router.post('/students/register', async (req, res)=>{
          httpOnly:true
 
       })
-      res.status(201).render('studentHome',{
+      res.status(201).render('tempPage',{
          
-         message: 'You are successfully Registered as a Student.'
+         message: 'You are successfully Registered as a Student.',
+         goto: '/students/dashboard',
+         destination: 'Dashboard'
+         
       })
    }catch(e){
       res.status(400).render('error404',{

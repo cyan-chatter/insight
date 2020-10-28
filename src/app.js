@@ -111,8 +111,6 @@ app.get('/teachers/login', (req,res)=>{
 
 app.get('/clcookie',(req,res) => {
     res.clearCookie('token')
-    
-
     res.json({name:"sanu"})
 }
 )
