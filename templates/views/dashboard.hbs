@@ -10,9 +10,16 @@
        <i class="fas fa-user"></i>
        <span>{{name}}</span>
        </div><br>
-       <form action="/students/logout" method='post'>
+       <div>
+       <form action="/{{type}}/logout" method='post'>
        <input type='submit' value='Logout'>
        </form>
+       <br>
+       <form action="/{{type}}/logoutAll" method='post'>
+       <input type='submit' value='LogoutAll'>
+       </form>
+       </div>
+
        
 
 

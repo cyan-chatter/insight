@@ -40,7 +40,8 @@ router.post('/students/register', async (req, res)=>{
          
          message: 'You are successfully Registered as a Student.',
          goto: '/students/dashboard',
-         destination: 'Dashboard'
+         destination: 'Dashboard',
+         name: user.name
          
       })
    }catch(e){
@@ -82,9 +83,15 @@ router.post('/students/logout', auth, async (req,res)=>{
       })
       await req.user.save()
       res.clearCookie('token')
-      res.send('You have logged out successfully') 
+      res.render('tempPage', {
+         
+         message: 'You have Logged Out successfully',
+         destination: 'Home Page',
+         goto: '/'
+
+      }) 
    }catch(e){
-      res.status(500).send()
+      res.status(500).send('Error in Logging Out')
    }
 })
 
@@ -94,24 +101,25 @@ router.post('/students/logoutAll', auth, async(req,res)=>{
       req.user.tokens = []
       await req.user.save()
       res.clearCookie('token')
-      res.send('You have successfully Logged Out from All your Devices')
+      res.render('tempPage', {
+         
+         message: 'You have Logged Out successfully from all your Devices',
+         destination: 'Home Page',
+         goto: '/'
+      })
    }catch(e){
-      res.status(500).send()
+      res.status(500).send('Error in Logging Out')
    }
 })
-
-
 
  router.get('/students/me', auth, async (req,res)=>{
     try{
        res.send(req.user)
     }catch(e){
        res.status(500).send(e)
-    } 
- 
+    }  
   })
  
-
  router.patch('/students/me', auth, async (req, res)=>{
    const allowedUpdates = ['name','email','password','age']
    const updates = Object.keys(req.body)
@@ -150,7 +158,7 @@ router.post('/students/logoutAll', auth, async(req,res)=>{
 })
 
 router.get('/students/dashboard',auth ,async (req,res)=> {
-    res.render('dashboard', { name: req.user.name})
+    res.render('dashboard', { name: req.user.name, type: 'students'})
 })
 ////////////////////////////////////
 // FILE UPLOADS

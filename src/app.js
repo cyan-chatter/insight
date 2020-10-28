@@ -86,8 +86,6 @@ app.get('/students/register',isloggedin, (req,res)=>{
     })
 })
 
-
-
 app.get('/teachers/register', (req,res)=>{
     res.render('register',{
         title: 'Teacher Registeration',
