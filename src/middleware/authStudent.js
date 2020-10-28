@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const User = require('../db/student')
 const cookieParser= require('cookie-parser')
 
-const secretKey = process.env.JWT_SECRET
+const secretKey = process.env.JWT_SECRET || 'TotalOverdose'
 // app.use((req,res,next)=>{
 //     if(req.method === 'GET' || req.method === 'POST' || req.method === 'PATCH' || req.method === 'DELETE'){
 //         res.status(503).end('Request Temporarily Disabled. Server is Under Maintainance')

@@ -22,7 +22,7 @@ app.use(userRouter)
 
 
 //port value
-const port = process.env.PORT
+const port = process.env.PORT||3000
 
 // paths
 const publicDirectoryPath = path.join(__dirname, '../public')
