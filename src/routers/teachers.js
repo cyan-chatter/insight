@@ -18,7 +18,9 @@ router.post('/teachers/register', async (req, res)=>{
     if(alreadyPresent){
        return res.status(400).render('error404',{
           status:'400',
-          message: 'E-mail already registered.'
+          message: 'E-mail already registered.',
+          destination: 'Teachers Page',
+          goto: '/teachers'
        })
     }
     try{
@@ -43,7 +45,9 @@ router.post('/teachers/register', async (req, res)=>{
     }catch(e){
        res.status(400).render('error404',{
           status:'400 :(',
-          message: 'Error Occurred while generating Token'
+          message: 'Error Occurred while generating Token',
+          destination: 'Teachers Page',
+          goto: '/teachers'
        })
     }
  
@@ -62,7 +66,9 @@ router.post('/teachers/register', async (req, res)=>{
        const E = e.toString() 
        res.status(400).render('error404',{
           status:'400 :(',
-          message: E
+          message: E,
+          destination: 'Teachers Page',
+          goto: '/teachers'
        })
      }
   })
@@ -87,7 +93,12 @@ router.post('/teachers/register', async (req, res)=>{
  
        }) 
     }catch(e){
-       res.status(500).send('Error in Logging Out')
+       res.status(500).render('error404',{
+        status:'500 :(',
+        message: 'Error in Logging Out, '+ e,
+        destination: 'Teachers Page',
+        goto: '/teachers'
+     })
     }
  })
  
@@ -104,10 +115,16 @@ router.post('/teachers/register', async (req, res)=>{
           goto: '/'
        })
     }catch(e){
-       res.status(500).send('Error in Logging Out')
+       res.status(500).render('error404',{
+        status:'500 :(',
+        message: 'Error in Logging Out, '+ e,
+        destination: 'Teachers Page',
+        goto: '/teachers'
+     })
     }
  })
- 
+ //////////////////
+
   router.get('/teachers/me', auth('teachers'), async (req,res)=>{
      try{
         res.send(req.user)

@@ -20,13 +20,13 @@ router.post('/students/register', async (req, res)=>{
    if(alreadyPresent){
       return res.status(400).render('error404',{
          status:'400',
-         message: 'E-mail already registered.'
+         message: 'E-mail already registered.',
+         goto: '/students',
+         destination: 'Students Page'
       })
    }
    try{
       const user = new Student(req.body)
-      
-      
       await user.save() 
       //sendWelcomeEmail(user.email, user.name)
       const token = await user.generateAuthToken()
@@ -46,7 +46,9 @@ router.post('/students/register', async (req, res)=>{
    }catch(e){
       res.status(400).render('error404',{
          status:'400 :(',
-         message: 'Error Occurred while generating Token'
+         message: 'Error Occurred while generating Token',
+         goto: '/students',
+         destination: 'Students Page'
       })
    }
 
@@ -65,7 +67,9 @@ router.post('/students/register', async (req, res)=>{
       const E = e.toString() 
       res.status(400).render('error404',{
          status:'400 :(',
-         message: E
+         message: E,
+         goto: '/students',
+         destination: 'Students Page'
       })
     }
  })
@@ -90,7 +94,12 @@ router.post('/students/logout', auth('students'), async (req,res)=>{
 
       }) 
    }catch(e){
-      res.status(500).send('Error in Logging Out')
+      res.status(500).render('error404',{
+         status:'500 :(',
+         message: 'Error in Logging Out, ' + e,
+         goto: '/students',
+         destination: 'Students Page'
+      })
    }
 })
 
@@ -107,15 +116,22 @@ router.post('/students/logoutAll', auth('students'), async(req,res)=>{
          goto: '/'
       })
    }catch(e){
-      res.status(500).send('Error in Logging Out')
+      res.status(500).render('error404',{
+         status:'500 :(',
+         message: 'Error in Logging Out, '+ e,
+         goto: '/students',
+         destination: 'Students Page'
+      })
    }
 })
+
+/////////////////////////////////
 
  router.get('/students/me', auth('students'), async (req,res)=>{
     try{
        res.send(req.user)
     }catch(e){
-       res.status(500).send(e)
+       res.status(500).render(e)
     }  
   })
  
