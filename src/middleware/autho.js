@@ -34,7 +34,12 @@ const auth = (type)=>{
         next()
     
         }catch(e){
-            res.status(401).send('error: Please authenticate.')
+            res.status(401).render('error404',{
+                status:'401 :(',
+                message: 'Please Authenticate Properly',
+                goto: '/',
+                destination: 'Home Page'
+             })
         }
     }
 } 
