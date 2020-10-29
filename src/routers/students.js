@@ -1,12 +1,11 @@
 const express = require('express')
 const router = new express.Router()
-const User = require('../db/student')
-const auth = require('../middleware/authStudent')
+const Student = require('../db/student')
+const auth = require('../middleware/autho')
 const multer = require('multer')
 const sharp = require('sharp')
-
-const parser = require('../middleware/parser')
 const bodyParser = require('body-parser')
+
 //const { sendWelcomeEmail, sendCancellationEmail} = require('../emails/account')
 ////////////////////////
 
@@ -17,7 +16,7 @@ const bodyParser = require('body-parser')
 router.post('/students/register', async (req, res)=>{
   
 
-   const alreadyPresent = await User.findOne({email: req.body.email})
+   const alreadyPresent = await Student.findOne({email: req.body.email})
    if(alreadyPresent){
       return res.status(400).render('error404',{
          status:'400',
@@ -25,7 +24,7 @@ router.post('/students/register', async (req, res)=>{
       })
    }
    try{
-      const user = new User(req.body)
+      const user = new Student(req.body)
       
       
       await user.save() 
@@ -55,7 +54,7 @@ router.post('/students/register', async (req, res)=>{
 
  router.post('/students/login', async (req,res)=>{
    try{    
-      const user = await User.findByCredentials(req.body.email, req.body.password)  
+      const user = await Student.findByCredentials(req.body.email, req.body.password)  
       const token = await user.generateAuthToken()
       res.cookie('token',token,{
          maxAge:3600000,
@@ -76,7 +75,7 @@ router.post('/students/register', async (req, res)=>{
 ////////////////////////////////////////
 //private
 
-router.post('/students/logout', auth, async (req,res)=>{
+router.post('/students/logout', auth('students'), async (req,res)=>{
    try{
       req.user.tokens = req.user.tokens.filter((t)=>{
          return t.token !== req.token
@@ -96,7 +95,7 @@ router.post('/students/logout', auth, async (req,res)=>{
 })
 
 
-router.post('/students/logoutAll', auth, async(req,res)=>{
+router.post('/students/logoutAll', auth('students'), async(req,res)=>{
    try{
       req.user.tokens = []
       await req.user.save()
@@ -112,7 +111,7 @@ router.post('/students/logoutAll', auth, async(req,res)=>{
    }
 })
 
- router.get('/students/me', auth, async (req,res)=>{
+ router.get('/students/me', auth('students'), async (req,res)=>{
     try{
        res.send(req.user)
     }catch(e){
@@ -120,7 +119,7 @@ router.post('/students/logoutAll', auth, async(req,res)=>{
     }  
   })
  
- router.patch('/students/me', auth, async (req, res)=>{
+ router.patch('/students/me', auth('students'), async (req, res)=>{
    const allowedUpdates = ['name','email','password','age']
    const updates = Object.keys(req.body)
    const isValidOperation = updates.every((update)=>{
@@ -147,7 +146,7 @@ router.post('/students/logoutAll', auth, async(req,res)=>{
    
 })
 
- router.delete('/students/me', auth, async (req, res)=>{
+ router.delete('/students/me', auth('students'), async (req, res)=>{
    try{
       //sendCancellationEmail(req.user.email, req.user.name)
       await req.user.remove()
@@ -157,13 +156,13 @@ router.post('/students/logoutAll', auth, async(req,res)=>{
    }
 })
 
-router.get('/students/dashboard',auth ,async (req,res)=> {
+router.get('/students/dashboard',auth('students') ,async (req,res)=> {
     res.render('dashboard', { name: req.user.name, type: 'students'})
 })
 ////////////////////////////////////
 // FILE UPLOADS
 
-const upload = multer({
+const uploadS = multer({
    //dest: 'avatars',
    limits: {
        fileSize: 1000000
@@ -178,7 +177,7 @@ const upload = multer({
    
 })
 
-router.post('/students/me/avatar', auth, upload.single('avatar'), async (req,res)=>{
+router.post('/students/me/avatar', auth('students'), uploadS.single('avatar'), async (req,res)=>{
   
   const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250}).png().toBuffer()
   req.user.avatar = buffer
@@ -188,7 +187,7 @@ router.post('/students/me/avatar', auth, upload.single('avatar'), async (req,res
    res.status(400).send({error: error.message})
 })
 
-router.delete('/students/me/avatar', auth, async (req,res)=>{
+router.delete('/students/me/avatar', auth('students'), async (req,res)=>{
    req.user.avatar = undefined 
    await req.user.save()
    try{
@@ -200,7 +199,7 @@ router.delete('/students/me/avatar', auth, async (req,res)=>{
  }) 
  
 
-router.get('/students/me/avatar', auth, async (req,res)=>{
+router.get('/students/me/avatar', auth('students'), async (req,res)=>{
    try{
       
       if(!req.user || !req.user.avatar){

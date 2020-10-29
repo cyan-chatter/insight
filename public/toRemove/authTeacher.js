@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const User = require('../db/student')
+const User = require('../../src/db/teacher')
 const cookieParser= require('cookie-parser')
 
 const secretKey = process.env.JWT_SECRET || 'TotalOverdose'

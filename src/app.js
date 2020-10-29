@@ -2,15 +2,12 @@ const path = require('path')
 const hbs = require('hbs')
 require('./db/mongoose')
 const express = require('express')
-const userRouter = require('./routers/students')
-const auth = require('./middleware/authStudent')
+const studentRouter = require('./routers/students')
+//const teacherRouter = require('./routers/teachers')
+const auth = require('./middleware/autho')
 const isloggedin = require('./middleware/isloggedin')
 const app = express()
-
-
 const cookieParser= require('cookie-parser')
-
-
 //body Parser for parsing form data
 const bodyParser = require('body-parser')
 
@@ -18,8 +15,8 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({extended:true}))
 
 app.use(cookieParser())
-app.use(userRouter)
-
+app.use(studentRouter)
+// app.use(teacherRouter)
 
 //port value
 const port = process.env.PORT||3000
@@ -40,18 +37,16 @@ app.use(express.static(publicDirectoryPath))
 
 
 //home routes
-app.get('/', isloggedin, (req, res) => {
-    
+app.get('/', (req, res) => {
     
     res.render('face', {
         title: 'INSIGHT',
         subtitle: 'Stream Analysis by Online Aptitude Tests'
     })
    
-  
 })
 
-app.get('/students',isloggedin,(req,res) =>{
+app.get('/students',isloggedin('students'),(req,res) =>{
     res.render('entry',{
         title: 'Students',
         login:'Student Login',
@@ -61,7 +56,7 @@ app.get('/students',isloggedin,(req,res) =>{
     })
 })
 
-app.get('/teachers',(req,res) =>{
+app.get('/teachers',isloggedin('teachers'),(req,res) =>{
     res.render('entry',{
         title: 'Teachers',
         login:'Teacher Login',
@@ -79,28 +74,28 @@ app.get('/admins',(req,res) =>{
     })
 })
 
-app.get('/students/register',isloggedin, (req,res)=>{
+app.get('/students/register',isloggedin('students'), (req,res)=>{
     res.render('register',{
         title: 'Student Registeration',
         goto: '/students/register'
     })
 })
 
-app.get('/teachers/register', (req,res)=>{
+app.get('/teachers/register',isloggedin('teachers'), (req,res)=>{
     res.render('register',{
         title: 'Teacher Registeration',
         goto:'/teachers/register'
     })
 })
 
-app.get('/students/login',isloggedin, (req,res)=>{
+app.get('/students/login',isloggedin('students'), (req,res)=>{
     res.render('login',{
         title: 'Student Login',
         goto: '/students/login'
     })
 })
 
-app.get('/teachers/login', (req,res)=>{
+app.get('/teachers/login',isloggedin('teachers'), (req,res)=>{
     res.render('login',{
         title: 'Teacher Login',
         goto:'/teachers/login'
