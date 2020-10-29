@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 
 app.use(cookieParser())
 app.use(studentRouter)
-// app.use(teacherRouter)
+app.use(teacherRouter)
 
 //port value
 const port = process.env.PORT||3000
