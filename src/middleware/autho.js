@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 const cookieParser= require('cookie-parser')
 const Student = require('../db/student');
 const Teacher = require('../db/teacher');
+const Admin = require('../db/admin');
 const secretKey = process.env.JWT_SECRET || 'TotalOverdose'
 // app.use((req,res,next)=>{
 //     if(req.method === 'GET' || req.method === 'POST' || req.method === 'PATCH' || req.method === 'DELETE'){
@@ -25,6 +26,9 @@ const auth = (type)=>{
             }
             else if(type === 'teachers'){
                 user = await Teacher.findOne({_id: decoded._id, 'tokens.token':token})
+            }
+            else if(type === 'admins'){
+                user = await Admin.findOne({_id: decoded._id, 'tokens.token':token})
             } 
             if (!user) {
             throw new Error()

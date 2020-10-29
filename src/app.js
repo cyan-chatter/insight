@@ -4,6 +4,7 @@ require('./db/mongoose')
 const express = require('express')
 const studentRouter = require('./routers/students')
 const teacherRouter = require('./routers/teachers')
+const adminRouter = require('./routers/admins')
 const auth = require('./middleware/autho')
 const isloggedin = require('./middleware/isloggedin')
 const app = express()
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.use(cookieParser())
 app.use(studentRouter)
 app.use(teacherRouter)
+app.use(adminRouter)
 
 //port value
 const port = process.env.PORT||3000
@@ -67,10 +69,12 @@ app.get('/teachers',isloggedin('teachers'),(req,res) =>{
 })
 
 app.get('/admins',(req,res) =>{
-    res.render('adminEntry',{
-        login:'Admin Login',
+    res.render('entry',{
         title:'Admin',
-        gotoLogin:'/admins/login'
+        login:'Admin Login',
+        gotoLogin:'/admins/login',
+        register: 'Admin Register',
+        gotoRegister: '/admins/register'
     })
 })
 
@@ -88,6 +92,13 @@ app.get('/teachers/register',isloggedin('teachers'), (req,res)=>{
     })
 })
 
+app.get('/admins/register',(req,res)=>{
+    res.render('adminReg',{
+        title: 'Admin Registeration',
+        goto:'/admins/register'
+    })
+})
+
 app.get('/students/login',isloggedin('students'), (req,res)=>{
     res.render('login',{
         title: 'Student Login',
@@ -99,6 +110,13 @@ app.get('/teachers/login',isloggedin('teachers'), (req,res)=>{
     res.render('login',{
         title: 'Teacher Login',
         goto:'/teachers/login'
+    })
+})
+
+app.get('/admins/login', (req,res)=>{
+    res.render('login',{
+        title: 'Admin Login',
+        goto:'/admins/login'
     })
 })
 
@@ -121,8 +139,6 @@ app.get('*',(req,res)=>{
         goto: '/'
     })
 })
-
-
 
 app.listen(port, () => {
     console.log('Server is Up on port ' + port)
