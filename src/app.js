@@ -110,13 +110,15 @@ app.get('/clcookie',(req,res) => {
 
 app.get('/cookie',(req,res)=> {
     console.log(req.cookies)
-    res.send("succes")
+    res.send("success")
 })
 
 app.get('*',(req,res)=>{
     res.render('error404',{
         status: '404',
-        message: 'Page Not Found' 
+        message: 'Page Not Found',
+        destination: 'Home Page',
+        goto: '/'
     })
 })
 
