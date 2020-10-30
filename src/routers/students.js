@@ -4,6 +4,9 @@ const Student = require('../db/student')
 const auth = require('../middleware/autho')
 const multer = require('multer')
 const sharp = require('sharp')
+const Questions= require('../db/test_questions')
+
+
 const bodyParser = require('body-parser')
 
 //const { sendWelcomeEmail, sendCancellationEmail} = require('../emails/account')
@@ -175,6 +178,14 @@ router.post('/students/logoutAll', auth('students'), async(req,res)=>{
 router.get('/students/dashboard',auth('students') ,async (req,res)=> {
     res.render('dashboard', { name: req.user.name, type: 'students'})
 })
+
+router.post('/students/test',(req,res)=>{
+   console.log(req.body)
+   
+   res.send("successful")
+})
+
+
 ////////////////////////////////////
 // FILE UPLOADS
 

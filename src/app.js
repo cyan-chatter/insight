@@ -7,6 +7,8 @@ const teacherRouter = require('./routers/teachers')
 const adminRouter = require('./routers/admins')
 const auth = require('./middleware/autho')
 const isloggedin = require('./middleware/isloggedin')
+const Questions = require('./db/test_questions')
+const api = require('../utils/js/api.js')
 const app = express()
 const cookieParser= require('cookie-parser')
 //body Parser for parsing form data
@@ -85,6 +87,53 @@ app.get('/students/register',isloggedin('students'), (req,res)=>{
     })
 })
 
+
+app.get('/students/test',auth('students'),async (req,res)=> {
+     const category= req.query.category
+    try{ 
+
+        
+         await api(category,async (questions)=>{
+
+            
+
+            const ques_arr = await questions.map(async (que)=>{
+                
+                que.incorrect_answers.push(que.correct_answer)
+                var options = que.incorrect_answers
+                
+
+                const ques = {question:que.question,options,correct_answer:que.correct_answer}
+                
+
+                const result= new Questions({
+                        ...ques,
+                        user:req.user._id
+        
+                    })
+
+                await result.save()
+
+                const quesParsed = result.parse_into_question()
+             
+                 
+
+                return quesParsed
+                    
+            })
+
+             const ques= await Promise.all(ques_arr)
+            
+            res.render('test',{questions:JSON.stringify(ques)})
+        })  
+        }catch(e){
+            res.send("error")
+        } 
+    
+})
+
+
+
 app.get('/teachers/register',isloggedin('teachers'), (req,res)=>{
     res.render('register',{
         title: 'Teacher Registeration',
@@ -129,6 +178,15 @@ app.get('/clcookie',(req,res) => {
 app.get('/cookie',(req,res)=> {
     console.log(req.cookies)
     res.send("success")
+})
+
+app.get('/testing/:id',  (req,res)=>{
+
+
+    res.send(req.params.id)
+    
+    
+    
 })
 
 app.get('*',(req,res)=>{
