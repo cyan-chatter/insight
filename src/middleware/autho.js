@@ -14,8 +14,7 @@ const secretKey = process.env.JWT_SECRET || 'TotalOverdose'
 // })
 
 const auth = (type)=>{
-    console.log("\nAuth Called\n")
-
+    
     return async(req, res, next)=>{
         try{ 
             const token = req.cookies.token
