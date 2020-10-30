@@ -4,6 +4,7 @@ const User = require('../db/student')
 const auth = require('../middleware/authStudent')
 const multer = require('multer')
 const sharp = require('sharp')
+const Questions= require('../db/test_questions')
 
 const parser = require('../middleware/parser')
 const bodyParser = require('body-parser')
@@ -86,6 +87,8 @@ router.post('/students/logout', auth, async (req,res)=>{
 })
 
 
+
+
 router.post('/students/logoutAll', auth, async(req,res)=>{
    try{
       req.user.tokens = []
@@ -144,6 +147,13 @@ router.post('/students/logoutAll', auth, async(req,res)=>{
    }catch(e){
       res.status(500).send()
    }
+})
+
+
+router.post('/students/test',(req,res)=>{
+   console.log(req.body)
+   
+   res.send("successful")
 })
 
 router.get('/students/dashboard',auth ,async (req,res)=> {
