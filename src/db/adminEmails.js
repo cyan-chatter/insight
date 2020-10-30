@@ -10,6 +10,6 @@ const adminEmailsSchema = new mongoose.Schema({
 }) 
 
 const adminEmails = mongoose.model('adminEmails',adminEmailsSchema)
-console.log('adminEmails called')
+
 module.exports = adminEmails
 //manually put emails in this collection in the database

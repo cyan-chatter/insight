@@ -169,6 +169,10 @@ app.get('/admins/login', (req,res)=>{
     })
 })
 
+app.get('/teachers/createtest',(req,res)=>{
+    res.render('test-create')
+})
+
 app.get('/clcookie',(req,res) => {
     res.clearCookie('token')
     res.json({name:"sanu"})
