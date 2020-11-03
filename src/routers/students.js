@@ -183,31 +183,34 @@ router.get('/students/dashboard',auth('students') ,async (req,res)=> {
     res.render('dashboard', { name: req.user.name, type: 'students'})
 })
 
-router.post('/students/test', auth('students'), async (req,res)=>{
-   // Data to process:
-   /* 
-      req.body -- has question id - entered answer as key value pairs.
-      Questions unattempted do not have any.
-      req.user -- has the user
-      _id -- mongo object id of Questions
-      options -- array of four strings
-      question -- string
-      correct_answer --string
-      user -- corresponding parent user id (mongo object id)
-      _v -- version {DND} 
-   */ 
-
-   
-
-   // for (x in questions) {
-   //    x = questions[x];
-   //    resultsParsed = x.parse_into_results()
-      
-   // };////
-
+router.post('/students/test', auth('students'), async (req,res)=>{ 
+/* DATA to Process:
+questions:
+[
+  {
+    options: [ 'Russia', 'China', 'United States of America', 'Canada' ],
+    _id: 5fa0f74c65955923445689e7,
+    question: 'What country is the second largest in the world by area?',
+    correct_answer: 'Canada',
+    user: 5f992186a27c242bd4a0a467,
+    test: 5fa0f74c65955923445689e6,
+    __v: 0
+  },..]
+    for(x in questions){
+       x = questions[x];
+    }
+req.body:
+ {
+   '5fa0fecf65b8b72a58c65ae9': 'Indonesia',
+   '5fa0fecf65b8b72a58c65aea': '6',
+   '5fa0fecf65b8b72a58c65af8': 'Sickle',
+   '5fa0fecf65b8b72a58c65af9': '8',
+   '5fa0fecf65b8b72a58c65afa': '8'
+ }
+  */
+ 
    const questions = await findTest(req.user._id, req.cookies.test)
-   console.log(questions);
-   //console.log(req.body)
+   console.log(req.body)
    //to-do: generate results -- req.body
    
    res.render('tempPage', {
