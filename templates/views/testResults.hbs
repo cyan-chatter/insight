@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <title>Test Results</title>
+    </head>
+    <body>
+        <h4>{{message}}</h4>
+        <h4>Total Marks Scored:</h4>
+        <h3>{{totalMarks}}/20</h3>
+
+    <div class="generate">
+        <h3 id = "head"></h3>
+        <br>
+        <h5>Question:</h5>
+        <div  class= "question">
+        </div>
+        <h5>Options:</h5>
+        <div  class= "options">
+        </div>
+        <h5>Correct Answer:</h5>
+        <div  class= "correct">
+        </div>
+        <h5>Answer Entered:</h5>
+        <div  class= "answer">
+        </div>
+        <h5>Marks Obtained:</h5>
+        <div  class= "mark">
+        </div>
+        <br>
+    </div>
+    <br>
+    <div class ="download">
+        <p>Download a Copy of this Page</p>
+        <button class = "downloadBtn"><a href = "/students/dashboard">DOWNLOAD</a></button> 
+    </div>
+
+        <script> 
+            var questions = {{{ques}}}
+            var answers = {{{ans}}}
+            var problems = {{{prob}}}
+            var correct = {{{correctMap}}}
+            var attempted = {{{att}}}
+
+            console.log('Questions: ' + questions)
+           
+        </script>
+
+        <script src="/js/testResults.js"></script>
+        
+    </body>
+</html>

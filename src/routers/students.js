@@ -9,6 +9,7 @@ const TestMap = require('../db/test_map')
 
 
 const bodyParser = require('body-parser')
+const { findById } = require('../db/student')
 //const { findOne } = require('../db/student')
 
 //const { sendWelcomeEmail, sendCancellationEmail} = require('../emails/account')
@@ -16,7 +17,7 @@ const bodyParser = require('body-parser')
 
 //public
 
-const findTest = async (StudentId, TestId)=>{
+const findTestQuestions = async (StudentId, TestId)=>{
    const questions = await Questions.find({test : TestId, user: StudentId})
    return questions
 }
@@ -209,15 +210,54 @@ req.body:
  }
   */
  
-   const questions = await findTest(req.user._id, req.cookies.test)
-   console.log(req.body)
+   const questions = await findTestQuestions(req.user._id, req.cookies.test)
    //to-do: generate results -- req.body
+
+   const problems = Object.keys(req.body)
+   // problems is array of Question IDs now
+   //works
+   const answers = Object.values(req.body)
+   // answers is array of Answer values now
+   //works
+   var correct = []
+   const len = problems.length
+   //works
+   for(var i=0; i<len; ++i){
+      correct[i] = 0;
+   }
+
+   var attempted = []
+   for(var i in questions){
+      attempted[i] = 0
+   }
    
-   res.render('tempPage', {
-      name : 'Test Completed',
-      message : 'You have Successfully Completed The Test. Check Results :',
-      goto: '/students/results/:' + req.cookies.test._id,
-      destination: 'Results Page'
+   const Test = await TestMap.findById(req.cookies.test)
+   //works
+   for(var x in questions){
+     for(var i=0; i<len; ++i){
+      if(problems[i] === questions[x]._id.toString){
+         attempted[x] = 1
+         if(answers[i] === questions[x].correct_answer){
+            Test.marks += 1
+            correct[i] = 1
+            console.log(Test.marks) 
+         } 
+      }   
+     }
+   }
+   if(Test.marks < 0){
+      Test.marks = 0
+   }
+   await Test.save()
+      
+   res.render('testResults', {
+      message : 'You have Successfully Completed The Test. Here are the Results.',
+      totalMarks : Test.marks,
+      correctMap : correct,
+      ans: answers,
+      ques : questions,
+      prob : problems,
+      att : attempted
    })
 })
 

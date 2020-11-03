@@ -5,9 +5,17 @@ const testMapSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    marks:{
+        type: Number,
+        default: 0
+    }, 
     teacher: {
         type: mongoose.Schema.Types.ObjectId,
         ref:"Teacher"
+    },
+    student: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Student"
     }
 })
 
