@@ -179,9 +179,23 @@ router.get('/students/dashboard',auth('students') ,async (req,res)=> {
     res.render('dashboard', { name: req.user.name, type: 'students'})
 })
 
-router.post('/students/test',(req,res)=>{
+router.post('/students/test', auth('students'), (req,res)=>{
    console.log(req.body)
-   
+   // Data to process:
+   /* 
+      req.body -- has question id - entered answer as key value pairs.
+      Questions unattempted do not have any.
+      req.user -- has the user
+      _id -- mongo object id of Questions
+      options -- array of four strings
+      question -- string
+      correct_answer --string
+      user -- corresponding parent user id (mongo object id)
+      _v -- version {DND} 
+   */ 
+
+
+
    res.send("successful")
 })
 

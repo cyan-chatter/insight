@@ -113,13 +113,13 @@ app.get('/students/test',auth('students'),async (req,res)=> {
                     })
 
                 await result.save()
-
+                    // each question gets saves to database with user id as parent field
                 const quesParsed = result.parse_into_question()
-             
+                    
                  
 
                 return quesParsed
-                    
+               // returns question data to be displayed     
             })
 
              const ques= await Promise.all(ques_arr)
