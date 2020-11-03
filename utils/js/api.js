@@ -9,7 +9,7 @@ const api = async  (subject,callback) => {
     const url= 'https://opentdb.com/api.php?amount=20&category='+subject+'&type=multiple'
      request({url,json:true}, (error, response) => {
        
-     callback(response.body.results)
+     callback(response.body.results, subject)
         
         
       })

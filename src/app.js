@@ -8,6 +8,7 @@ const adminRouter = require('./routers/admins')
 const auth = require('./middleware/autho')
 const isloggedin = require('./middleware/isloggedin')
 const Questions = require('./db/test_questions')
+const TestMap = require('./db/test_map')
 const api = require('../utils/js/api.js')
 const app = express()
 const cookieParser= require('cookie-parser')
@@ -93,10 +94,11 @@ app.get('/students/test',auth('students'),async (req,res)=> {
     try{ 
 
         
-         await api(category,async (questions)=>{
+         await api(category,async (questions,category)=>{
 
-            
-
+            const test = new TestMap({subject: category})
+            await test.save() 
+          
             const ques_arr = await questions.map(async (que)=>{
                 
                 que.incorrect_answers.push(que.correct_answer)
@@ -105,19 +107,21 @@ app.get('/students/test',auth('students'),async (req,res)=> {
 
                 const ques = {question:que.question,options,correct_answer:que.correct_answer}
                 
-
                 const result= new Questions({
                         ...ques,
-                        user:req.user._id
-        
+                        user: req.user._id,
+                        test: test._id
                     })
 
                 await result.save()
-                    // each question gets saves to database with user id as parent field
+                    // each question gets saved to database with user id as parent field
                 const quesParsed = result.parse_into_question()
                     
-                 
-
+                res.cookie('test',test,{
+                    maxAge:1000*60*60,
+                    httpOnly:true
+                 })
+                
                 return quesParsed
                // returns question data to be displayed     
             })

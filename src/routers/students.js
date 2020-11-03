@@ -5,20 +5,24 @@ const auth = require('../middleware/autho')
 const multer = require('multer')
 const sharp = require('sharp')
 const Questions= require('../db/test_questions')
+const TestMap = require('../db/test_map')
 
 
 const bodyParser = require('body-parser')
+//const { findOne } = require('../db/student')
 
 //const { sendWelcomeEmail, sendCancellationEmail} = require('../emails/account')
 ////////////////////////
 
 //public
 
-
+const findTest = async (StudentId, TestId)=>{
+   const questions = await Questions.find({test : TestId, user: StudentId})
+   return questions
+}
 
 router.post('/students/register', async (req, res)=>{
   
-
    const alreadyPresent = await Student.findOne({email: req.body.email})
    if(alreadyPresent){
       return res.status(400).render('error404',{
@@ -179,8 +183,7 @@ router.get('/students/dashboard',auth('students') ,async (req,res)=> {
     res.render('dashboard', { name: req.user.name, type: 'students'})
 })
 
-router.post('/students/test', auth('students'), (req,res)=>{
-   console.log(req.body)
+router.post('/students/test', auth('students'), async (req,res)=>{
    // Data to process:
    /* 
       req.body -- has question id - entered answer as key value pairs.
@@ -194,12 +197,31 @@ router.post('/students/test', auth('students'), (req,res)=>{
       _v -- version {DND} 
    */ 
 
+   
 
+   // for (x in questions) {
+   //    x = questions[x];
+   //    resultsParsed = x.parse_into_results()
+      
+   // };////
 
-   res.send("successful")
+   const questions = await findTest(req.user._id, req.cookies.test)
+   console.log(questions);
+   //console.log(req.body)
+   //to-do: generate results -- req.body
+   
+   res.render('tempPage', {
+      name : 'Test Completed',
+      message : 'You have Successfully Completed The Test. Check Results :',
+      goto: '/students/results/:' + req.cookies.test._id,
+      destination: 'Results Page'
+   })
 })
 
 
+//to-do: 
+//fix router positions
+//remove MongoClient
 ////////////////////////////////////
 // FILE UPLOADS
 
