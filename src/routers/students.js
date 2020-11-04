@@ -5,20 +5,25 @@ const auth = require('../middleware/autho')
 const multer = require('multer')
 const sharp = require('sharp')
 const Questions= require('../db/test_questions')
+const TestMap = require('../db/test_map')
 
 
 const bodyParser = require('body-parser')
+const { findById } = require('../db/student')
+//const { findOne } = require('../db/student')
 
 //const { sendWelcomeEmail, sendCancellationEmail} = require('../emails/account')
 ////////////////////////
 
 //public
 
-
+const findTestQuestions = async (StudentId, TestId)=>{
+   const questions = await Questions.find({test : TestId, user: StudentId})
+   return questions
+}
 
 router.post('/students/register', async (req, res)=>{
   
-
    const alreadyPresent = await Student.findOne({email: req.body.email})
    if(alreadyPresent){
       return res.status(400).render('error404',{
@@ -179,13 +184,85 @@ router.get('/students/dashboard',auth('students') ,async (req,res)=> {
     res.render('dashboard', { name: req.user.name, type: 'students'})
 })
 
-router.post('/students/test',(req,res)=>{
-   console.log(req.body)
+router.post('/students/test', auth('students'), async (req,res)=>{ 
+/* DATA to Process:
+questions:
+[
+  {
+    options: [ 'Russia', 'China', 'United States of America', 'Canada' ],
+    _id: 5fa0f74c65955923445689e7,
+    question: 'What country is the second largest in the world by area?',
+    correct_answer: 'Canada',
+    user: 5f992186a27c242bd4a0a467,
+    test: 5fa0f74c65955923445689e6,
+    __v: 0
+  },..]
+    for(x in questions){
+       x = questions[x];
+    }
+req.body:
+ {
+   '5fa0fecf65b8b72a58c65ae9': 'Indonesia',
+   '5fa0fecf65b8b72a58c65aea': '6',
+   '5fa0fecf65b8b72a58c65af8': 'Sickle',
+   '5fa0fecf65b8b72a58c65af9': '8',
+   '5fa0fecf65b8b72a58c65afa': '8'
+ }
+  */
+ 
+   const questions = await findTestQuestions(req.user._id, req.cookies.test)
+   //to-do: generate results -- req.body
+
+   const problems = Object.keys(req.body)
+   // problems is array of Question IDs now
+   //works
+   const answers = Object.values(req.body)
+   // answers is array of Answer values now
+   //works
+   var correct = []
+   const len = problems.length
+   //works
+   for(var i=0; i<len; ++i){
+      correct[i] = 0;
+   }
+
+   var attempted = []
+   for(var i in questions){
+      attempted[i] = 0
+   }
    
-   res.send("successful")
+   const Test = await TestMap.findById(req.cookies.test) //works
+   
+   for(var x in questions){  
+     for(var i=0; i<len; ++i){   //Works but some Error might be present
+      if(problems[i] === questions[x]._id.toString()){
+         attempted[x] = 1
+         if(answers[i] === questions[x].correct_answer){
+            Test.marks += 1
+            correct[i] = 1 
+         } 
+      }   
+     }
+   }
+   if(Test.marks < 0){
+      Test.marks = 0
+   }
+   await Test.save()  
+   res.render('testResults', {
+      message : 'You have Successfully Completed The Test. Here are the Results.',
+      totalMarks : Test.marks,
+      correctMap : correct,
+      ans: answers,
+      ques : questions,
+      prob : problems,
+      att : attempted
+   })
 })
 
 
+//to-do: 
+//fix router positions
+//remove MongoClient
 ////////////////////////////////////
 // FILE UPLOADS
 
