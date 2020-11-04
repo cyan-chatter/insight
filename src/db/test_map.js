@@ -17,6 +17,8 @@ const testMapSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref:"Student"
     }
+},{
+    timestamps: true
 })
 
 
