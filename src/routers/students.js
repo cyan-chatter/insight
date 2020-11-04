@@ -181,7 +181,7 @@ router.post('/students/logoutAll', auth('students'), async(req,res)=>{
 })
 
 router.get('/students/dashboard',auth('students') ,async (req,res)=> {
-    res.render('dashboard', { name: req.user.name, type: 'students'})
+    res.render('dashboard', { name: req.user.name, type: 'students', goto: '/students/results', destination: 'Results'})
 })
 
 router.post('/students/test', auth('students'), async (req,res)=>{ 
@@ -247,7 +247,9 @@ req.body:
    if(Test.marks < 0){
       Test.marks = 0
    }
-   await Test.save()  
+   Test.student = req.user._id
+   await Test.save() 
+
    res.render('testResults', {
       message : 'You have Successfully Completed The Test. Here are the Results.',
       totalMarks : Test.marks,
@@ -260,9 +262,37 @@ req.body:
 })
 
 
+router.get('/students/results',auth('students') ,async (req,res)=>{
+   const Tests = await TestMap.find({student : req.user._id})
+   try{
+      const marksArr = []
+      const subArr = []
+      const timeObjArr = []
+
+      for(var t in Tests){
+         marksArr[t] = Tests[t].marks
+         subArr[t] = Tests[t].subject
+         timeObjArr[t] = Tests[t].createdAt
+      }
+
+      res.render('results', {marks : marksArr, subcode : subArr, time: timeObjArr})
+   }
+   catch(e){
+      console.log(e)
+   }
+   
+
+})
+
+
+
+
+
+
+
+////////////////////////////////////
 //to-do: 
 //fix router positions
-//remove MongoClient
 ////////////////////////////////////
 // FILE UPLOADS
 

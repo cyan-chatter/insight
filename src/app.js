@@ -35,7 +35,10 @@ app.set('view engine', 'hbs')
 app.set('views', viewsPath)
 const partialsPath = path.join(__dirname, '../templates/partials' )
 hbs.registerPartials(partialsPath)
-
+hbs.registerHelper("inc", function(value, options)
+{
+    return parseInt(value) + 1;
+});
 // serving static directory
 app.use(express.static(publicDirectoryPath))
 
