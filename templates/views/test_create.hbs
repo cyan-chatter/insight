@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://kit.fontawesome.com/a392ca20cf.js" crossorigin="anonymous"></script>
+        <script rel="javascript" src="/js/reload_on_back.js"></script>
+        <title>New Test</title></head>
+    <body>
+        <h1 id='createtestheading'>New Test</h1>
+        {{!-- <img href="../utils/img/cat.jpg" alt="close_icon"> --}}
+        
+        <form id='questionsblock' action='/teachers/createtest' method='post'>
+        <div class='quesholder' id='quesholder1'>
+            <label><input type='text' name='q1' placeholder='Enter Question 1' required></label>
+            <i id='close1' class="far fa-times-circle" onclick="this.parentElement.remove(); updatequestions(0);"></i>
+            <br>
+            <label><input type='text' name='o11' placeholder='Enter Option 1' required></label>
+            <br>
+            <label><input type='text' name='o12' placeholder='Enter Option 2' required></label>
+            <br>
+            <label><input type='text' name='o13' placeholder='Enter Option 3' required></label>
+            <br>
+            <label><input type='text' name='o14' placeholder='Enter Option 4' required></label>
+            <br>
+            <label><input type='text' name='c1' placeholder='Enter Answer' required></label>
+            <br>
+        </div>
+            <button id='addquestion'>Add Question</button>
+            <br><br>
+            <input type='submit' value='Create New Test'>
+        </form>
+        
+        <script rel="javascript" src="/js/test_create.js"> </script>
+
+
+
+    </body>
+</html>

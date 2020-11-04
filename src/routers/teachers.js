@@ -176,6 +176,12 @@ router.post('/teachers/register', async (req, res)=>{
  
  // FILE UPLOADS
 
+
+ router.post('/teachers/createtest',(req,res)=> {
+    console.log(req.body)
+    res.render('login')
+ })
+
 const uploadT = multer({
     //dest: 'avatars',
     limits: {

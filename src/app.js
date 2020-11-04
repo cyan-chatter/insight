@@ -170,7 +170,8 @@ app.get('/admins/login', (req,res)=>{
 })
 
 app.get('/teachers/createtest',(req,res)=>{
-    res.render('test-create')
+    
+    res.render('test_create')
 })
 
 app.get('/clcookie',(req,res) => {
