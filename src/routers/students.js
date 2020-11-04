@@ -231,16 +231,15 @@ req.body:
       attempted[i] = 0
    }
    
-   const Test = await TestMap.findById(req.cookies.test)
-   //works
-   for(var x in questions){
-     for(var i=0; i<len; ++i){
-      if(problems[i] === questions[x]._id.toString){
+   const Test = await TestMap.findById(req.cookies.test) //works
+   
+   for(var x in questions){  
+     for(var i=0; i<len; ++i){   //Works but some Error might be present
+      if(problems[i] === questions[x]._id.toString()){
          attempted[x] = 1
          if(answers[i] === questions[x].correct_answer){
             Test.marks += 1
-            correct[i] = 1
-            console.log(Test.marks) 
+            correct[i] = 1 
          } 
       }   
      }
@@ -248,8 +247,7 @@ req.body:
    if(Test.marks < 0){
       Test.marks = 0
    }
-   await Test.save()
-      
+   await Test.save()  
    res.render('testResults', {
       message : 'You have Successfully Completed The Test. Here are the Results.',
       totalMarks : Test.marks,

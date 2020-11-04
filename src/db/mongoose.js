@@ -3,7 +3,7 @@
 const mongodb = require('mongodb')
 const mongoose = require('mongoose')
 
-const MongoClient = mongodb.MongoClient
+//const MongoClient = mongodb.MongoClient
 
 const mongoaddress =  process.env.MONGODB_URL||'mongodb://127.0.0.1:27017/'
 const dbName = 'insight-base' 
@@ -14,7 +14,7 @@ mongoose.connect(connectionURL,{
     useCreateIndex: true,
     useFindAndModify: false,
     useUnifiedTopology: true,
-    useMongoClient: true
+    //useMongoClient: true
 })
     
 
