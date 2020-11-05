@@ -94,6 +94,10 @@ questions.forEach((question)=>{
     {   const option = document.createElement('p')
         option.innerHTML=(j+1)+'. '+question.options[j]
         quesholder.appendChild(option)
+        var options_str= question.options[j]
+        const htmlentity = document.createElement('p')
+        htmlentity.innerHTML= options_str
+        options_str=htmlentity.innerHTML
 
         if(question.correct_answer===question.options[j])
         {   const check=document.createElement('i')
@@ -108,7 +112,7 @@ questions.forEach((question)=>{
             option.style.width='40%'
         }
         
-        else if(status_value===3 && answers[answerindex]===question.options[j])
+        else if(status_value===3 && answers[answerindex]===options_str)
         {   
             
             const wrong=document.createElement('i')
