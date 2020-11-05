@@ -43,7 +43,14 @@ hbs.registerHelper("inc", function(value, options)
 app.use(express.static(publicDirectoryPath))
 
 
-
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
 //home routes
 app.get('/', (req, res) => {
     
@@ -106,9 +113,11 @@ app.get('/students/test',auth('students'),async (req,res)=> {
                 
                 que.incorrect_answers.push(que.correct_answer)
                 var options = que.incorrect_answers
+                shuffleArray(options)
                 
 
                 const ques = {question:que.question,options,correct_answer:que.correct_answer}
+                console.log(ques)
                 
                 const result= new Questions({
                         ...ques,

@@ -209,7 +209,7 @@ req.body:
    '5fa0fecf65b8b72a58c65afa': '8'
  }
   */
- 
+   console.log()
    const questions = await findTestQuestions(req.user._id, req.cookies.test)
    //to-do: generate results -- req.body
 
@@ -237,6 +237,7 @@ req.body:
      for(var i=0; i<len; ++i){   //Works but some Error might be present
       if(problems[i] === questions[x]._id.toString()){
          attempted[x] = 1
+
          if(answers[i] === questions[x].correct_answer){
             Test.marks += 1
             correct[i] = 1 
@@ -249,16 +250,18 @@ req.body:
    }
    Test.student = req.user._id
    await Test.save() 
+   console.log(answers,problems)
 
    res.render('testResults', {
       message : 'You have Successfully Completed The Test. Here are the Results.',
-      totalMarks : Test.marks,
-      correctMap : correct,
-      ans: answers,
-      ques : questions,
-      prob : problems,
-      att : attempted
+      totalMarks : JSON.stringify(Test.marks),
+      correctMap : JSON.stringify(correct),
+      ans: JSON.stringify(answers),
+      ques : JSON.stringify(questions),
+      prob : JSON.stringify(problems),
+      att : JSON.stringify(attempted)
    })
+
 })
 
 
