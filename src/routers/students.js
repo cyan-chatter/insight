@@ -102,7 +102,7 @@ router.post('/students/logout', auth('students'), async (req,res)=>{
 
       }) 
    }catch(e){
-      res.status(500).render('error404',{
+      res.render('error404',{
          status:'500 :(',
          message: 'Error in Logging Out, ' + e,
          goto: '/students',
@@ -124,7 +124,7 @@ router.post('/students/logoutAll', auth('students'), async(req,res)=>{
          goto: '/'
       })
    }catch(e){
-      res.status(500).render('error404',{
+      res.render('error404',{
          status:'500 :(',
          message: 'Error in Logging Out, '+ e,
          goto: '/students',
@@ -135,16 +135,20 @@ router.post('/students/logoutAll', auth('students'), async(req,res)=>{
 
 /////////////////////////////////
 
- router.get('/students/me', auth('students'), async (req,res)=>{
+ router.get('/students/profile/patch', auth('students'), async (req,res)=>{
     try{
-       res.send(req.user)
+       res.render('update',{
+          title: 'Students Update Profile',
+          goto: '/students/profile/patch',
+          type: 'students'
+       })
     }catch(e){
        res.status(500).render(e)
     }  
   })
  
- router.patch('/students/me', auth('students'), async (req, res)=>{
-   const allowedUpdates = ['name','email','password','age']
+ router.post('/students/profile/patch', auth('students'), async (req, res)=>{
+   const allowedUpdates = ['name','age','email','password']
    const updates = Object.keys(req.body)
    const isValidOperation = updates.every((update)=>{
       return allowedUpdates.includes(update)
@@ -157,15 +161,30 @@ router.post('/students/logoutAll', auth('students'), async(req,res)=>{
    try{
      
       updates.forEach((update)=>{
-        req.user[update] = req.body[update]
+        
+        if(req.body[update]){
+         req.user[update] = req.body[update]
+        }
+         
       }) 
 
       await req.user.save()       
-      res.status(200).send(req.user)
+
+      res.status(200).render('tempPage',{
+         name: req.user.name,
+         message: 'Profile Data Updated',
+         goto: '/students/dashboard',
+         destination: 'Dashboard'
+      })
    }
 
    catch(e){
-      return res.status(400).send(e)
+      return res.render('error404', {
+         status: '400',
+         message: e + 'Unable to Update Profile Data. Please Try Again',
+         goto: '/students/dashboard',
+         destination: 'Dashboard'
+      })
    }
    
 })
@@ -181,8 +200,9 @@ router.post('/students/logoutAll', auth('students'), async(req,res)=>{
 })
 
 router.get('/students/dashboard',auth('students') ,async (req,res)=> {
-    res.render('dashboard', { name: req.user.name, type: 'students', goto: '/students/results', destination: 'Results'})
+    res.render('dashboard', { name: req.user.name, type: 'students', goto: '/students/results', destination: 'Results', goto2: '/students/profile', destination2: 'Profile'})
 })
+
 
 router.post('/students/test', auth('students'), async (req,res)=>{ 
    
@@ -317,10 +337,35 @@ router.get('/students/stream',auth('students') ,async (req,res)=>{
 ////////////////////////////////////
 // FILE UPLOADS
 
+//STUDENTS
+router.get('/students/profile', auth('students'), async(req,res)=>{
+
+   if(!req.user){
+      throw new Error()
+   }
+   const noTests = await TestMap.count({student : req.user._id})
+   
+   if(!req.user.avatar){
+      var pic = "Profile Picture Not Uploaded"
+   }else{
+      var pic = req.user.avatar
+   }
+
+   res.render('profile', {
+      title : 'Student Profile',
+      type: 'students',
+      name : req.user.name,
+      noTests,
+      diffString: 'Attempted',
+      pic
+   })
+})
+
+
 const uploadS = multer({
    //dest: 'avatars',
    limits: {
-       fileSize: 1000000
+       fileSize: 5000000
    },
    fileFilter(req,file,cb){
       
@@ -332,42 +377,49 @@ const uploadS = multer({
    
 })
 
-router.post('/students/me/avatar', auth('students'), uploadS.single('avatar'), async (req,res)=>{
-  
+router.post('/students/profile/avatar', auth('students'), uploadS.single('avatar'), async (req,res)=>{
+   
   const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250}).png().toBuffer()
-  req.user.avatar = buffer
+  try{
+   req.user.avatar = buffer
   await req.user.save() 
-  res.send()
+  res.redirect('/students/profile/patch')
+  }
+  catch{
+   res.render('400',{
+      message: 'Choose an image before Pressing Upload Button',
+      status: '400',
+      destination: 'Students Profile',
+      goto: '/students/profile/patch'
+   })
+  }
+  
 }, (error, req, res, next)=>{
-   res.status(400).send({error: error.message})
+   res.status(400).send(error.message)
 })
 
-router.delete('/students/me/avatar', auth('students'), async (req,res)=>{
+router.get('/students/profile/avatar/delete', auth('students'), async (req,res)=>{
    req.user.avatar = undefined 
    await req.user.save()
    try{
-      res.send()
+      res.redirect('/students/profile/patch')
    }catch(e){
-      res.status(400).send(e)
+      res.render('400',{
+         message: e,
+         status: '400',
+         destination: 'Students Profile',
+         goto: '/students/profile/patch'
+      })
    } 
-   
  }) 
  
 
-router.get('/students/me/avatar', auth('students'), async (req,res)=>{
-   try{
-      
-      if(!req.user || !req.user.avatar){
-         throw new Error()
-      }
-      res.set('Content-Type', 'image/png')
-      res.send(req.user.avatar)
-   } catch(e){
-      res.status(404).send()
-   }
-})
+////////////////////////////////////////////
+
+ 
 
 ////////////////////////////////////////////
+
 
 ////////////////////////////////////////////
 module.exports = router

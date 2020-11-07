@@ -1,6 +1,7 @@
 const express = require('express')
 const router = new express.Router()
 const Teacher = require('../db/teacher')
+const TestMap = require('../db/test_map')
 const auth = require('../middleware/autho')
 const multer = require('multer')
 const sharp = require('sharp')
@@ -73,11 +74,11 @@ router.post('/teachers/register', async (req, res)=>{
      }
   })
  
- 
- 
+
  ////////////////////////////////////////
  //private
  
+
  router.post('/teachers/logout', auth('teachers'), async (req,res)=>{
     try{
        req.user.tokens = req.user.tokens.filter((t)=>{
@@ -125,40 +126,59 @@ router.post('/teachers/register', async (req, res)=>{
  })
  //////////////////
 
-  router.get('/teachers/me', auth('teachers'), async (req,res)=>{
-     try{
-        res.send(req.user)
-     }catch(e){
-        res.status(500).send(e)
-     }  
-   })
-  
-  router.patch('/teachers/me', auth('teachers'), async (req, res)=>{
-    const allowedUpdates = ['name','email','password','age']
-    const updates = Object.keys(req.body)
-    const isValidOperation = updates.every((update)=>{
-       return allowedUpdates.includes(update)
-    })
- 
-    if(!isValidOperation){
-       return res.status(400).send({ error: 'Invalid Updates!'})
-    }
- 
-    try{
-      
-       updates.forEach((update)=>{
-         req.user[update] = req.body[update]
-       }) 
- 
-       await req.user.save()       
-       res.status(200).send(req.user)
-    }
- 
-    catch(e){
-       return res.status(400).send(e)
-    }
-    
+ router.get('/teachers/profile/patch', auth('teachers'), async (req,res)=>{
+   try{
+      res.render('update',{
+         title: 'Teachers Update Profile',
+         goto: '/teachers/profile/patch',
+         type: 'teachers'
+      })
+   }catch(e){
+      res.status(500).render(e)
+   }  
  })
+
+router.post('/teachers/profile/patch', auth('teachers'), async (req, res)=>{
+  const allowedUpdates = ['name','age','email','password']
+  const updates = Object.keys(req.body)
+  const isValidOperation = updates.every((update)=>{
+     return allowedUpdates.includes(update)
+  })
+
+  if(!isValidOperation){
+     return res.status(400).send({ error: 'Invalid Updates!'})
+  }
+
+  try{
+     updates.forEach((update)=>{
+       
+       if(req.body[update]){
+        req.user[update] = req.body[update]
+       }
+        
+     }) 
+
+     await req.user.save()       
+
+     res.status(200).render('tempPage',{
+        name: req.user.name,
+        message: 'Profile Data Updated',
+        goto: '/teachers/dashboard',
+        destination: 'Dashboard'
+     })
+  }
+
+  catch(e){
+     return res.render('error404', {
+        status: '400',
+        message: e + 'Unable to Update Profile Data. Please Try Again',
+        goto: '/teachers/dashboard',
+        destination: 'Dashboard'
+     })
+  }
+  
+})
+
  
   router.delete('/teachers/me', auth('teachers'), async (req, res)=>{
     try{
@@ -171,60 +191,86 @@ router.post('/teachers/register', async (req, res)=>{
  })
  
  router.get('/teachers/dashboard',auth('teachers') ,async (req,res)=> {
-     res.render('dashboard', { name: req.user.name, type: 'teachers'})
- })
- 
- // FILE UPLOADS
+   res.render('dashboard', { name: req.user.name, type: 'teachers', goto: '/teachers/tests', destination: 'Tests', goto2: '/teachers/profile', destination2: 'Profile'})
+})
 
-const uploadT = multer({
-    //dest: 'avatars',
-    limits: {
-        fileSize: 1000000
-    },
-    fileFilter(req,file,cb){
-       
-       if(!file.originalname.match(/\.(png|jpeg|jpg)$/)){
-       return cb(new Error('File must be a an Image'))
-     }
-       cb(undefined, true)
+///////////////////////// 
+// FILE UPLOADS
+const uploadS = multer({
+   //dest: 'avatars',
+   limits: {
+       fileSize: 5000000
+   },
+   fileFilter(req,file,cb){
+      
+      if(!file.originalname.match(/\.(png|jpeg|jpg)$/)){
+      return cb(new Error('File must be a an Image'))
     }
-    
- })
- 
- router.post('/teachers/me/avatar', auth('teachers'), uploadT.single('avatar'), async (req,res)=>{
+      cb(undefined, true)
+   }
    
-   const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250}).png().toBuffer()
+})
+
+
+router.get('/teachers/profile', auth('teachers'), async(req,res)=>{
+
+   if(!req.user){
+      throw new Error()
+   }
+   const noTests = await TestMap.count({teacher : req.user._id})
+   
+   if(!req.user.avatar){
+      var pic = "Profile Picture Not Uploaded"
+   }else{
+      var pic = req.user.avatar
+   }
+
+   res.render('profile', {
+      title : 'Teachers Profile',
+      type: 'teachers',
+      name : req.user.name,
+      noTests,
+      diffString: 'Created',
+      pic
+   })
+})
+
+
+router.post('/teachers/profile/avatar', auth('teachers'), uploadS.single('avatar'), async (req,res)=>{
+   
+  const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250}).png().toBuffer()
+  try{
    req.user.avatar = buffer
-   await req.user.save() 
-   res.send()
- }, (error, req, res, next)=>{
-    res.status(400).send({error: error.message})
- })
- 
- router.delete('/teachers/me/avatar', auth('teachers'), async (req,res)=>{
-    req.user.avatar = undefined 
-    await req.user.save()
-    try{
-       res.send()
-    }catch(e){
-       res.status(400).send(e)
-    } 
-    
-  }) 
+  await req.user.save() 
+  res.redirect('/teachers/profile/patch')
+  }
+  catch{
+   res.render('400',{
+      message: 'Choose an image before Pressing Upload Button',
+      status: '400',
+      destination: 'Teachers Profile',
+      goto: '/teachers/profile/patch'
+   })
+  }
   
- 
- router.get('/teachers/me/avatar', auth('teachers'), async (req,res)=>{
-    try{
-       
-       if(!req.user || !req.user.avatar){
-          throw new Error()
-       }
-       res.set('Content-Type', 'image/png')
-       res.send(req.user.avatar)
-    } catch(e){
-       res.status(404).send()
-    }
- })
+}, (error, req, res, next)=>{
+   res.status(400).send(error.message)
+})
+
+router.get('/teachers/profile/avatar/delete', auth('teachers'), async (req,res)=>{
+   req.user.avatar = undefined 
+   await req.user.save()
+   try{
+      res.redirect('/teachers/profile')
+   }catch(e){
+      res.render('400',{
+         message: e,
+         status: '400',
+         destination: 'Teachers Profile',
+         goto: '/teachers/profile'
+      })
+   } 
+ }) 
  
  ////////////////////////////////////////////
  

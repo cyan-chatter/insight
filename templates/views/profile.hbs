@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="./css/styles.css">
+        <title>Profile</title>
+        <link rel="icon" href="../../utils/img/searchW2.png">
+    </head>
+    <body class="main-content">
+        
+        <div class= "header">
+            <h2>{{title}}</h2>
+        </div>
+        
+    
+    <br>
+    <button><a href="/{{type}}/dashboard" class="getDashboard" method = "get">Dashboard</a></button>
+    <br>
+    <script>    
+    </script>
+    
+        <div class = "details">
+            <p>Name : {{name}}</p>
+            <p>Number of Tests {{diffString}} : {{noTests}}</p>
+        <br>
+            <button><a href="/{{type}}/profile/patch" class="updateProfile" method = "get">Update Profile</a></button>
+        <br>
+            <hr>
+            <div>
+                <picture>{{pic}}</picture>
+            </div>
+            <hr>
+        </div>
+
+
+
+    
+    </body>
+</html>
