@@ -348,7 +348,7 @@ router.get('/students/profile', auth('students'), async(req,res)=>{
    if(!req.user.avatar){
       var pic = "Profile Picture Not Uploaded"
    }else{
-      var pic = req.user.avatar
+      var pic = req.user.avatar.toString('base64')
    }
 
    res.render('profile', {
@@ -357,7 +357,7 @@ router.get('/students/profile', auth('students'), async(req,res)=>{
       name : req.user.name,
       noTests,
       diffString: 'Attempted',
-      pic
+      pic:JSON.stringify(pic)
    })
 })
 
@@ -382,6 +382,7 @@ router.post('/students/profile/avatar', auth('students'), uploadS.single('avatar
   const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250}).png().toBuffer()
   try{
    req.user.avatar = buffer
+   
   await req.user.save() 
   res.redirect('/students/profile/patch')
   }

@@ -26,10 +26,18 @@
         <br>
             <hr>
             <div>
-                <picture>{{pic}}</picture>
+                {{!-- <picture>{{pic}}</picture> --}}
+                <img id='profilepic'>
             </div>
             <hr>
         </div>
+
+        <script>
+            var picture = document.getElementById('profilepic')
+            var pic = {{{pic}}}
+            picture.src= "data:image/png;base64, "+pic
+        </script>
+        
 
 
 

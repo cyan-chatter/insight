@@ -34,6 +34,7 @@ const auth = (type)=>{
             }
         req.token = token
         req.user = user
+        req.user_type= type
         next()
     
         }catch(e){
