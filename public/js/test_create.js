@@ -15,32 +15,25 @@
  const updatequestions = (currquesNo)=>{
      try{
 
-     const all_holders= document.getElementsByClassName('quesholder')
-     console.log(currquesNo)
-     quesNo--
-     
-     for(i=currquesNo;i<all_holders.length;i++)
-     {   const currholder= all_holders[i]
+        const all_holders= document.getElementsByClassName('quesholder')
+        console.log(currquesNo)
+        quesNo--
         
-         currholder.id='quesholder'+(i+1)
-         const children= currholder.childNodes
-         setAttributes(children[2].childNodes[0],{'name':'q'+(i+1),'placeholder':'Enter Question '+(i+1)})
-         children[3].id='close'+(i+1)
-         for(j=5,k=1;j<9;j++,k++)
-         {
-            children[j].childNodes[0].name='o'+(i+1)+k
-         }
-         children[9].childNodes[0].name='c'+(i+1)
-         
-         
-         console.log(quesNo)
-         
-
-
-     }
-    }catch(e){
-
-    }
+        for(i=currquesNo;i<all_holders.length;i++)
+        {   const currholder= all_holders[i]
+            
+            currholder.id='quesholder'+(i+1)
+            const children= currholder.childNodes
+            setAttributes(children[2].childNodes[0],{'name':'q'+(i+1),'placeholder':'Enter Question '+(i+1)})
+            children[3].id='close'+(i+1)
+            for(j=5,k=1;j<9;j++,k++)
+            {
+                children[j].childNodes[0].name='o'+(i+1)+k
+            }
+            children[9].childNodes[0].name='c'+(i+1)
+        
+        }
+        }catch(e){}
  }
 
 

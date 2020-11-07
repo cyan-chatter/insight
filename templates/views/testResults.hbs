@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <title>Test Results</title>
+        <script src="https://kit.fontawesome.com/a392ca20cf.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <h4>{{message}}</h4>
+        <h4>Total Marks Scored:</h4>
+        <h3>{{totalMarks}}/20</h3>
+
+    
+    <div id='questions'>
+
+
+    </div>
+
+    <br>
+    <div class ="download">
+        <p>Download a Copy of this Page</p>
+        <button class = "downloadBtn"><a href = "/students/dashboard">DOWNLOAD</a></button> 
+    </div>
+
+        <script> 
+            var questions = {{{ques}}}
+            var answers = {{{ans}}}
+            var problems = {{{prob}}}
+            var correct = {{{correctMap}}}
+            var attempted = {{{att}}}
+
+           
+        </script>
+
+        <script src="/js/testResults.js"></script>
+        
+    </body>
+</html>
