@@ -17,7 +17,7 @@
     <form id="theImageForm" action = "/{{type}}/profile/avatar" method = "post" enctype="multipart/form-data">
         <label for="theImageField" id="theImageContainer">
             <input type="file" id="theImageField" accept="image/png, image/jpeg" name="avatar">
-            Click here to Upload an Image
+            <p>Click here to Upload an Image, Select Image and then Click Upload to Set new Profile Picture </p>
         </label>
         <button class="btn btn-lg btn-primary" type="submit">Update Profile Picture</button>
         <button><a href="/{{type}}/profile/avatar/delete" id="clearImage" method = "get">Remove</a></button>
@@ -27,6 +27,7 @@
 
 
         <div class="main-content">
+
                 <br>
                 <form id="updateForm" method ="post" action = {{goto}}>
                     
