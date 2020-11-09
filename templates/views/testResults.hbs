@@ -4,37 +4,13 @@
         
         <title>Test Results</title>
         <script src="https://kit.fontawesome.com/a392ca20cf.js" crossorigin="anonymous"></script>
-                <script type="text/javascript">
-function print_webpage()
-{
- var printContent = document.getElementsByTagName('body')[0];
- var WinPrint = window.open('', '', 'width=700,height=650');
- WinPrint.document.write(printContent.innerHTML);
- WinPrint.document.close();
- WinPrint.focus();
- WinPrint.print();
- WinPrint.close();
-}
-
-function print_div()
-{
- var printContent = document.getElementById('print_div');
- var WinPrint = window.open('', '', 'width=700,height=650');
- WinPrint.document.write(printContent.innerHTML);
- WinPrint.document.close();
- WinPrint.focus();
- WinPrint.print();
- WinPrint.close();
-}
-</script>
-
-        
+      
     </head>
     <body>
         <div id="print_div">
         <h4>{{message}}</h4>
         <h4>Total Marks Scored:</h4>
-        <h3>{{totalMarks}}/20</h3>
+        <h3 id='totalmarks'></h3>
 
     
     <div id='questions'>
@@ -44,12 +20,14 @@ function print_div()
     </div>
 
     <br>
+    <div id='not-printable'>
     <div class ="download">
         <p>Download a Copy of this Page Here</p>
-        <input type="button" class="print_button" value="Download" onclick="print_div();"> 
+        <input type="button" class="print_button" value="Download" onclick="printresult()"> 
     </div>
     <div>
         <button><a href = "/students/dashboard">Dashboard</a></button>
+    </div>
     </div>
 
         <script> 
@@ -58,7 +36,14 @@ function print_div()
             var problems = {{{prob}}}
             var correct = {{{correctMap}}}
             var attempted = {{{att}}}
-
+            const totalmarks_DOM = document.querySelector('#totalmarks')
+            totalmarks_DOM.innerHTML= {{{totalMarks}}}+'/'+questions.length
+            function printresult(){
+                const download_Div= document.querySelector('#not-printable')
+                download_Div.style.display= 'none'
+                window.print()
+                download_Div.style.display='block'
+            }
            
         </script>
 

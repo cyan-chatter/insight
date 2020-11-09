@@ -4,7 +4,7 @@ THE GREAT LIST
 ////////////////////////////////////
 //to-do-list: (and we thought we were almost done with this project....)
 //render the Results Page HTML
-//make a map of subject-string to subject-code and render the subject string on 'stream' view
+//done //make a map of subject-string to subject-code and render the subject string on 'stream' view
 //fix router positions in the code
 //make enter subjects form to be displayed just after Register --give option to enter subjects in order of preference
 //on dashboard, show only those subjects for creating test which were entered in the subjects form

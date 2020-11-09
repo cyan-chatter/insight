@@ -9,7 +9,7 @@ const auth = require('./middleware/autho')
 const isloggedin = require('./middleware/isloggedin')
 const Questions = require('./db/test_questions')
 const TestMap = require('./db/test_map')
-const api = require('../utils/js/api.js')
+
 const app = express()
 const cookieParser= require('cookie-parser')
 //body Parser for parsing form data
@@ -44,14 +44,7 @@ hbs.registerHelper("inc", function(value, options)
 app.use(express.static(publicDirectoryPath))
 
 
-function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-}
+
 //home routes
 app.get('/', (req, res) => {
     
@@ -95,66 +88,21 @@ app.get('/admins',(req,res) =>{
 app.get('/students/register',isloggedin('students'), (req,res)=>{
     res.render('register',{
         title: 'Student Registeration',
-        goto: '/students/register'
+        goto: '/students/register',
+        type: JSON.stringify('students')
     })
 })
 
 
-app.get('/students/test',auth('students'),async (req,res)=> {
-     const category= req.query.category
-    try{ 
 
-        
-         await api(category,async (questions,category)=>{
-
-            const test = new TestMap({subject: category})
-            await test.save() 
-          
-            const ques_arr = await questions.map(async (que)=>{
-                
-                que.incorrect_answers.push(que.correct_answer)
-                var options = que.incorrect_answers
-                shuffleArray(options)
-                
-
-                const ques = {question:que.question,options,correct_answer:que.correct_answer}
-                console.log(ques)
-                
-                const result= new Questions({
-                        ...ques,
-                        user: req.user._id,
-                        test: test._id
-                    })
-
-                await result.save()
-                    // each question gets saved to database with user id as parent field
-                const quesParsed = result.parse_into_question()
-                    
-                res.cookie('test',test,{
-                    maxAge:1000*60*60,
-                    httpOnly:true
-                 })
-                
-                return quesParsed
-               // returns question data to be displayed     
-            })
-
-             const ques= await Promise.all(ques_arr)
-            
-            res.render('test',{questions:JSON.stringify(ques)})
-        })  
-        }catch(e){
-            res.send("error")
-        } 
-    
-})
 
 
 
 app.get('/teachers/register',isloggedin('teachers'), (req,res)=>{
     res.render('register',{
         title: 'Teacher Registeration',
-        goto:'/teachers/register'
+        goto:'/teachers/register',
+        type: JSON.stringify('teachers')
     })
 })
 

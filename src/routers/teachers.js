@@ -6,6 +6,7 @@ const auth = require('../middleware/autho')
 const multer = require('multer')
 const sharp = require('sharp')
 const bodyParser = require('body-parser')
+const Questions= require('../db/test_questions')
 
 
 //const { sendWelcomeEmail, sendCancellationEmail} = require('../emails/account')
@@ -141,8 +142,10 @@ router.post('/teachers/register', async (req, res)=>{
  })
 
 router.post('/teachers/profile/patch', auth('teachers'), async (req, res)=>{
-  const allowedUpdates = ['name','age','email','password']
+  const allowedUpdates = ['name','age','email','password','subject']
   const updates = Object.keys(req.body)
+  console.log(req.body)
+
   const isValidOperation = updates.every((update)=>{
      return allowedUpdates.includes(update)
   })
@@ -193,35 +196,54 @@ router.post('/teachers/profile/patch', auth('teachers'), async (req, res)=>{
  })
  
  router.get('/teachers/dashboard',auth('teachers') ,async (req,res)=> {
-     res.render('dashboard', { name: req.user.name, type:'teachers',type_str:JSON.stringify('teachers')})
+     res.render('dashboard', { name: req.user.name,
+       type:'teachers',
+       type_str:JSON.stringify(req.user_type),
+       goto2: '/teachers/profile', 
+       destination2: 'Profile',
+       goto3: '/teachers/createtest',
+      destination3: 'Create a New Test'})
  })
  
  // FILE UPLOADS
 
 
  router.post('/teachers/createtest',auth('teachers'),async (req,res)=> {
+    try{
     const questions = req.body
     const quesNo = questions
-    console.log(questions)
+    const test_map= new TestMap({subject:req.user.subject,teacher:req.user._id})
+    await test_map.save()
+    console.log(test_map)
     for(i=1;questions['q'+i]!==undefined;i+=1)
     { var options=[]
        for(j=1;j<=4;j++)
       {
          options.push(questions['o'+i+j])
       }
-      const ques = {question:questions['q'+i],options,correct_answer:questions['c'+i]}
+      const ques =new  Questions( {question:questions['q'+i],options,correct_answer:questions['c'+i],test:test_map._id})
+      await ques.save()
       console.log(ques)
     }
-    const test = new TestMap({subject})
-    res.redirect('/teachers/testcreated')
- })
-
- router.get('/teachers/testcreated',(req,res)=>{
     
-    res.send("test Created")
+    res.redirect('/teachers/testcreated')
+   }catch(e){
+      res.render('temppage',{name:req.user.name,
+         message:"Error in test Creation",
+         goto: '/teachers/dashboard',
+         destination: 'Dashboard'})
+   }
  })
 
-const uploadT = multer({
+ router.get('/teachers/testcreated',auth('teachers'),(req,res)=>{
+    
+    res.render('temppage',{name:req.user.name,
+    message:"Test Created Successfully",
+    goto: '/teachers/dashboard',
+    destination: 'Dashboard'})
+ })
+
+const uploadS = multer({
     //dest: 'avatars',
     limits: {
         fileSize: 1000000
@@ -248,7 +270,7 @@ router.get('/teachers/profile', auth('teachers'), async(req,res)=>{
    if(!req.user.avatar){
       var pic = "Profile Picture Not Uploaded"
    }else{
-      var pic = req.user.avatar
+      var pic = req.user.avatar.toString('base64')
    }
 
    res.render('profile', {
@@ -257,7 +279,7 @@ router.get('/teachers/profile', auth('teachers'), async(req,res)=>{
       name : req.user.name,
       noTests,
       diffString: 'Created',
-      pic
+      pic : JSON.stringify(pic)
    })
 })
 

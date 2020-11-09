@@ -2,7 +2,12 @@
 <html>
     <head>
         <link rel="stylesheet" href="./css/styles.css">
-        
+        <script>
+            var subject_code = {{conclusion}}
+            var subject_key = {{{subject_key}}}
+            var stream_sugg = subject_key[subject_code]
+            
+        </script>
         <title>Stream</title>
         <link rel="icon" href="../../utils/img/searchW2.png">
     </head>
@@ -11,7 +16,7 @@
             <h3>Your Recommended Stream is : </h3>
         </div>
         <hr>
-        <h1 class = "announceStream">{{conclusion}}</h1>
+        <h1 class = "announceStream"></h1>
         </div>
         <br>
         <div>
@@ -20,5 +25,9 @@
         <div>
             <button><a href = "/students/results">Results</a></button>
         </div>
+        <script>var stream = document.querySelector('.announceStream')
+            stream.innerHTML=stream_sugg
+        </script>
+       
     </body>
 </html>

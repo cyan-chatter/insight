@@ -3,6 +3,7 @@ const request= require('request')
 
 const { response } = require('express');
 const api = async  (subject,callback) => {
+  console.log(subject)
     
     
     try{

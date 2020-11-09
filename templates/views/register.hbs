@@ -21,6 +21,14 @@
                     <input type="number" name="age" id="age" required><br>
                     <label for="email">Email</label><br>
                     <input type="email" name="email" id="email" required><br>
+                    <label id="subjects">Choose your subject:<br>
+                        <select name="subject" >
+                            <option value="22">Geography</option>
+                            <option value="17">Science and Nature</option>
+                            <option value="19">Mathematics</option>
+                            <option value="11">Entertainment:Movies</option>
+                        </select><br>
+                    </label>
                     <label for="password">Password</label><br>
                     <input type="password" name="password" id="password" minlength=6 required><br>
                     <label for="confirmpass">Confirm Password</label><br>
@@ -30,7 +38,13 @@
                 
                 <br>
         </div>
-        
+     <script>
+         if({{{type}}}=='students')
+         {
+             var sub_options = document.querySelector('#subjects')
+             sub_options.remove()
+         }
+     </script>   
      <script src="/js/confirmpass.js" ></script>
    <!-- <div><script src="/js/face.js"></script></div> -->
     

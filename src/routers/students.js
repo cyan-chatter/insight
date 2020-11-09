@@ -1,6 +1,7 @@
 const express = require('express')
 const router = new express.Router()
 const Student = require('../db/student')
+const api = require('../../utils/js/api.js')
 const auth = require('../middleware/autho')
 const multer = require('multer')
 const sharp = require('sharp')
@@ -8,16 +9,23 @@ const Questions= require('../db/test_questions')
 const TestMap = require('../db/test_map')
 const bodyParser = require('body-parser')
 const { findById } = require('../db/student')
+const { ObjectID } = require('mongodb')
 //const { findOne } = require('../db/student')
 
 //const { sendWelcomeEmail, sendCancellationEmail} = require('../emails/account')
 ////////////////////////
 
 //public
-const findTestQuestions = async (StudentId, TestId)=>{
-   const questions = await Questions.find({test : TestId, user: StudentId})
-   return questions
-}
+
+function shuffleArray(array) {
+   for (var i = array.length - 1; i > 0; i--) {
+       var j = Math.floor(Math.random() * (i + 1));
+       var temp = array[i];
+       array[i] = array[j];
+       array[j] = temp;
+   }
+}  
+
 
 var subject_key={'22':'Geography','19':'Mathematics','17':'Science and Nature','11':'Entertainment:Movies'}
 
@@ -139,7 +147,8 @@ router.post('/students/logoutAll', auth('students'), async(req,res)=>{
        res.render('update',{
           title: 'Students Update Profile',
           goto: '/students/profile/patch',
-          type: 'students'
+          type: 'students',
+          type_str: JSON.stringify('students')
        })
     }catch(e){
        res.status(500).render(e)
@@ -199,21 +208,119 @@ router.post('/students/logoutAll', auth('students'), async(req,res)=>{
 })
 
 router.get('/students/dashboard',auth('students') ,async (req,res)=> {
-    res.render('dashboard', { name: req.user.name, type: 'students', goto: '/students/results', destination: 'Results', goto2: '/students/profile', destination2: 'Profile'})
+    res.render('dashboard', { name: req.user.name, type: 'students', type_str:JSON.stringify(req.user_type),goto: '/students/results', destination: 'Results', goto2: '/students/profile', destination2: 'Profile'})
+})
+
+router.get('/students/pretest',auth('students'),async (req,res)=> {
+   const teacher_tests = await TestMap.find({subject:req.query.category})
+   var tests = []
+   teacher_tests.forEach((test)=>{
+      if(test.teacher && !test.student){
+         tests.push(test)
+      }
+   })
+   
+   res.render('pretest_page',{goto:'/students/test', 
+                           test_list:JSON.stringify(tests),
+                           subject: req.query.category})
+})
+
+router.get('/students/test',auth('students'),async (req,res)=> {
+   const category= req.query.testchoice
+  
+  try{ 
+       
+       if( subject_key[category])
+       {
+       await api(category,async (questions,category)=>{
+          const test = new TestMap({subject: category})
+          await test.save() 
+        
+          const ques_arr = await questions.map(async (que)=>{
+              
+              que.incorrect_answers.push(que.correct_answer)
+              var options = que.incorrect_answers
+              shuffleArray(options)
+              
+
+              const ques = {question:que.question,options,correct_answer:que.correct_answer}
+             
+              
+              const result= new Questions({
+                      ...ques,
+                      user: req.user._id,
+                      test: test._id
+                  })
+
+              await result.save()
+                  // each question gets saved to database with user id as parent field
+              const quesParsed = result.parse_into_question()
+                  
+              res.cookie('test',test,{
+                  maxAge:1000*60*60,
+                  httpOnly:true
+               })
+              
+              return quesParsed
+             // returns question data to be displayed     
+          })
+
+           const ques= await Promise.all(ques_arr)
+          
+          res.render('test',{questions:JSON.stringify(ques)})
+      })
+      }  
+      else{
+         
+         const test_map = await TestMap.findById(req.query.testchoice)
+         const questions = await Questions.find({test:ObjectID(req.query.testchoice)})
+         var parsed_questions=[]
+         const test = new TestMap({subject: test_map.subject})
+          test.student= req.user._id
+          test.testconnect= ObjectID(category)
+          await test.save()
+          
+          res.cookie('test',test,{
+            maxAge:1000*60*60,
+            httpOnly:true
+         })
+         
+         questions.forEach(question => {
+            parsed_questions.push(question.parse_into_question())
+         })
+         res.render('test',{questions:JSON.stringify(parsed_questions)})
+         
+      }
+      
+      }catch(e){
+         
+         res.send(e)
+
+      } 
+  
 })
 
 
+
 router.post('/students/test', auth('students'), async (req,res)=>{ 
+   var questions
+   console.log(req.cookies.test)
+   //const questions = await findTestQuestions( req.cookies.test)
+   if(req.cookies.test.testconnect){
+   questions = await Questions.find({test : req.cookies.test.testconnect})
+   }
+   else{
+   questions = await Questions.find({test :req.cookies.test._id})
+   }
    
-   const questions = await findTestQuestions(req.user._id, req.cookies.test)
    //to-do: generate results -- req.body
-   console.log(questions)
    const problems = Object.keys(req.body)
    // problems is array of Question IDs now
    //works
    const answers = Object.values(req.body)
    // answers is array of Answer values now
    //works
+   
    var correct = []
    const len = problems.length
    //works
@@ -227,6 +334,7 @@ router.post('/students/test', auth('students'), async (req,res)=>{
    }
    
    const Test = await TestMap.findById(req.cookies.test) //works
+   Test.marks=0
    
    for(var x in questions){  
      for(var i=0; i<len; ++i){   //Works but some Error might be present
@@ -244,8 +352,9 @@ router.post('/students/test', auth('students'), async (req,res)=>{
       Test.marks = 0
    }
    Test.student = req.user._id
+   Test.marksOutOf= questions.length
    await Test.save() 
-   //console.log(answers,problems)
+   console.log(Test)
 
    res.render('testResults', {
       message : 'You have Successfully Completed The Test. Here are the Results.',
@@ -309,7 +418,7 @@ router.get('/students/results',auth('students') ,async (req,res)=>{
 })
 
 router.get('/students/stream',auth('students') ,async (req,res)=>{
-   res.render('stream',{conclusion: req.cookies.stream})
+   res.render('stream',{conclusion: req.cookies.stream,subject_key:JSON.stringify(subject_key)})
 })
 
 

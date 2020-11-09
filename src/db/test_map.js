@@ -9,6 +9,10 @@ const testMapSchema = new mongoose.Schema({
         type: Number,
         default: 0
     }, 
+    marksOutOf :{
+        type : Number,
+        default :0
+    },
     teacher: {
         type: mongoose.Schema.Types.ObjectId,
         ref:"Teacher"
@@ -16,10 +20,15 @@ const testMapSchema = new mongoose.Schema({
     student: {
         type: mongoose.Schema.Types.ObjectId,
         ref:"Student"
+    },
+    testconnect:{
+        type :mongoose.Schema.Types.ObjectId
     }
+
 },{
     timestamps: true
 })
+
 
 
 const TestMap = new mongoose.model('TestMap',testMapSchema)

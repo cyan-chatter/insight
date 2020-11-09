@@ -2,7 +2,10 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const fs= require('fs')
 const secretKey = process.env.JWT_SECRET||'TotalOverdose'
+
+const default_image= fs.readFileSync(__dirname+"../../../utils/img/default.png")
 
 const teacherSchema = new mongoose.Schema({
     name: {
@@ -29,6 +32,11 @@ const teacherSchema = new mongoose.Schema({
             }
         }
     },
+    subject: {
+        type: String,
+        required:true,
+        
+    },
     password: {
         type: String,
         required: true,
@@ -49,7 +57,8 @@ const teacherSchema = new mongoose.Schema({
         }
     }],
     avatar: {
-        type: Buffer
+        type: Buffer,
+        default : default_image
     }
 },{
     timestamps: true
