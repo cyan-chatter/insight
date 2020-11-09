@@ -14,13 +14,12 @@ const { findById } = require('../db/student')
 ////////////////////////
 
 //public
-
 const findTestQuestions = async (StudentId, TestId)=>{
    const questions = await Questions.find({test : TestId, user: StudentId})
    return questions
 }
 
-
+var subject_key={'22':'Geography','19':'Mathematics','17':'Science and Nature','11':'Entertainment:Movies'}
 
 router.post('/students/register', async (req, res)=>{
   

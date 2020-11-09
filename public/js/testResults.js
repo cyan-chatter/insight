@@ -99,6 +99,13 @@ questions.forEach((question)=>{
         htmlentity.innerHTML= options_str
         options_str=htmlentity.innerHTML
 
+        const htmlentity = document.createElement('p')
+        htmlentity.innerHTML= options_str
+        console.log(options_str,htmlentity.innerHTML)
+        options_str=htmlentity.innerHTML
+        option.innerHTML=(j+1)+'. '+question.options[j] 
+        quesholder.appendChild(option)
+        
         if(question.correct_answer===question.options[j])
         {   const check=document.createElement('i')
             check.className='fas fa-check'

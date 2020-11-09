@@ -1,0 +1,938 @@
+[1mdiff --git a/package-lock.json b/package-lock.json[m
+[1mindex cc43814..64180b7 100644[m
+[1m--- a/package-lock.json[m
+[1m+++ b/package-lock.json[m
+[36m@@ -132,9 +132,9 @@[m
+       "integrity": "sha1-tG6JCTSpWR8tL2+G1+ap8bP+dqg="[m
+     },[m
+     "aws4": {[m
+[31m-      "version": "1.11.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/aws4/-/aws4-1.11.0.tgz",[m
+[31m-      "integrity": "sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA=="[m
+[32m+[m[32m      "version": "1.10.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/aws4/-/aws4-1.10.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-zg7Hz2k5lI8kb7U32998pRRFin7zJlkfezGJjUc2heaD4Pw2wObakCDVzkKztTm/Ln7eiVvYsjqak0Ed4LkMDA=="[m
+     },[m
+     "axo": {[m
+       "version": "0.0.2",[m
+[36m@@ -1597,9 +1597,9 @@[m
+       "integrity": "sha512-0bA08/2RKWxw6pMkOVd3KP+0F5+ifQLMMTDxrCgxlgkoU1N8DhCbCSAYEqpgaVYM2smvbVVewiXjW+8AyoLfxQ=="[m
+     },[m
+     "nodemon": {[m
+[31m-      "version": "2.0.6",[m
+[31m-      "resolved": "https://registry.npmjs.org/nodemon/-/nodemon-2.0.6.tgz",[m
+[31m-      "integrity": "sha512-4I3YDSKXg6ltYpcnZeHompqac4E6JeAMpGm8tJnB9Y3T0ehasLa4139dJOcCrB93HHrUMsCrKtoAlXTqT5n4AQ==",[m
+[32m+[m[32m      "version": "2.0.5",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/nodemon/-/nodemon-2.0.5.tgz",[m
+[32m+[m[32m      "integrity": "sha512-6/jqtZvJdk092pVnD2AIH19KQ9GQZAKOZVy/yT1ueL6aoV+Ix7a1lVZStXzvEh0fP4zE41DDWlkVoHjR6WlozA==",[m
+       "requires": {[m
+         "chokidar": "^3.2.2",[m
+         "debug": "^3.2.6",[m
+[36m@@ -1851,9 +1851,9 @@[m
+       "integrity": "sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A=="[m
+     },[m
+     "pupa": {[m
+[31m-      "version": "2.1.1",[m
+[31m-      "resolved": "https://registry.npmjs.org/pupa/-/pupa-2.1.1.tgz",[m
+[31m-      "integrity": "sha512-l1jNAspIBSFqbT+y+5FosojNpVpF94nlI+wDUpqP9enwOTfHx9f0gh5nB96vl+6yTpsJsypeNrwfzPrKuHB41A==",[m
+[32m+[m[32m      "version": "2.0.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/pupa/-/pupa-2.0.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-hEJH0s8PXLY/cdXh66tNEQGndDrIKNqNC5xmrysZy3i5C3oEoLna7YAOad+7u125+zH1HNXUmGEkrhb3c2VriA==",[m
+       "requires": {[m
+         "escape-goat": "^2.0.0"[m
+       }[m
+[36m@@ -2341,9 +2341,9 @@[m
+       }[m
+     },[m
+     "term-size": {[m
+[31m-      "version": "2.2.1",[m
+[31m-      "resolved": "https://registry.npmjs.org/term-size/-/term-size-2.2.1.tgz",[m
+[31m-      "integrity": "sha512-wK0Ri4fOGjv/XPy8SBHZChl8CM7uMc5VML7SqiQ0zG7+J5Vr+RMQDoHa2CNT6KHUnTGIXH34UDMkPzAUyapBZg=="[m
+[32m+[m[32m      "version": "2.2.0",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/term-size/-/term-size-2.2.0.tgz",[m
+[32m+[m[32m      "integrity": "sha512-a6sumDlzyHVJWb8+YofY4TW112G6p2FCPEAFk+59gIYHv3XHRhm9ltVQ9kli4hNWeQBwSpe8cRN25x0ROunMOw=="[m
+     },[m
+     "to-readable-stream": {[m
+       "version": "1.0.0",[m
+[36m@@ -2442,11 +2442,6 @@[m
+         "debug": "^2.2.0"[m
+       }[m
+     },[m
+[31m-    "underscore": {[m
+[31m-      "version": "1.11.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/underscore/-/underscore-1.11.0.tgz",[m
+[31m-      "integrity": "sha512-xY96SsN3NA461qIRKZ/+qox37YXPtSBswMGfiNptr+wrt6ds4HaMw23TP612fEyGekRE6LNRiLYr/aqbHXNedw=="[m
+[31m-    },[m
+     "unique-string": {[m
+       "version": "2.0.0",[m
+       "resolved": "https://registry.npmjs.org/unique-string/-/unique-string-2.0.0.tgz",[m
+[1mdiff --git a/package.json b/package.json[m
+[1mindex 97652eb..b144574 100644[m
+[1m--- a/package.json[m
+[1m+++ b/package.json[m
+[36m@@ -5,7 +5,7 @@[m
+   "main": "index.js",[m
+   "scripts": {[m
+     "start": "node src/app.js",[m
+[31m-    "dev": "env-cmd -f ./config/dev.env nodemon src/app.js"[m
+[32m+[m[32m    "dev": "env-cmd -f ./config/dev.env nodemon src/app.js -e js,hbs"[m
+   },[m
+   "author": "",[m
+   "license": "ISC",[m
+[36m@@ -23,12 +23,10 @@[m
+     "multer": "^1.4.2",[m
+     "multiparty": "^4.2.2",[m
+     "node-fetch": "^2.6.1",[m
+[31m-    "nodemon": "^2.0.6",[m
+[32m+[m[32m    "nodemon": "^2.0.5",[m
+     "path": "^0.12.7",[m
+     "request": "^2.88.2",[m
+[31m-    "requests": "^0.3.0",[m
+     "sharp": "^0.26.2",[m
+[31m-    "underscore": "^1.11.0",[m
+     "validator": "^13.1.17"[m
+   }[m
+ }[m
+[1mdiff --git a/public/css/styles.css b/public/css/styles.css[m
+[1mindex 0c2db38..e69de29 100644[m
+[1m--- a/public/css/styles.css[m
+[1m+++ b/public/css/styles.css[m
+[36m@@ -1,3 +0,0 @@[m
+[31m-.main-content{[m
+[31m-    background-color: lightseagreen;[m
+[31m-}[m
+\ No newline at end of file[m
+[1mdiff --git a/public/js/reload_on_back.js b/public/js/reload_on_back.js[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e4543e7[m
+[1m--- /dev/null[m
+[1m+++ b/public/js/reload_on_back.js[m
+[36m@@ -0,0 +1,6 @@[m
+[32m+[m[32mvar perfEntries = performance.getEntriesByType("navigation");[m
+[32m+[m
+[32m+[m[32mif (perfEntries[0].type === "back_forward") {[m
+[32m+[m[32m    location.reload();[m
+[32m+[m[32m}[m
+[32m+[m
+[1mdiff --git a/public/js/testResults.js b/public/js/testResults.js[m
+[1mdeleted file mode 100644[m
+[1mindex 2f178a5..0000000[m
+[1m--- a/public/js/testResults.js[m
+[1m+++ /dev/null[m
+[36m@@ -1,134 +0,0 @@[m
+[31m-[m
+[31m-const generateDOM = document.querySelector('.generate')[m
+[31m-const headDOM = document.getElementById('head')[m
+[31m-const questionDOM = document.querySelector('.question')[m
+[31m-const optionsDOM = document.querySelector('.options')[m
+[31m-const correctDOM = document.querySelector('.correct')[m
+[31m-const answerDOM = document.querySelector('.answer')[m
+[31m-const markDOM = document.querySelector('.mark')[m
+[31m-const downloadBtnDOM = document.querySelector('.downloadBtn')[m
+[31m-[m
+[31m-[m
+[31m-var attQ = [][m
+[31m-[m
+[31m-for(x=0;x<questions.length;x++){[m
+[31m-    [m
+[31m-    if(attempted[x] === 1){[m
+[31m-        attQ.push(x)  [m
+[31m-    }[m
+[31m-}[m
+[31m-[m
+[31m-[m
+[31m-[m
+[31m-[m
+[31m-// headDOM.insertAdjacentText('beforeend', 'Attempted Questions:')[m
+[31m-[m
+[31m-// for(var q=0; q<attQ.length; ++q){[m
+[31m-//     questionDOM.insertAdjacentText('beforeend', attQ[q].question)[m
+[31m-//     optionsDOM.insertAdjacentText('beforeend', attQ[q].options)[m
+[31m-//     correctDOM.insertAdjacentText('beforeend', attQ[q].correct_answer)[m
+[31m-//     answerDOM.insertAdjacentText('beforeend', answers[q])[m
+[31m-//     if(correct[q] === 1){[m
+[31m-//         markDOM.insertAdjacentText('beforeend', '+1')[m
+[31m-//     }else{[m
+[31m-//         markDOM.insertAdjacentText('beforeend', '0')[m
+[31m-//     }[m
+[31m-// }[m
+[31m-[m
+[31m-// headDOM.insertAdjacentText('beforeend', 'Unattempted Questions:')[m
+[31m-[m
+[31m-// var y[m
+[31m-// var f = 0[m
+[31m-// for(y in questions){[m
+[31m-//     if(attempted[y] === 0){[m
+[31m-//         f=1[m
+[31m-//         questionDOM.insertAdjacentText('beforeend', questions[y].question)[m
+[31m-//         optionsDOM.insertAdjacentText('beforeend', questions[y].options)[m
+[31m-//         correctDOM.insertAdjacentText('beforeend', questions[y].correct_answer) [m
+[31m-//         answerDOM.insertAdjacentText('beforeend', 'none')[m
+[31m-//         markDOM.insertAdjacentText('beforeend', '0')  [m
+[31m-//     }[m
+[31m-// }[m
+[31m-[m
+[31m-// if(f === 0){[m
+[31m-//     generateDOM.insertAdjacentText('beforeend', 'NONE. All questions were attempted')[m
+[31m-// }[m
+[31m-[m
+[31m-// downloadBtnDOM.addEventListener('click', (e)=>{[m
+[31m-[m
+[31m-// })[m
+[31m-const quesdiv= document.querySelector('#questions')[m
+[31m-[m
+[31m-var i=0[m
+[31m-[m
+[31m-//console.log(problems)[m
+[31m-[m
+[31m-[m
+[31m-questions.forEach((question)=>{[m
+[31m-    [m
+[31m-    const quesholder = document.createElement('div')[m
+[31m-    const que = document.createElement('p')[m
+[31m-    que.innerHTML='Question '+(i+1)+': '+question.question[m
+[31m-    quesholder.appendChild(que)[m
+[31m-    //status_value = 1 for not attempted , 2 for correct and 3 for Incorrect[m
+[31m-    var status_value = 1[m
+[31m-    var answerindex[m
+[31m-    const isattempted = problems.includes(question._id)[m
+[31m-    var statstr = 'Not Attempted'[m
+[31m-    if(isattempted){[m
+[31m-     answerindex = problems.indexOf(question._id)[m
+[31m-    }[m
+[31m-    [m
+[31m-    if(isattempted && question.correct_answer===answers[answerindex])[m
+[31m-    {[m
+[31m-        status_value=2[m
+[31m-        statstr = 'Correct'[m
+[31m-    }[m
+[31m-    else if(isattempted)[m
+[31m-    { [m
+[31m-        status_value=3[m
+[31m-        statstr='Incorrect'[m
+[31m-    }[m
+[31m-    [m
+[31m-    for(j=0;j<4;j++) [m
+[31m-    {   const option = document.createElement('p')[m
+[31m-        option.innerHTML=(j+1)+'. '+question.options[j][m
+[31m-        quesholder.appendChild(option)[m
+[31m-[m
+[31m-        if(question.correct_answer===question.options[j])[m
+[31m-        {   const check=document.createElement('i')[m
+[31m-            check.className='fas fa-check'[m
+[31m-            option.insertAdjacentElement('beforeend',check)[m
+[31m-            if(question.options[j]===answers[answerindex]){[m
+[31m-                option.style.backgroundColor='#4eaf00'[m
+[31m-            }[m
+[31m-            else{[m
+[31m-            option.style.backgroundColor='#4caf5094'[m
+[31m-            }[m
+[31m-            option.style.width='40%'[m
+[31m-        }[m
+[31m-        [m
+[31m-        else if(status_value===3 && answers[answerindex]===question.options[j])[m
+[31m-        {   [m
+[31m-            [m
+[31m-            const wrong=document.createElement('i')[m
+[31m-            wrong.className='fas fa-times'[m
+[31m-            option.insertAdjacentElement('beforeend',wrong)[m
+[31m-            option.style.backgroundColor='#f44336bf'[m
+[31m-            option.style.width='40%'[m
+[31m-            [m
+[31m-        }[m
+[31m-        [m
+[31m-        [m
+[31m-    }[m
+[31m-[m
+[31m-    const status = document.createElement('p')[m
+[31m-    [m
+[31m-    status.innerHTML='Status: '+statstr[m
+[31m-    i++[m
+[31m-    quesholder.appendChild(status)[m
+[31m-    quesdiv.appendChild(document.createElement('br'))[m
+[31m-    quesdiv.appendChild(quesholder)[m
+[31m-    [m
+[31m-    [m
+[31m-})[m
+[1mdiff --git a/public/js/test_create.js b/public/js/test_create.js[m
+[1mindex 41243c8..ba59016 100644[m
+[1m--- a/public/js/test_create.js[m
+[1m+++ b/public/js/test_create.js[m
+[36m@@ -15,25 +15,32 @@[m
+  const updatequestions = (currquesNo)=>{[m
+      try{[m
+ [m
+[31m-        const all_holders= document.getElementsByClassName('quesholder')[m
+[31m-        console.log(currquesNo)[m
+[31m-        quesNo--[m
+[31m-        [m
+[31m-        for(i=currquesNo;i<all_holders.length;i++)[m
+[31m-        {   const currholder= all_holders[i][m
+[31m-            [m
+[31m-            currholder.id='quesholder'+(i+1)[m
+[31m-            const children= currholder.childNodes[m
+[31m-            setAttributes(children[2].childNodes[0],{'name':'q'+(i+1),'placeholder':'Enter Question '+(i+1)})[m
+[31m-            children[3].id='close'+(i+1)[m
+[31m-            for(j=5,k=1;j<9;j++,k++)[m
+[31m-            {[m
+[31m-                children[j].childNodes[0].name='o'+(i+1)+k[m
+[31m-            }[m
+[31m-            children[9].childNodes[0].name='c'+(i+1)[m
+[32m+[m[32m     const all_holders= document.getElementsByClassName('quesholder')[m
+[32m+[m[32m     console.log(currquesNo)[m
+[32m+[m[32m     quesNo--[m
+[32m+[m[41m     [m
+[32m+[m[32m     for(i=currquesNo;i<all_holders.length;i++)[m
+[32m+[m[32m     {   const currholder= all_holders[i][m
+         [m
+[31m-        }[m
+[31m-        }catch(e){}[m
+[32m+[m[32m         currholder.id='quesholder'+(i+1)[m
+[32m+[m[32m         const children= currholder.childNodes[m
+[32m+[m[32m         setAttributes(children[2].childNodes[0],{'name':'q'+(i+1),'placeholder':'Enter Question '+(i+1)})[m
+[32m+[m[32m         children[3].id='close'+(i+1)[m
+[32m+[m[32m         for(j=5,k=1;j<9;j++,k++)[m
+[32m+[m[32m         {[m
+[32m+[m[32m            children[j].childNodes[0].name='o'+(i+1)+k[m
+[32m+[m[32m         }[m
+[32m+[m[32m         children[9].childNodes[0].name='c'+(i+1)[m
+[32m+[m[41m         [m
+[32m+[m[41m         [m
+[32m+[m[32m         console.log(quesNo)[m
+[32m+[m[41m         [m
+[32m+[m
+[32m+[m
+[32m+[m[32m     }[m
+[32m+[m[32m    }catch(e){[m
+[32m+[m
+[32m+[m[32m    }[m
+  }[m
+ [m
+ [m
+[1mdiff --git a/src/app.js b/src/app.js[m
+[1mindex 9e16bed..b68c327 100644[m
+[1m--- a/src/app.js[m
+[1m+++ b/src/app.js[m
+[36m@@ -8,7 +8,6 @@[m [mconst adminRouter = require('./routers/admins')[m
+ const auth = require('./middleware/autho')[m
+ const isloggedin = require('./middleware/isloggedin')[m
+ const Questions = require('./db/test_questions')[m
+[31m-const TestMap = require('./db/test_map')[m
+ const api = require('../utils/js/api.js')[m
+ const app = express()[m
+ const cookieParser= require('cookie-parser')[m
+[36m@@ -35,22 +34,12 @@[m [mapp.set('view engine', 'hbs')[m
+ app.set('views', viewsPath)[m
+ const partialsPath = path.join(__dirname, '../templates/partials' )[m
+ hbs.registerPartials(partialsPath)[m
+[31m-hbs.registerHelper("inc", function(value, options)[m
+[31m-{[m
+[31m-    return parseInt(value) + 1;[m
+[31m-});[m
+[32m+[m
+ // serving static directory[m
+ app.use(express.static(publicDirectoryPath))[m
+ [m
+ [m
+[31m-function shuffleArray(array) {[m
+[31m-    for (var i = array.length - 1; i > 0; i--) {[m
+[31m-        var j = Math.floor(Math.random() * (i + 1));[m
+[31m-        var temp = array[i];[m
+[31m-        array[i] = array[j];[m
+[31m-        array[j] = temp;[m
+[31m-    }[m
+[31m-}[m
+[32m+[m
+ //home routes[m
+ app.get('/', (req, res) => {[m
+     [m
+[36m@@ -104,38 +93,33 @@[m [mapp.get('/students/test',auth('students'),async (req,res)=> {[m
+     try{ [m
+ [m
+         [m
+[31m-         await api(category,async (questions,category)=>{[m
+[32m+[m[32m         await api(category,async (questions)=>{[m
+[32m+[m
+[32m+[m[41m            [m
+ [m
+[31m-            const test = new TestMap({subject: category})[m
+[31m-            await test.save() [m
+[31m-          [m
+             const ques_arr = await questions.map(async (que)=>{[m
+                 [m
+                 que.incorrect_answers.push(que.correct_answer)[m
+                 var options = que.incorrect_answers[m
+[31m-                shuffleArray(options)[m
+                 [m
+ [m
+                 const ques = {question:que.question,options,correct_answer:que.correct_answer}[m
+[31m-                console.log(ques)[m
+                 [m
+[32m+[m
+                 const result= new Questions({[m
+                         ...ques,[m
+[31m-                        user: req.user._id,[m
+[31m-                        test: test._id[m
+[32m+[m[32m                        user:req.user._id[m
+[32m+[m[41m        [m
+                     })[m
+ [m
+                 await result.save()[m
+[31m-                    // each question gets saved to database with user id as parent field[m
+[32m+[m
+                 const quesParsed = result.parse_into_question()[m
+[31m-                    [m
+[31m-                res.cookie('test',test,{[m
+[31m-                    maxAge:1000*60*60,[m
+[31m-                    httpOnly:true[m
+[31m-                 })[m
+[31m-                [m
+[32m+[m[41m             [m
+[32m+[m[41m                 [m
+[32m+[m
+                 return quesParsed[m
+[31m-               // returns question data to be displayed     [m
+[32m+[m[41m                    [m
+             })[m
+ [m
+              const ques= await Promise.all(ques_arr)[m
+[36m@@ -185,6 +169,11 @@[m [mapp.get('/admins/login', (req,res)=>{[m
+     })[m
+ })[m
+ [m
+[32m+[m[32mapp.get('/teachers/createtest',(req,res)=>{[m
+[32m+[m[41m    [m
+[32m+[m[32m    res.render('test_create')[m
+[32m+[m[32m})[m
+[32m+[m
+ app.get('/clcookie',(req,res) => {[m
+     res.clearCookie('token')[m
+     res.json({name:"sanu"})[m
+[1mdiff --git a/src/db/admin.js b/src/db/admin.js[m
+[1mindex 936ff5e..67c9b0e 100644[m
+[1m--- a/src/db/admin.js[m
+[1m+++ b/src/db/admin.js[m
+[36m@@ -4,7 +4,6 @@[m [mconst jwt = require('jsonwebtoken')[m
+ const bcrypt = require('bcryptjs')[m
+ const secretKey = process.env.JWT_SECRET||'TotalOverdose'[m
+ [m
+[31m-[m
+ const adminSchema = new mongoose.Schema({[m
+     name: {[m
+         type: String,[m
+[1mdiff --git a/src/db/adminEmails.js b/src/db/adminEmails.js[m
+[1mindex 6212884..983ced5 100644[m
+[1m--- a/src/db/adminEmails.js[m
+[1m+++ b/src/db/adminEmails.js[m
+[36m@@ -10,6 +10,6 @@[m [mconst adminEmailsSchema = new mongoose.Schema({[m
+ }) [m
+ [m
+ const adminEmails = mongoose.model('adminEmails',adminEmailsSchema)[m
+[31m-console.log('adminEmails called')[m
+[32m+[m
+ module.exports = adminEmails[m
+ //manually put emails in this collection in the database[m
+\ No newline at end of file[m
+[1mdiff --git a/src/db/mongoose.js b/src/db/mongoose.js[m
+[1mindex 7f30190..5537944 100644[m
+[1m--- a/src/db/mongoose.js[m
+[1m+++ b/src/db/mongoose.js[m
+[36m@@ -3,7 +3,7 @@[m
+ const mongodb = require('mongodb')[m
+ const mongoose = require('mongoose')[m
+ [m
+[31m-//const MongoClient = mongodb.MongoClient[m
+[32m+[m[32mconst MongoClient = mongodb.MongoClient[m
+ [m
+ const mongoaddress =  process.env.MONGODB_URL||'mongodb://127.0.0.1:27017/'[m
+ const dbName = 'insight-base' [m
+[36m@@ -13,8 +13,7 @@[m [mmongoose.connect(connectionURL,{[m
+     useNewUrlParser: true,[m
+     useCreateIndex: true,[m
+     useFindAndModify: false,[m
+[31m-    useUnifiedTopology: true,[m
+[31m-    //useMongoClient: true[m
+[32m+[m[32m    useUnifiedTopology: true[m
+ })[m
+     [m
+ [m
+[1mdiff --git a/src/db/test_map.js b/src/db/test_map.js[m
+[1mdeleted file mode 100644[m
+[1mindex 9f409e7..0000000[m
+[1m--- a/src/db/test_map.js[m
+[1m+++ /dev/null[m
+[36m@@ -1,27 +0,0 @@[m
+[31m-const mongoose = require('mongoose')[m
+[31m-[m
+[31m-const testMapSchema = new mongoose.Schema({[m
+[31m-    subject: {[m
+[31m-        type: String,[m
+[31m-        required: true[m
+[31m-    },[m
+[31m-    marks:{[m
+[31m-        type: Number,[m
+[31m-        default: 0[m
+[31m-    }, [m
+[31m-    teacher: {[m
+[31m-        type: mongoose.Schema.Types.ObjectId,[m
+[31m-        ref:"Teacher"[m
+[31m-    },[m
+[31m-    student: {[m
+[31m-        type: mongoose.Schema.Types.ObjectId,[m
+[31m-        ref:"Student"[m
+[31m-    }[m
+[31m-},{[m
+[31m-    timestamps: true[m
+[31m-})[m
+[31m-[m
+[31m-[m
+[31m-const TestMap = new mongoose.model('TestMap',testMapSchema)[m
+[31m-[m
+[31m-module.exports= TestMap[m
+\ No newline at end of file[m
+[1mdiff --git a/src/db/test_questions.js b/src/db/test_questions.js[m
+[1mindex 49fed1d..77f2838 100644[m
+[1m--- a/src/db/test_questions.js[m
+[1m+++ b/src/db/test_questions.js[m
+[36m@@ -18,12 +18,7 @@[m [mconst QuestionSchema = new mongoose.Schema({[m
+         type: mongoose.Schema.Types.ObjectId,[m
+         required:true,[m
+         ref:"Student"[m
+[31m-    },[m
+[31m-    test: {[m
+[31m-        type: mongoose.Schema.Types.ObjectId,[m
+[31m-        required: true,[m
+[31m-        ref: "TestMap" [m
+[31m-    } [m
+[32m+[m[32m    }[m
+ [m
+ })[m
+ [m
+[36m@@ -33,22 +28,12 @@[m [mQuestionSchema.methods.parse_into_question=  function (){[m
+ [m
+     delete quesobject.correct_answer[m
+     delete quesobject.user[m
+[31m-    delete quesobject.test[m
+     delete quesobject.__v[m
+     return quesobject[m
+     [m
+ }[m
+ [m
+ [m
+[31m-QuestionSchema.methods.parse_into_results= function(){[m
+[31m-    const question=this[m
+[31m-    const quesobject= question.toObject()[m
+[31m-    delete quesobject.user[m
+[31m-    delete quesobject.test[m
+[31m-    delete quesobject.__v[m
+[31m-    return quesobject[m
+[31m-}[m
+[31m-[m
+ const Questions = new mongoose.model('Questions',QuestionSchema)[m
+ [m
+ module.exports= Questions[m
+\ No newline at end of file[m
+[1mdiff --git a/src/middleware/autho.js b/src/middleware/autho.js[m
+[1mindex ed24cf5..555d912 100644[m
+[1m--- a/src/middleware/autho.js[m
+[1m+++ b/src/middleware/autho.js[m
+[36m@@ -15,6 +15,7 @@[m [mconst secretKey = process.env.JWT_SECRET || 'TotalOverdose'[m
+ [m
+ const auth = (type)=>{[m
+     [m
+[32m+[m
+     return async(req, res, next)=>{[m
+         try{ [m
+             const token = req.cookies.token[m
+[1mdiff --git a/src/routers/students.js b/src/routers/students.js[m
+[1mindex cb99784..3f87f4c 100644[m
+[1m--- a/src/routers/students.js[m
+[1m+++ b/src/routers/students.js[m
+[36m@@ -5,25 +5,20 @@[m [mconst auth = require('../middleware/autho')[m
+ const multer = require('multer')[m
+ const sharp = require('sharp')[m
+ const Questions= require('../db/test_questions')[m
+[31m-const TestMap = require('../db/test_map')[m
+ [m
+ [m
+ const bodyParser = require('body-parser')[m
+[31m-const { findById } = require('../db/student')[m
+[31m-//const { findOne } = require('../db/student')[m
+ [m
+ //const { sendWelcomeEmail, sendCancellationEmail} = require('../emails/account')[m
+ ////////////////////////[m
+ [m
+ //public[m
+ [m
+[31m-const findTestQuestions = async (StudentId, TestId)=>{[m
+[31m-   const questions = await Questions.find({test : TestId, user: StudentId})[m
+[31m-   return questions[m
+[31m-}[m
+[32m+[m
+ [m
+ router.post('/students/register', async (req, res)=>{[m
+   [m
+[32m+[m
+    const alreadyPresent = await Student.findOne({email: req.body.email})[m
+    if(alreadyPresent){[m
+       return res.status(400).render('error404',{[m
+[36m@@ -181,121 +176,16 @@[m [mrouter.post('/students/logoutAll', auth('students'), async(req,res)=>{[m
+ })[m
+ [m
+ router.get('/students/dashboard',auth('students') ,async (req,res)=> {[m
+[31m-    res.render('dashboard', { name: req.user.name, type: 'students', goto: '/students/results', destination: 'Results'})[m
+[31m-})[m
+[31m-[m
+[31m-router.post('/students/test', auth('students'), async (req,res)=>{ [m
+[31m-/* DATA to Process:[m
+[31m-questions:[m
+[31m-[[m
+[31m-  {[m
+[31m-    options: [ 'Russia', 'China', 'United States of America', 'Canada' ],[m
+[31m-    _id: 5fa0f74c65955923445689e7,[m
+[31m-    question: 'What country is the second largest in the world by area?',[m
+[31m-    correct_answer: 'Canada',[m
+[31m-    user: 5f992186a27c242bd4a0a467,[m
+[31m-    test: 5fa0f74c65955923445689e6,[m
+[31m-    __v: 0[m
+[31m-  },..][m
+[31m-    for(x in questions){[m
+[31m-       x = questions[x];[m
+[31m-    }[m
+[31m-req.body:[m
+[31m- {[m
+[31m-   '5fa0fecf65b8b72a58c65ae9': 'Indonesia',[m
+[31m-   '5fa0fecf65b8b72a58c65aea': '6',[m
+[31m-   '5fa0fecf65b8b72a58c65af8': 'Sickle',[m
+[31m-   '5fa0fecf65b8b72a58c65af9': '8',[m
+[31m-   '5fa0fecf65b8b72a58c65afa': '8'[m
+[31m- }[m
+[31m-  */[m
+[31m-   console.log()[m
+[31m-   const questions = await findTestQuestions(req.user._id, req.cookies.test)[m
+[31m-   //to-do: generate results -- req.body[m
+[31m-[m
+[31m-   const problems = Object.keys(req.body)[m
+[31m-   // problems is array of Question IDs now[m
+[31m-   //works[m
+[31m-   const answers = Object.values(req.body)[m
+[31m-   // answers is array of Answer values now[m
+[31m-   //works[m
+[31m-   var correct = [][m
+[31m-   const len = problems.length[m
+[31m-   //works[m
+[31m-   for(var i=0; i<len; ++i){[m
+[31m-      correct[i] = 0;[m
+[31m-   }[m
+[31m-[m
+[31m-   var attempted = [][m
+[31m-   for(var i in questions){[m
+[31m-      attempted[i] = 0[m
+[31m-   }[m
+[31m-   [m
+[31m-   const Test = await TestMap.findById(req.cookies.test) //works[m
+[31m-   [m
+[31m-   for(var x in questions){  [m
+[31m-     for(var i=0; i<len; ++i){   //Works but some Error might be present[m
+[31m-      if(problems[i] === questions[x]._id.toString()){[m
+[31m-         attempted[x] = 1[m
+[31m-[m
+[31m-         if(answers[i] === questions[x].correct_answer){[m
+[31m-            Test.marks += 1[m
+[31m-            correct[i] = 1 [m
+[31m-         } [m
+[31m-      }   [m
+[31m-     }[m
+[31m-   }[m
+[31m-   if(Test.marks < 0){[m
+[31m-      Test.marks = 0[m
+[31m-   }[m
+[31m-   Test.student = req.user._id[m
+[31m-   await Test.save() [m
+[31m-   console.log(answers,problems)[m
+[31m-[m
+[31m-   res.render('testResults', {[m
+[31m-      message : 'You have Successfully Completed The Test. Here are the Results.',[m
+[31m-      totalMarks : JSON.stringify(Test.marks),[m
+[31m-      correctMap : JSON.stringify(correct),[m
+[31m-      ans: JSON.stringify(answers),[m
+[31m-      ques : JSON.stringify(questions),[m
+[31m-      prob : JSON.stringify(problems),[m
+[31m-      att : JSON.stringify(attempted)[m
+[31m-   })[m
+[31m-[m
+[32m+[m[32m    res.render('dashboard', { name: req.user.name, type: 'students'})[m
+ })[m
+ [m
+[31m-[m
+[31m-router.get('/students/results',auth('students') ,async (req,res)=>{[m
+[31m-   const Tests = await TestMap.find({student : req.user._id})[m
+[31m-   try{[m
+[31m-      const marksArr = [][m
+[31m-      const subArr = [][m
+[31m-      const timeObjArr = [][m
+[31m-[m
+[31m-      for(var t in Tests){[m
+[31m-         marksArr[t] = Tests[t].marks[m
+[31m-         subArr[t] = Tests[t].subject[m
+[31m-         timeObjArr[t] = Tests[t].createdAt[m
+[31m-      }[m
+[31m-[m
+[31m-      res.render('results', {marks : marksArr, subcode : subArr, time: timeObjArr})[m
+[31m-   }[m
+[31m-   catch(e){[m
+[31m-      console.log(e)[m
+[31m-   }[m
+[32m+[m[32mrouter.post('/students/test',(req,res)=>{[m
+[32m+[m[32m   console.log(req.body)[m
+    [m
+[31m-[m
+[32m+[m[32m   res.send("successful")[m
+ })[m
+ [m
+ [m
+[31m-[m
+[31m-[m
+[31m-[m
+[31m-[m
+[31m-[m
+[31m-////////////////////////////////////[m
+[31m-//to-do: [m
+[31m-//fix router positions[m
+ ////////////////////////////////////[m
+ // FILE UPLOADS[m
+ [m
+[1mdiff --git a/src/routers/teachers.js b/src/routers/teachers.js[m
+[1mindex af6a509..7356083 100644[m
+[1m--- a/src/routers/teachers.js[m
+[1m+++ b/src/routers/teachers.js[m
+[36m@@ -176,6 +176,12 @@[m [mrouter.post('/teachers/register', async (req, res)=>{[m
+  [m
+  // FILE UPLOADS[m
+ [m
+[32m+[m
+[32m+[m[32m router.post('/teachers/createtest',(req,res)=> {[m
+[32m+[m[32m    console.log(req.body)[m
+[32m+[m[32m    res.render('login')[m
+[32m+[m[32m })[m
+[32m+[m
+ const uploadT = multer({[m
+     //dest: 'avatars',[m
+     limits: {[m
+[1mdiff --git a/templates/views/dashboard.hbs b/templates/views/dashboard.hbs[m
+[1mindex 8a4d93d..f4845cd 100644[m
+[1m--- a/templates/views/dashboard.hbs[m
+[1m+++ b/templates/views/dashboard.hbs[m
+[36m@@ -2,6 +2,7 @@[m
+ <html>[m
+     <head>[m
+         <script src="https://kit.fontawesome.com/a392ca20cf.js" crossorigin="anonymous"></script>[m
+[32m+[m[32m        <script rel="javascript" src="/js/reload_on_back.js"></script>[m
+       <title>Dashboard</title>[m
+     </head>[m
+      <body>[m
+[36m@@ -32,9 +33,7 @@[m
+       <input type='submit' value="Create Test">[m
+     </form>[m
+ [m
+[31m-    <div>[m
+[31m-      <button class = "diffun"><a href = "{{goto}}">{{destination}}</a></button>[m
+[31m-    </div>[m
+[32m+[m
+ [m
+      </body>[m
+ [m
+[1mdiff --git a/templates/views/entry.hbs b/templates/views/entry.hbs[m
+[1mindex 8a35fa3..ee4cfe6 100644[m
+[1m--- a/templates/views/entry.hbs[m
+[1m+++ b/templates/views/entry.hbs[m
+[36m@@ -7,7 +7,6 @@[m
+         <link rel="icon" href="../../utils/img/searchW2.png">[m
+     </head>[m
+     <body>[m
+[31m-        [m
+         <div class= "header">[m
+             <h2>{{title}}</h2>[m
+         </div>[m
+[1mdiff --git a/templates/views/login.hbs b/templates/views/login.hbs[m
+[1mindex 9f52559..22e46a4 100644[m
+[1m--- a/templates/views/login.hbs[m
+[1m+++ b/templates/views/login.hbs[m
+[36m@@ -1,7 +1,9 @@[m
+ <!DOCTYPE html>[m
+ <html>[m
+     <head>[m
+[31m-        <link rel="stylesheet" href="../../public/css/styles.css">[m
+[32m+[m[32m        <link rel="stylesheet" href="./css/styles.css">[m
+[32m+[m[32m        <script rel="javascript" src="/js/reload_on_back.js"></script>[m
+[32m+[m[41m        [m
+         [m
+         <title>Insight</title>[m
+         <link rel="icon" href="../../utils/img/searchW2.png">[m
+[1mdiff --git a/templates/views/results.hbs b/templates/views/results.hbs[m
+[1mdeleted file mode 100644[m
+[1mindex b304bf3..0000000[m
+[1m--- a/templates/views/results.hbs[m
+[1m+++ /dev/null[m
+[36m@@ -1,28 +0,0 @@[m
+[31m-<!DOCTYPE html>[m
+[31m-<html>[m
+[31m-    <head>[m
+[31m-        <link rel="stylesheet" href="./css/styles.css">[m
+[31m-        [m
+[31m-        <title>Results</title>[m
+[31m-        <link rel="icon" href="../../utils/img/searchW2.png">[m
+[31m-    </head>[m
+[31m-    <body>[m
+[31m-        <div class= "header">[m
+[31m-            <h2>Results</h2>[m
+[31m-        </div>[m
+[31m-        <hr>[m
+[31m-        <div class="generateResults">[m
+[31m-           [m
+[31m-            <div class = "result">[m
+[31m-            {{time}}[m
+[31m-            {{subcode}}[m
+[31m-            {{marks}}[m
+[31m-            </div>[m
+[31m-        [m
+[31m-        </div>[m
+[31m-        [m
+[31m-        [m
+[31m-[m
+[31m-    [m
+[31m-    </body>[m
+[31m-</html>[m
+[1mdiff --git a/templates/views/success.hbs b/templates/views/success.hbs[m
+[1mindex 5b49176..57bc6c2 100644[m
+[1m--- a/templates/views/success.hbs[m
+[1m+++ b/templates/views/success.hbs[m
+[36m@@ -2,6 +2,7 @@[m
+ <html>[m
+     <head>[m
+         <link rel="stylesheet" href="/css/styles.css">[m
+[32m+[m[32m        <script rel="javascript" src="/js/reload_on_back.js"></script>[m
+         <title>success</title>[m
+         </head>[m
+     <body>[m
+[1mdiff --git a/templates/views/tempPage.hbs b/templates/views/tempPage.hbs[m
+[1mindex 855c9dd..d3f5c8e 100644[m
+[1m--- a/templates/views/tempPage.hbs[m
+[1m+++ b/templates/views/tempPage.hbs[m
+[36m@@ -2,6 +2,7 @@[m
+ <html>[m
+     <head>[m
+         <link rel="stylesheet" href="./css/styles.css">[m
+[32m+[m[32m        <script rel="javascript" src="/js/reload_on_back.js"></script>[m
+         [m
+         <title>Insight</title>[m
+         <link rel="icon" href="../../utils/img/searchW2.png">[m
+[1mdiff --git a/templates/views/testResults.hbs b/templates/views/testResults.hbs[m
+[1mdeleted file mode 100644[m
+[1mindex 8e16132..0000000[m
+[1m--- a/templates/views/testResults.hbs[m
+[1m+++ /dev/null[m
+[36m@@ -1,38 +0,0 @@[m
+[31m-<!DOCTYPE html>[m
+[31m-<html>[m
+[31m-    <head>[m
+[31m-        [m
+[31m-        <title>Test Results</title>[m
+[31m-        <script src="https://kit.fontawesome.com/a392ca20cf.js" crossorigin="anonymous"></script>[m
+[31m-    </head>[m
+[31m-    <body>[m
+[31m-        <h4>{{message}}</h4>[m
+[31m-        <h4>Total Marks Scored:</h4>[m
+[31m-        <h3>{{totalMarks}}/20</h3>[m
+[31m-[m
+[31m-    [m
+[31m-    <div id='questions'>[m
+[31m-[m
+[31m-[m
+[31m-    </div>[m
+[31m-[m
+[31m-    <br>[m
+[31m-    <div class ="download">[m
+[31m-        <p>Download a Copy of this Page</p>[m
+[31m-        <button class = "downloadBtn"><a href = "/students/dashboard">DOWNLOAD</a></button> [m
+[31m-    </div>[m
+[31m-[m
+[31m-        <script> [m
+[31m-            var questions = {{{ques}}}[m
+[31m-            var answers = {{{ans}}}[m
+[31m-            var problems = {{{prob}}}[m
+[31m-            var correct = {{{correctMap}}}[m
+[31m-            var attempted = {{{att}}}[m
+[31m-[m
+[31m-           [m
+[31m-        </script>[m
+[31m-[m
+[31m-        <script src="/js/testResults.js"></script>[m
+[31m-        [m
+[31m-    </body>[m
+[31m-</html>[m
+[1mdiff --git a/templates/views/test_create.hbs b/templates/views/test_create.hbs[m
+[1mnew file mode 100644[m
+[1mindex 0000000..02b734f[m
+[1m--- /dev/null[m
+[1m+++ b/templates/views/test_create.hbs[m
+[36m@@ -0,0 +1,37 @@[m
+[32m+[m[32m<!DOCTYPE html>[m
+[32m+[m[32m<html>[m
+[32m+[m[32m    <head>[m
+[32m+[m[32m        <script src="https://kit.fontawesome.com/a392ca20cf.js" crossorigin="anonymous"></script>[m
+[32m+[m[32m        <script rel="javascript" src="/js/reload_on_back.js"></script>[m
+[32m+[m[32m        <title>New Test</title></head>[m
+[32m+[m[32m    <body>[m
+[32m+[m[32m        <h1 id='createtestheading'>New Test</h1>[m
+[32m+[m[32m        {{!-- <img href="../utils/img/cat.jpg" alt="close_icon"> --}}[m
+[32m+[m[41m        [m
+[32m+[m[32m        <form id='questionsblock' action='/teachers/createtest' method='post'>[m
+[32m+[m[32m        <div class='quesholder' id='quesholder1'>[m
+[32m+[m[32m            <label><input type='text' name='q1' placeholder='Enter Question 1' required></label>[m
+[32m+[m[32m            <i id='close1' class="far fa-times-circle" onclick="this.parentElement.remove(); updatequestions(0);"></i>[m
+[32m+[m[32m            <br>[m
+[32m+[m[32m            <label><input type='text' name='o11' placeholder='Enter Option 1' required></label>[m
+[32m+[m[32m            <br>[m
+[32m+[m[32m            <label><input type='text' name='o12' placeholder='Enter Option 2' required></label>[m
+[32m+[m[32m            <br>[m
+[32m+[m[32m            <label><input type='text' name='o13' placeholder='Enter Option 3' required></label>[m
+[32m+[m[32m            <br>[m
+[32m+[m[32m            <label><input type='text' name='o14' placeholder='Enter Option 4' required></label>[m
+[32m+[m[32m            <br>[m
+[32m+[m[32m            <label><input type='text' name='c1' placeholder='Enter Answer' required></label>[m
+[32m+[m[32m            <br>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m            <button id='addquestion'>Add Question</button>[m
+[32m+[m[32m            <br><br>[m
+[32m+[m[32m            <input type='submit' value='Create New Test'>[m
+[32m+[m[32m        </form>[m
+[32m+[m[41m        [m
+[32m+[m[32m        <script rel="javascript" src="/js/test_create.js"> </script>[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m    </body>[m
+[32m+[m[32m</html>[m
+\ No newline at end of file[m
+[1mdiff --git a/utils/img/cat.jpg b/utils/img/cat.jpg[m
+[1mnew file mode 100644[m
+[1mindex 0000000..ac926be[m
+Binary files /dev/null and b/utils/img/cat.jpg differ
+[1mdiff --git a/utils/img/close_icon.png b/utils/img/close_icon.png[m
+[1mnew file mode 100644[m
+[1mindex 0000000..6072634[m
+Binary files /dev/null and b/utils/img/close_icon.png differ
+[1mdiff --git a/utils/js/api.js b/utils/js/api.js[m
+[1mindex 2a4c186..0fc2d1d 100644[m
+[1m--- a/utils/js/api.js[m
+[1m+++ b/utils/js/api.js[m
+[36m@@ -9,7 +9,7 @@[m [mconst api = async  (subject,callback) => {[m
+     const url= 'https://opentdb.com/api.php?amount=20&category='+subject+'&type=multiple'[m
+      request({url,json:true}, (error, response) => {[m
+        [m
+[31m-     callback(response.body.results, subject)[m
+[32m+[m[32m     callback(response.body.results)[m
+         [m
+         [m
+       })[m

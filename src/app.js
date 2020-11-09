@@ -23,6 +23,7 @@ app.use(studentRouter)
 app.use(teacherRouter)
 app.use(adminRouter)
 
+app.set('subject_key',{'22':'Geography','19':'Mathematics','17':'Science and Nature','11':'Entertainment:Movies'})
 //port value
 const port = process.env.PORT||3000
 
@@ -183,6 +184,11 @@ app.get('/admins/login', (req,res)=>{
         title: 'Admin Login',
         goto:'/admins/login'
     })
+})
+
+app.get('/teachers/createtest',auth('teachers'),(req,res)=>{
+    
+    res.render('test_create')
 })
 
 app.get('/clcookie',(req,res) => {

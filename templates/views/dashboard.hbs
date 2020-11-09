@@ -2,6 +2,7 @@
 <html>
     <head>
         <script src="https://kit.fontawesome.com/a392ca20cf.js" crossorigin="anonymous"></script>
+        <script rel="javascript" src="/js/reload_on_back.js"></script>
       <title>Dashboard</title>
     </head>
      <body>
@@ -21,7 +22,7 @@
        </div>
 
        
-    <form action="/students/test" method='get'>
+    <form action="/students/test" method='get' id = 'studenttest'>
     <label for="category">Choose a subject:</label>
       <select name="category" id="subjects">
         <option value="22">Geography</option>
@@ -36,6 +37,12 @@
       <button class = "diffun"><a href = "{{goto}}">{{destination}}</a></button>
       <button class = "diffun2"><a href = "{{goto2}}">{{destination2}}</a></button>
     </div>
+
+    <script>
+      var student_test = document.getElementById('studenttest')
+      if({{{type_str}}}=='teachers')
+      {student_test.style.display='none' }
+    </script>
 
      </body>
 
