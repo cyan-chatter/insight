@@ -46,7 +46,7 @@ addques.addEventListener('click',function (button){
     
     
     const newques = document.createElement('label')
-    newques.innerHTML="<input type='text' name='q"+quesNo+"' placeholder='Enter Question "+quesNo+"'>"
+    newques.innerHTML="<input type='text' name='q"+quesNo+"' autocomplete='off' placeholder='Enter Question "+quesNo+"'>"
     const close= document.createElement('i')
     close.id='close'+quesNo
     close.className='far fa-times-circle'
@@ -66,14 +66,14 @@ addques.addEventListener('click',function (button){
     for(i=1;i<=4;i++)
     {  
         const op = document.createElement('label')
-         op.innerHTML="<input type='text' placeholder='Enter Option "+i+"' name='o"+quesNo+i+"' placeholder='Enter Option "+i+"' required><br>"
+         op.innerHTML="<input type='text' autocomplete='off' placeholder='Enter Option "+i+"' name='o"+quesNo+i+"' placeholder='Enter Option "+i+"' required><br>"
         // op.innerHTML="<input type='text'"
         holder.appendChild(op)
 
     }
     
     const answer= document.createElement('label')
-    answer.innerHTML="<input type='text' name='c"+quesNo+"' placeholder='Enter Answer' required><br>"
+    answer.innerHTML="<input type='text' autocomplete='off' name='c"+quesNo+"' placeholder='Enter Answer' required><br>"
     holder.appendChild(answer)
 
     

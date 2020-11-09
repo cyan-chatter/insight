@@ -10,18 +10,18 @@
         
         <form id='questionsblock' action='/teachers/createtest' method='post'>
         <div class='quesholder' id='quesholder1'>
-            <label><input type='text' name='q1' placeholder='Enter Question 1' required></label>
+            <label><input type='text' name='q1' placeholder='Enter Question 1' autocomplete='off'required></label>
             <i id='close1' class="far fa-times-circle" onclick="this.parentElement.remove(); updatequestions(0);"></i>
             <br>
-            <label><input type='text' name='o11' placeholder='Enter Option 1' required></label>
+            <label><input type='text' name='o11' placeholder='Enter Option 1'  autocomplete='off'required></label>
             <br>
-            <label><input type='text' name='o12' placeholder='Enter Option 2' required></label>
+            <label><input type='text' name='o12' placeholder='Enter Option 2' autocomplete='off' required></label>
             <br>
-            <label><input type='text' name='o13' placeholder='Enter Option 3' required></label>
+            <label><input type='text' name='o13' placeholder='Enter Option 3' autocomplete='off'required></label>
             <br>
-            <label><input type='text' name='o14' placeholder='Enter Option 4' required></label>
+            <label><input type='text' name='o14' placeholder='Enter Option 4' autocomplete='off'required></label>
             <br>
-            <label><input type='text' name='c1' placeholder='Enter Answer' required></label>
+            <label><input type='text' name='c1' placeholder='Enter Answer' autocomplete='off'required></label>
             <br>
         </div>
             <button id='addquestion'>Add Question</button>

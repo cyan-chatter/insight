@@ -22,7 +22,7 @@
        </div>
 
        
-    <form action="/students/test" method='get'>
+    <form action="/students/test" method='get' id = 'studenttest'>
     <label for="category">Choose a subject:</label>
       <select name="category" id="subjects">
         <option value="22">Geography</option>
@@ -36,6 +36,12 @@
     <div>
       <button class = "diffun"><a href = "{{goto}}">{{destination}}</a></button>
     </div>
+
+    <script>
+      var student_test = document.getElementById('studenttest')
+      if({{{type_str}}}=='teachers')
+      {student_test.style.display='none' }
+    </script>
 
      </body>
 

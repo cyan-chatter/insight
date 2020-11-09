@@ -2,14 +2,17 @@ const express = require('express')
 const router = new express.Router()
 const Teacher = require('../db/teacher')
 const auth = require('../middleware/autho')
+const TestMap = require('../db/test_map')
 const multer = require('multer')
 const sharp = require('sharp')
 const bodyParser = require('body-parser')
+
 
 //const { sendWelcomeEmail, sendCancellationEmail} = require('../emails/account')
 ////////////////////////
 
 //public
+var subject_key={'22':'Geography','19':'Mathematics','17':'Science and Nature','11':'Entertainment:Movies'}
 
 router.post('/teachers/register', async (req, res)=>{
   
@@ -171,15 +174,32 @@ router.post('/teachers/register', async (req, res)=>{
  })
  
  router.get('/teachers/dashboard',auth('teachers') ,async (req,res)=> {
-     res.render('dashboard', { name: req.user.name, type: 'teachers'})
+     res.render('dashboard', { name: req.user.name, type:'teachers',type_str:JSON.stringify('teachers')})
  })
  
  // FILE UPLOADS
 
 
- router.post('/teachers/createtest',(req,res)=> {
-    console.log(req.body)
-    res.render('login')
+ router.post('/teachers/createtest',auth('teachers'),async (req,res)=> {
+    const questions = req.body
+    const quesNo = questions
+    console.log(questions)
+    for(i=1;questions['q'+i]!==undefined;i+=1)
+    { var options=[]
+       for(j=1;j<=4;j++)
+      {
+         options.push(questions['o'+i+j])
+      }
+      const ques = {question:questions['q'+i],options,correct_answer:questions['c'+i]}
+      console.log(ques)
+    }
+    const test = new TestMap({subject})
+    res.redirect('/teachers/testcreated')
+ })
+
+ router.get('/teachers/testcreated',(req,res)=>{
+    
+    res.send("test Created")
  })
 
 const uploadT = multer({
