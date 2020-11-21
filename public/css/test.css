@@ -3,11 +3,13 @@
 #timer{
     
     position: fixed;
-width: 500px;
-height: 20px;
-margin: 5% auto; /* Will not center vertically and won't work in IE6/7. */
-left: 0;
-
+width: 500px; 
+left:0;
+ margin: auto; /* Will not center vertically and won't work in IE6/7.  */
+text-align: center;
+background-color: #888888;
 right: 0;
-color:red;
+border-radius:5px;
+color:#ffffff;
+
 }
