@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="./css/styles.css">
+        <link rel="stylesheet" href="/css/common.css">
+        <style>
+            td,th{
+                padding:10px;
+            }
+            table,td,th{
+                border:1px solid;
+            }
+        </style>
+        
         
         <title>Results</title>
         <link rel="icon" href="../../utils/img/searchW2.png">
@@ -14,9 +23,7 @@
         <div class="generateResults">
            
             <div class = "result">
-            {{time}}
-            {{subcode}}
-            {{marks}}
+        
             </div>
         
         </div>
@@ -25,7 +32,30 @@
             <button><a href = "/students/dashboard">Dashboard</a></button>
         </div>
         <div>
-            <button><a href = "/students/stream">Check Stream Recommendation</a></button>
+            <button id='streamrecommender' onclick="check()"><a href = "/students/stream">Check Stream Recommendation</a></button>
+            <p id='streamMessage'></p>
         </div>
+        <script>
+            const time_str={{{time}}}
+            
+            const marks= {{{marks}}}
+            const marksOutOf={{{marksOutOf}}}
+            const subjects = {{{subjects}}}
+            var messageDOM = document.querySelector('#streamMessage')
+            if (new Set(subjects).size<3){
+                const stream_button=document.querySelector('#streamrecommender').querySelector('a')
+                stream_button.addEventListener('click',(e)=>{
+                    e.preventDefault()
+
+
+                })   
+            }
+            function check(){
+                messageDOM.innerHTML='Please give Tests of atleast 3 subject for Stream Recommendation'
+                
+            }
+        </script>
+        <script src="/js/results.js"></script>
+
     </body>
 </html>

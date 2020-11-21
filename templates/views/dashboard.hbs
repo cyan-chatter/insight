@@ -3,21 +3,21 @@
     <head>
         <script src="https://kit.fontawesome.com/a392ca20cf.js" crossorigin="anonymous"></script>
         <script rel="javascript" src="/js/reload_on_back.js"></script>
+        <link rel="stylesheet" href="/css/common.css">
       <title>Dashboard</title>
     </head>
      <body>
        <h1>DashBoard</h1>
        <div>
-       <i class="fas fa-user"></i>
+       <a href='/{{type}}/profile'><i class="fas fa-user"></i></a>
        <span>{{name}}</span>
        </div><br>
        <div>
-       <form action="/{{type}}/logout" method='post'>
-       <input type='submit' value='Logout'>
+       <form style='display:inline' action="/{{type}}/logout" method='post'>
+       <button type='submit'>Logout</button>
        </form>
-       <br>
-       <form action="/{{type}}/logoutAll" method='post'>
-       <input type='submit' value='LogoutAll'>
+       <form style='display:inline' action="/{{type}}/logoutAll" method='post'>
+       <button type='submit'>LogoutAll</button>
        </form>
        </div>
 
@@ -30,7 +30,7 @@
         <option value="19">Mathematics</option>
         <option value="11">Entertainment:Movies</option>
       </select>
-      <input type='submit' value="Create Test">
+      <button type='submit'>Create Test</button>
     </form>
     
     <span>

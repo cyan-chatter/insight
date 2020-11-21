@@ -1,15 +1,16 @@
 <html>
     <head>
         <title>Test choice</title>
+        <link rel="stylesheet" href="/css/common.css">
     </head>
     <body>
         <p>
-            Select a Test from following :
+            <h3>Select a Test from following :</h3>
         </p>
         <div id ='testOptions'>
             <form action={{goto}} method="get" id= 'testoptionform' >
                 <label><input type = 'radio' name = 'testchoice' value= {{subject}} required>Random Generated Test</label><br>
-                <input type ='submit' value= 'Start Test'>
+                <button type ='submit'>Start Test</button>
             </form>
         </div>
         <script>

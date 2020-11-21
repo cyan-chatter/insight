@@ -46,16 +46,14 @@ addques.addEventListener('click',function (button){
     
     
     const newques = document.createElement('label')
-    newques.innerHTML="<input type='text' name='q"+quesNo+"' autocomplete='off' placeholder='Enter Question "+quesNo+"'>"
+    newques.innerHTML="<input type='text' class='question' name='q"+quesNo+"' autocomplete='off' placeholder='Enter Question "+quesNo+"'>"
     const close= document.createElement('i')
     close.id='close'+quesNo
     close.className='far fa-times-circle'
     close.addEventListener('click',()=> {
         const currquesNo= holder.id.slice(10)
         holder.remove()
-        
-        
-        
+      
         updatequestions(currquesNo-1)
 
     })

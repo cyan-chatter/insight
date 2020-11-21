@@ -35,24 +35,6 @@ const isCompleted= ()=> {
 }
 window.setInterval(isCompleted,1000)
 
-//  window.onscroll = function() { document.getElementsByClassName("timer").innerHTML='yes'
-//      myFunction()}
-
-//  // Get the header
-//  var timer = document.getElementsByClassName("timer")
- 
-//  // Get the offset position of the navbar
-//  var fixed = timer.offsetTop
- 
-//  // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
-//  function myFunction() {
-//    if (window.pageYOffset > fixed) {
-//      timer.classList.add='fixed'
-//    } else {
-//      timer.classList.remove='fixed'
-//    }
-//  }
-
 
 const setAttributes= (ele,params)=> {
     for(attribute in params)

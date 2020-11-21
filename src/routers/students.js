@@ -372,14 +372,16 @@ router.post('/students/test', auth('students'), async (req,res)=>{
 router.get('/students/results',auth('students') ,async (req,res)=>{
    const Tests = await TestMap.find({student : req.user._id})
    try{
-      const marksArr = []
-      const subArr = []
-      const timeObjArr = []
+      var marksArr = []
+      var subArr = []
+      var timeObjArr = []
+      var marksOutOfArr=[]
 
       for(var t in Tests){
          marksArr[t] = Tests[t].marks
          subArr[t] = Tests[t].subject
          timeObjArr[t] = Tests[t].createdAt
+         marksOutOfArr[t]=Tests[t].marksOutOf
       }
 
       var subjects = [...subArr]
@@ -409,8 +411,14 @@ router.get('/students/results',auth('students') ,async (req,res)=>{
          maxAge:3600000,
          httpOnly:true
       })
-
-      res.render('results', {marks : marksArr, subcode : subArr, time: timeObjArr})
+   for(i in subArr){
+      subjects[i]=subject_key[subArr[i]]
+   }
+      
+   res.render('results', {marks : JSON.stringify(marksArr),
+       subjects : JSON.stringify(subjects),
+        time: JSON.stringify(timeObjArr),
+      marksOutOf: JSON.stringify(marksOutOfArr)})
    }
    catch(e){
       console.log(e)
