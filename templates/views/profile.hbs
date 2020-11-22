@@ -20,6 +20,7 @@
     
         <div class = "details">
             <p>Name : {{name}}</p>
+            <p id='subjectele'>Subject: {{subject}}</p>
             <p>Number of Tests {{diffString}} : {{noTests}}</p>
         <br>
             <button><a href="/{{type}}/profile/patch" class="updateProfile" method = "get">Update Profile</a></button>
@@ -36,6 +37,11 @@
             var picture = document.getElementById('profilepic')
             var pic = {{{pic}}}
             picture.src= "data:image/png;base64, "+pic
+            var subjectele= document.querySelector('#subjectele')
+            if({{{type_js}}}==='students')
+            {
+                subjectele.remove()
+            }
         </script>
         
 

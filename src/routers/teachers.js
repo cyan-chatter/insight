@@ -228,7 +228,7 @@ router.post('/teachers/profile/patch', auth('teachers'), async (req, res)=>{
     
     res.redirect('/teachers/testcreated')
    }catch(e){
-      res.render('temppage',{name:req.user.name,
+      res.render('tempPage',{name:req.user.name,
          message:"Error in test Creation",
          goto: '/teachers/dashboard',
          destination: 'Dashboard'})
@@ -237,7 +237,7 @@ router.post('/teachers/profile/patch', auth('teachers'), async (req, res)=>{
 
  router.get('/teachers/testcreated',auth('teachers'),(req,res)=>{
     
-    res.render('temppage',{name:req.user.name,
+    res.render('tempPage',{name:req.user.name,
     message:"Test Created Successfully",
     goto: '/teachers/dashboard',
     destination: 'Dashboard'})
@@ -272,10 +272,11 @@ router.get('/teachers/profile', auth('teachers'), async(req,res)=>{
    }else{
       var pic = req.user.avatar.toString('base64')
    }
-
    res.render('profile', {
       title : 'Teachers Profile',
       type: 'teachers',
+      type_js:JSON.stringify('teachers'),
+      subject:subject_key[req.user.subject],
       name : req.user.name,
       noTests,
       diffString: 'Created',

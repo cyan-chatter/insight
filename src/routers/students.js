@@ -199,7 +199,7 @@ router.post('/students/logoutAll', auth('students'), async(req,res)=>{
 
  router.delete('/students/me', auth('students'), async (req, res)=>{
    try{
-      //sendCancellationEmail(req.user.email, req.user.name)
+      
       await req.user.remove()
       res.send(req.user)
    }catch(e){
@@ -385,26 +385,20 @@ router.get('/students/results',auth('students') ,async (req,res)=>{
       }
 
       var subjects = [...subArr]
-      var points = [...marksArr]
-
-      for(var i=0; i<subjects.length; ++i){
-         var streamTemp = subjects[i]
-         for(var j=i+1; j<subjects.length; ++j){
-            if(subjects[j] === streamTemp && subjects[j] !== '-1'){
-               points[i] = Math.max(points[i], points[j])
-               subjects[j] = '-1'
-            }
-         }
+      var points=[]
+      for(var i in marksArr){
+            points[i]= marksArr[i]/marksOutOfArr[i]
       }
-
-   var maxPt=points[0]
-   var streamIndex = 0
-   for(var i=1; i<points.length; ++i){
-      if(maxPt < points[i] && subjects[i] !== '-1'){
-         maxPt = points[i]
-         streamIndex = i
-      }
-   }
+      var streamIndex = points.findIndex((e)=>Math.max(...points)==e)
+      // for(var i=0; i<subjects.length; ++i){
+      //    var streamTemp = subjects[i]
+      //    for(var j=i+1; j<subjects.length; ++j){
+      //       if(subjects[j] === streamTemp && subjects[j] !== '-1'){
+      //          points[i] = Math.max(points[i], points[j])
+      //          subjects[j] = '-1'
+      //       }
+      //    }
+      // }
 
    var stream = subjects[streamIndex]
       res.cookie('stream',stream,{
@@ -430,26 +424,6 @@ router.get('/students/stream',auth('students') ,async (req,res)=>{
 })
 
 
-
-
-
-////////////////////////////////////
-//to-do-list: (and we thought we were almost done with this project....)
-//render the Results Page HTML
-//make a map of subject-string to subject-code and render the subject string on 'stream' view
-//fix router positions in the code
-//make enter subjects form to be displayed just after Register --give option to enter subjects in order of preference
-//on dashboard, show only those subjects for creating test which were entered in the subjects form
-//in the profile section, give an option to the student to add more subjects and as more subjects are added along with their preference number, Those subjects get also displayed in the Create Test Option in Dashboard
-//lock the button for generating stream recommendation until atleast 1 test of all the subjects selected are completed
-//Once Create Test Form is Submitted, Add a page in between which gives the user an option to select either API Test or Teacher test. If no Teacher test is available, lock that option
-//figure out a way to download a web page and Make option to Download the web page in PDF form
-//add login via google and login via facebook 
-//figure out a way to calculate the stream not only on the basis of max marks but also providing some weightage to the preference number provided to each subject 
-//teacher gets a page to view the tests created by him --on that page, teacher also gets options to Edit and Delete a test
-//student on Results page, gets options to remove a particular test or all the tests -> remember to lock the Generate Stream Button if the required tests get deleted.    
-//On the Test page, add an option to clear selection (either by clicking the same option again or a button after the options)  
-
 ////////////////////////////////////
 // FILE UPLOADS
 
@@ -470,6 +444,7 @@ router.get('/students/profile', auth('students'), async(req,res)=>{
    res.render('profile', {
       title : 'Student Profile',
       type: 'students',
+      type_js:JSON.stringify('students'),
       name : req.user.name,
       noTests,
       diffString: 'Attempted',

@@ -6,13 +6,12 @@ const QuestionSchema = new mongoose.Schema({
     question : {
         type:String,
         required:true,
-
-
     },
     options:[String],
     correct_answer: {
         type:String,
-        required:true
+        required:true,
+        trim:true
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
