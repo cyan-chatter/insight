@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const fs = require('fs')
 const secretKey = process.env.JWT_SECRET||'TotalOverdose'
-console.log(process.cwd())
-const default_image= fs.readFileSync(process.cwd()+"/utils/img/cat.jpg")
+
+const default_image= fs.readFileSync(process.cwd()+"/utils/img/default.png")
 
 const studentSchema = new mongoose.Schema({
     name: {
@@ -58,14 +58,6 @@ const studentSchema = new mongoose.Schema({
 },{
     timestamps: true
 }) 
-
-// studentSchema.virtual('tasks',{
-//      ref: 'Task',
-//      localField: '_id',
-//      foreignField: 'owner'
-// })
-
-
 
 studentSchema.statics.findByCredentials = async (email, password) =>{
     const student = await Student.findOne({ email })

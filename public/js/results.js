@@ -6,17 +6,15 @@ var messageDOM = document.querySelector('#streamMessage')
 function check(){
     
     if (new Set(subjects).size<3){
-        const stream_button=document.querySelector('#streamrecommender').querySelector('a')
-        stream_button.addEventListener('click',(e)=>{
-            e.preventDefault()
-        })   
+        const stream_button=document.querySelector('#streamrecommender')
         
-     messageDOM.innerHTML='<h3>Please give Tests of atleast 3 subjects for Stream Recommendation<h3>'
-     
+     messageDOM.innerHTML='<h3>Please give Tests of atleast 3 subjects for Stream Recommendation<h3>' 
+    }
+    else{
+        window.location.href='/students/stream'
     }
     
 }
-
 
 if(time_str[0]===undefined)
 {
