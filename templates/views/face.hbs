@@ -2,13 +2,30 @@
 <html>
     <head>
         <link rel="stylesheet" href="/css/common.css">
+        <style>
+            
+            .icon{
+                background-image: url('/img/title-logo-face.png') ; 
+                height:70px;
+                width:70px;
+                background-size:contain;
+                background-repeat: no-repeat;
+                display:table-cell;
+                bottom:0px;
+                margin-top: 20px;
+            
+            }
+        </style>
         
         <title>Insight</title>
         <link rel="icon" href="../../utils/img/searchW2.png">
     </head>
     <body>
         <div class= "header">
-            <h1>{{title}}</h1>
+            <div class='title' style='display:table'>
+           <span class='icon'></span>
+            <h1 style='display:table-cell;'> {{title}}</h1>
+            </div>
             <h2>{{subtitle}}</h2>    
         </div>
         <div class="main-content">

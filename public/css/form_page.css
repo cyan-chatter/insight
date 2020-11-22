@@ -7,8 +7,8 @@ body {
   input{
     box-sizing:border-box;
     width:100%;
-    padding:2px;
-    margin:auto;
+    padding:5px 3px;
+    
     border-radius:10px;
     margin:5px 0px;
     box-shadow:0 0 15px 4px rgba(255,255,255,0.2);
@@ -80,4 +80,10 @@ body {
     
   }
 
-  
+  select{
+    color:#444444;
+    background:#00ffff;
+     font-family:Arial, Helvetica, sans-serif;
+     width:230px;
+     margin:5px 3px;
+}

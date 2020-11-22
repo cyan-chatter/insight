@@ -3,6 +3,14 @@
     <head>
         <link rel="stylesheet" type='text/css' href="/css/test.css">
         <link rel="stylesheet" href="/css/common.css">
+        <script>
+            var perfEntries = performance.getEntriesByType("navigation");
+
+            if (perfEntries[0].type === "back_forward") {
+                window.location.href='/students/dashboard';
+            }
+
+        </script>
         
         <title>Test</title>
     </head>

@@ -67,14 +67,26 @@ for( i=0;i<no;i++)
     } 
 
     para.appendChild(options)
+    const clearOptions = document.createElement('button')
+    clearOptions.innerHTML='Clear Selection'
+    setAttributes(clearOptions,{'class':'clearSelection','type':'button'})
+    clearOptions.onclick= function (r){
+             const opts=clearOptions.parentElement.querySelectorAll('[type="radio"]')
+             opts.forEach((radio)=>{
+                 radio.checked=false
+             })
+
+    }
+    para.appendChild(clearOptions)
     const br = document.createElement('br')
 
     element.appendChild(para)
     element.appendChild(br)
     
 }
-const submit = document.createElement('input')
-setAttributes(submit,{'type':'submit','value':'Submit Test'})
+const submit = document.createElement('button')
+submit.innerHTML='Submit Test'
+submit.setAttribute('type','submit')
 element.appendChild(submit)
 
     

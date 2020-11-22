@@ -41,19 +41,7 @@
             const marks= {{{marks}}}
             const marksOutOf={{{marksOutOf}}}
             const subjects = {{{subjects}}}
-            var messageDOM = document.querySelector('#streamMessage')
-            if (new Set(subjects).size<3){
-                const stream_button=document.querySelector('#streamrecommender').querySelector('a')
-                stream_button.addEventListener('click',(e)=>{
-                    e.preventDefault()
-
-
-                })   
-            }
-            function check(){
-                messageDOM.innerHTML='Please give Tests of atleast 3 subject for Stream Recommendation'
-                
-            }
+           
         </script>
         <script src="/js/results.js"></script>
 

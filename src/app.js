@@ -139,25 +139,7 @@ app.get('/teachers/createtest',auth('teachers'),(req,res)=>{
     res.render('test_create')
 })
 
-app.get('/clcookie',(req,res) => {
-    res.clearCookie('token')
-    res.json({name:"sanu"})
-}
-)
 
-app.get('/cookie',(req,res)=> {
-    console.log(req.cookies)
-    res.send("success")
-})
-
-app.get('/testing/:id',  (req,res)=>{
-
-
-    res.send(req.params.id)
-    
-    
-    
-})
 
 app.get('*',(req,res)=>{
     res.render('error404',{

@@ -23,7 +23,6 @@ const quesdiv= document.querySelector('#questions')
 
 var i=0
 
-//console.log(problems)
 
 
 questions.forEach((question)=>{

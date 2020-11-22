@@ -29,11 +29,9 @@ select{
     color:#444444;
     background:#00ffff;
      font-family:Arial, Helvetica, sans-serif;
-    
-
 }
 
-input{
+input:not([type='radio']):not([type='checkbox']){
     box-sizing:border-box;
     width:250px;
     padding:5px 2px;
@@ -51,3 +49,14 @@ input{
     
   }
    
+.clearSelection{
+    background-color: #ffffff;
+    color:#333333;
+    height:auto;
+    padding:0px 3px;
+
+}
+.clearSelection:hover{
+    background-color: #cccccc;
+
+}
