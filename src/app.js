@@ -25,7 +25,7 @@ app.use(adminRouter)
 
 app.set('subject_key',{'22':'Geography','19':'Mathematics','17':'Science and Nature','11':'Entertainment:Movies'})
 //port value
-const port = process.env.PORT
+const port = process.env.PORT||3000
 
 // paths
 const publicDirectoryPath = path.join(__dirname, '../public')

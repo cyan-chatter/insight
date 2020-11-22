@@ -4,9 +4,9 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const fs = require('fs')
 const secretKey = process.env.JWT_SECRET||'TotalOverdose'
+console.log(process.cwd())
+const default_image= fs.readFileSync(process.cwd()+"/utils/img/cat.jpg")
 
-const default_image= fs.readFileSync("/utils/img/cat.jpg")
-console.log(default_image)
 const studentSchema = new mongoose.Schema({
     name: {
         type: String,
