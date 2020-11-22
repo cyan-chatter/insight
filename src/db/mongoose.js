@@ -9,7 +9,7 @@ const mongoaddress =  process.env.MONGODB_URL||'mongodb://127.0.0.1:27017/'
 const dbName = 'insight-base' 
 const connectionURL = mongoaddress + dbName
 
-mongoose.connect(connectionURL,{
+mongoose.connect(mongoaddress,{
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
