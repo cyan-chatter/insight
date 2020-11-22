@@ -5,8 +5,8 @@ const bcrypt = require('bcryptjs')
 const fs = require('fs')
 const secretKey = process.env.JWT_SECRET||'TotalOverdose'
 
-const default_image= fs.readFileSync(__dirname+"../../../utils/img/default.png")
-
+const default_image= fs.readFileSync("/utils/img/cat.jpg")
+console.log(default_image)
 const studentSchema = new mongoose.Schema({
     name: {
         type: String,
