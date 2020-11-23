@@ -1,6 +1,6 @@
 body{
     font-family:quickSand,Arial, Helvetica, sans-serif;
-    background: linear-gradient(to right, #74ebd5, #acb6e5);
+    background: linear-gradient(to right, #74ebd5, #acb6e5);  
 }
 
 a{
@@ -60,3 +60,4 @@ input:not([type='radio']):not([type='checkbox']){
     background-color: #cccccc;
 
 }
+
