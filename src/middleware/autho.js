@@ -39,6 +39,9 @@ const auth = (type)=>{
         next()
     
         }catch(e){
+            
+            res.clearCookie('token','stream','test')
+
             res.status(401).render('error404',{
                 status:'401 :(',
                 message: 'Please Authenticate Properly',
