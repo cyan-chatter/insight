@@ -134,7 +134,8 @@ router.post('/teachers/register', async (req, res)=>{
       res.render('update',{
          title: 'Teachers Update Profile',
          goto: '/teachers/profile/patch',
-         type: 'teachers'
+         type: 'teachers',
+         type_str:JSON.stringify('teachers')
       })
    }catch(e){
       res.status(500).render(e)
