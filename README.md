@@ -16,3 +16,4 @@ THE GREAT LIST
 //teacher gets a page to view the tests created by him --on that page, teacher also gets options to Edit and Delete a test
 //student on Results page, gets options to remove a particular test or all the tests -> remember to lock the Generate Stream Button if the required tests get deleted.    
 //On the Test page, add an option to clear selection (either by clicking the same option again or a button after the options)  
+https://ms-insight.herokuapp.com/
