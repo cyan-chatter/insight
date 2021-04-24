@@ -1,8 +1,8 @@
 # insight
-##Stream Analysis using Online Aptitude Tests
-##https://ms-insight.herokuapp.com/
+## Stream Analysis using Online Aptitude Tests
+## https://ms-insight.herokuapp.com/
 
-###Task List
+### Task List
 
 
 - [x] make a map of subject-string to subject-code and render the subject string on 'stream' view
