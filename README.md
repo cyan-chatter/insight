@@ -2,7 +2,7 @@
 
 ### Stream Analysis using Online Aptitude Tests
 
-## https://ms-insight.herokuapp.com/
+## https://insight-cluster.herokuapp.com/
 
 #### The REST-based application is built for Students who are unsure about Selecting the Stream appropriate for them. 
 #### A Student can give short Online Aptitude Tests in his/her selected subjects on the basis of which the appropriate Stream would be Recommended to the student.
