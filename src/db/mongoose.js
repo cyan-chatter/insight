@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 
 //const MongoClient = mongodb.MongoClient
 const dbName = 'insight-base' 
-const mongoaddress =  process.env.MONGODB_URL||("mongodb://127.0.0.1:27017/insight-base")
+const mongoaddress =  process.env.MONGODB_URI||("mongodb://127.0.0.1:27017/insight-base")
 
 
 mongoose.connect(mongoaddress,{
