@@ -1,5 +1,5 @@
 {
-   "version": 1,
+   "version": 2,
    "name": "insight",
    "builds": [
       { "src": "./src/app.js", "use": "@vercel/node" }
