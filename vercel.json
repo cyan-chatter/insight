@@ -2,9 +2,9 @@
    "version": 1,
    "name": "insight",
    "builds": [
-      { "src": "src/app.js", "use": "@vercel/node" }
+      { "src": "./src/app.js", "use": "@vercel/node" }
    ],
    "routes": [
-      { "src": "/(.*)", "dest": "/src/app.js" }
+      { "src": "/(.*)", "dest": "app.js" }
    ]
 }
