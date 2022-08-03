@@ -1,52 +1,50 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="/css/form_page.css">
-        
+        <link rel="stylesheet" href="/css/common.css">        
         <title>Insight</title>
         <link rel="icon" href="../../utils/img/searchW2.png">
-       
     </head>
     <body>
-        <div class= "header">
-        <h1>{{title}}</h1>
-        </div>
-        <div class="main-content">
-                <br>
-                <form id="registerForm" method ="post" action = {{goto}}>
-                    
-                    <label for="name">Name</label><br>
-                    <input type="text" name="name" id="name" required><br>
-                    <label for="age">Age</label><br>
-                    <input type="number" name="age" id="age" required><br>
-                    <label for="email">Email</label><br>
-                    <input type="email" name="email" id="email" required><br>
-                    <label id="subjects">Choose your subject:<br>
-                        <select name="subject" >
-                            <option value="22">Geography</option>
-                            <option value="17">Science and Nature</option>
-                            <option value="19">Mathematics</option>
-                            <option value="11">Entertainment:Movies</option>
-                        </select><br>
-                    </label>
-                    <label for="password">Password</label><br>
-                    <input type="password" name="password" id="password" minlength=6 required><br>
-                    <label for="confirmpass">Confirm Password</label><br>
-                    <input type="password" id="confirmpass" required><br><br>
-                    <button type="submit" form="registerForm" id="submit">Register</button>
-                </form>
-                
-                <br>
-        </div>
-     <script>
-         if({{{type}}}=='students')
-         {
-             var sub_options = document.querySelector('#subjects')
-             sub_options.remove()
-         }
-     </script>   
-     <script src="/js/confirmpass.js" ></script>
-   <!-- <div><script src="/js/face.js"></script></div> -->
-    
+        <div class="content">
+            <div class="main-content">
+                <div class = "face-level">
+                    <div class= "welcome">
+                        <img class="mainlogo" src="/img/title-logo-face.png"></img>
+                        <h1>{{title}}</h1>
+                        <h3>{{subtitle}}</h3>    
+                    </div>
+                    <form id="registerForm" method ="post" action = {{goto}}>
+                        <label for="name">Name</label><br>
+                        <input type="text" name="name" id="name" required><br>
+                        <label for="age">Age</label><br>
+                        <input type="number" name="age" id="age" required><br>
+                        <label for="email">Email</label><br>
+                        <input type="email" name="email" id="email" required><br>
+                        <label id="subjects">Choose your subject:<br>
+                            <select name="subject" >
+                                <option value="22">Geography</option>
+                                <option value="17">Science and Nature</option>
+                                <option value="19">Mathematics</option>
+                                <option value="11">Entertainment:Movies</option>
+                            </select><br>
+                        </label>
+                        <label for="password">Password</label><br>
+                        <input type="password" name="password" id="password" minlength=6 required><br>
+                        <label for="confirmpass">Confirm Password</label><br>
+                        <input type="password" id="confirmpass" required><br><br>
+                        <button type="submit" form="registerForm" id="submit">Register</button>
+                    </form>
+                </div>
+            </div>
+            <script>
+                if({{{type}}}=='students')
+                {
+                    var sub_options = document.querySelector('#subjects')
+                    sub_options.remove()
+                }
+            </script>   
+            <script src="/js/confirmpass.js" ></script>
+        </div>    
     </body>
 </html>

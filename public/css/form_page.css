@@ -3,7 +3,10 @@ body {
     background: linear-gradient(to right, #74ebd5, #acb6e5);
   }
   
-  
+  .welcome {
+    text-align: center;
+    margin-top: 20px;
+  }
   input{
     box-sizing:border-box;
     width:100%;

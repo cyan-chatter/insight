@@ -7,18 +7,19 @@
         <script rel="javascript" src="/js/reload_on_back.js"></script>
     </head>
     <body>
-        <div class= "header">
-        <h1>Hi, {{name}}</h1>
-        </div>
-        <div class= "statusMessage">
-            <h4>{{message}}</h4>
-        </div>
-        <br>
-        <div class="main-content">  
-            <p>Click Here to Redirect to the {{destination}}</p>
+        <div class="content">
+            <div class= "header">
+            <h1>Hi, {{name}}</h1>
+            </div>
+            <div class= "statusMessage">
+                <h4>{{message}}</h4>
+            </div>
             <br>
-            <a href= "{{goto}}">{{destination}}</a>
-        </div>
-    
+            <div class="main-content">  
+                <p>Click Here to Redirect to the {{destination}}</p>
+                <br>
+                <a href= "{{goto}}">{{destination}}</a>
+            </div>
+        </div> 
     </body>
 </html>

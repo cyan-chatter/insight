@@ -1,7 +1,109 @@
 body{
-    font-family:quickSand,Arial, Helvetica, sans-serif;
-    background: linear-gradient(to right, #74ebd5, #acb6e5);  
+    font-family: quicksand,Arial, Helvetica, sans-serif;
+    background: linear-gradient(to right, #126455, #554d70);
 }
+
+.content{
+    max-width: 1020px;
+    background: linear-gradient(to right, #74ebd5b9, #acb6e5f3);
+    margin: auto;
+    min-height: 100vh;
+    border-radius: 0.3rem;
+}
+
+.header{
+    display: flex;
+    padding: 0px 50px 10px 50px;
+    justify-content: space-between;
+}
+.welcome {
+    text-align: center;
+    margin-top: 10px;
+}
+.always-present-buttons{
+    display: flex;
+    justify-content: flex-end;
+}
+.always-present-buttons button{
+    min-height: 40px;
+    min-width: 100px;
+}
+
+.main-content{
+    padding: 10px;
+    max-width: 960px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.face-level{
+    padding: 10px;
+    max-width: 30%;
+    width: 30%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+}
+
+.face-level button{
+    border: none;
+    cursor: pointer;
+    min-width: 40%;
+    padding: 10px;
+    border-radius: 1.5rem;
+    background: linear-gradient(to right, #8c00ff, #cc00ff);
+    color: #ffffff;
+    font-family: quicksand, arial;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    margin: 20px auto 20px auto;
+}
+
+.face-level button:hover{
+    background: linear-gradient(to right, #7f00ff, #ff00c8);
+}
+
+.face-level input{
+    border: none;
+    border-radius: 0.5rem;
+    width: 90%;
+    height: 100%;
+    margin: 10px 0px;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #ffffff;
+    font-family: quicksand, arial;
+    font-weight: semi-bold;
+    font-size: larger;
+}
+
+input:active{
+    background-color: rgba(255,255,255,0.2);
+}
+
+.face-level label{
+    color: #ffffff;
+    font-family: quicksand, arial;
+    font-size: larger;
+}
+
+.face-level button:active{
+    outline: none;
+    border: 2px solid;
+}
+
+.face-level select{
+    width: 100%;
+    margin: 5px 3px;
+}
+
 
 a{
     text-decoration: none;
@@ -11,11 +113,12 @@ button {
    border:none;
    background: #d00e0e;
    font-size: 17px;
-   margin:20px 0px;
+   margin:20px 10px;
    color:#ffffff;
    padding :5px 10px;
    cursor:pointer;
    border-radius:5px;
+   max-width: 250px;
 }
 button:hover{
     background: #500e0e;
@@ -28,7 +131,7 @@ button a{
 select{
     color:#444444;
     background:#00ffff;
-     font-family:Arial, Helvetica, sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 input:not([type='radio']):not([type='checkbox']){
@@ -42,11 +145,9 @@ input:not([type='radio']):not([type='checkbox']){
   }
 
   input:focus{
-    
     outline:none;
     border-radius:10px;
-    border:3px solid;
-    
+    border:2px solid rgb(255, 47, 220);
   }
    
 .clearSelection{
@@ -58,6 +159,5 @@ input:not([type='radio']):not([type='checkbox']){
 }
 .clearSelection:hover{
     background-color: #cccccc;
-
 }
 

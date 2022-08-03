@@ -2,25 +2,23 @@
 <html>
     <head>
         <link rel="stylesheet" href="/css/common.css">
-        
         <title>Insight</title>
         <link rel="icon" href="../../utils/img/searchW2.png">
     </head>
     <body>
-        
-        <div class= "header">
-            <h2>{{title}}</h2>
-        </div>
+    <div class="content">
         <div class="main-content">
-                <br>
-                <br>
+            <div class="face-level">
+            <div class= "welcome">
+                <img class="mainlogo" src="/img/title-logo-face.png"></img>
+                <h1> {{title}}</h1>
+                <h3>{{subtitle}}</h3>    
+            </div>
                 <button class = "login-btn button" href="{{gotoLogin}}">{{login}}</button> 
-                <br>
-                <br>
-                <button class = "register-btn button" href="{{gotoRegister}}">{{register}}</button> 
-                <br>    
+                <button class = "register-btn button" href="{{gotoRegister}}">{{register}}</button>
+            </div>
         </div>
-        
-    <script defer src="/js/buttons.js"></script>
+        <script defer src="/js/buttons.js"></script>
+    </div>
     </body>
 </html>

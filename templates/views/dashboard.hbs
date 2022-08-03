@@ -4,54 +4,53 @@
         <script src="https://kit.fontawesome.com/a392ca20cf.js" crossorigin="anonymous"></script>
         <script rel="javascript" src="/js/reload_on_back.js"></script>
         <link rel="stylesheet" href="/css/common.css">
-      <title>Dashboard</title>
+        <title>Dashboard</title>
     </head>
      <body>
-       <h1>DashBoard</h1>
-       <div>
-       <a href='/{{type}}/profile'><i class="fas fa-user"></i></a>
-       <span>{{name}}</span>
-       </div><br>
-       <div>
-       <form style='display:inline' action="/{{type}}/logout" method='post'>
-       <button type='submit'>Logout</button>
-       </form>
-       <form style='display:inline' action="/{{type}}/logoutAll" method='post'>
-       <button type='submit'>LogoutAll</button>
-       </form>
-       </div>
-
+      <div class="content">
        
-    <form action="/students/pretest" method='get' id = 'studenttest'>
-    <label for="category">Choose a subject:</label>
-      <select name="category" id="subjects">
-        <option value="22">Geography</option>
-        <option value="17">Science and Nature</option>
-        <option value="19">Mathematics</option>
-        <option value="11">Entertainment:Movies</option>
-      </select>
-      <button type='submit'>Create Test</button>
-    </form>
-    
-    <span>
-      
-      <button class = "diffun"><a href = "{{goto}}">{{destination}}</a></button>
-      <button class = "diffun2"><a href = "{{goto2}}">{{destination2}}</a></button>
-      <button class = "diffun3"><a href = "{{goto3}}">{{destination3}}</a></button>
-    </span>
+        <div class="header">
+          <div class="title"><h1>DashBoard</h1></div>
+          <div class="always-present-buttons">
+            <button class="button header-profile-link" href='/{{type}}/profile'> <i class="fas fa-user"></i> <span>{{name}}</span></button>
+            <form style='display:inline' action="/{{type}}/logout" method='post'>
+            <button type='submit'>Logout</button>
+            </form>
+            <form style='display:inline' action="/{{type}}/logoutAll" method='post'>
+            <button type='submit'>LogoutAll</button>
+            </form>
+          </div>
+        </div>
 
-    <script>
-      var student_test = document.getElementById('studenttest')
-      var result_button = document.querySelector('.diffun')
-      if({{{type_str}}}=='teachers')
-      {student_test.remove()
-       result_button.remove()}
-      else{
-        document.querySelector('.diffun3').remove()
+        <div class="main-content">
+                
+          <form action="/students/pretest" method='get' id = 'studenttest'>
+          <label for="category">Choose a subject:</label>
+            <select name="category" id="subjects">
+              <option value="22">Geography</option>
+              <option value="17">Science and Nature</option>
+              <option value="19">Mathematics</option>
+              <option value="11">Entertainment:Movies</option>
+            </select>
+            <button type='submit'>Create Test</button>
+          </form>
+        
+          <span>
+            <button class = "diffun button" href = "{{goto}}">{{destination}}</button>
+            <button class = "diffun2 button" href = "{{goto2}}">{{destination2}}</button>
+            <button class = "diffun3 button" href = "{{goto3}}">{{destination3}}</button>
+          </span>
 
-      }
-    </script>
-
+          <script>
+            var student_test = document.getElementById('studenttest')
+            var result_button = document.querySelector('.diffun')
+            if({{{type_str}}}=='teachers')
+            {student_test.remove()
+            result_button.remove()}
+            else document.querySelector('.diffun3').remove()
+          </script>
+          <script defer src="/js/buttons.js"></script>
+        </div>
+      </div>
      </body>
-
 </html>

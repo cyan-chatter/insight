@@ -5,27 +5,22 @@
         <link rel="stylesheet" href="/css/common.css">
         <script>
             var perfEntries = performance.getEntriesByType("navigation");
-
             if (perfEntries[0].type === "back_forward") {
                 window.location.href='/students/dashboard';
             }
-
         </script>
-        
         <title>Test</title>
     </head>
     <body>
-        
-        <span id ='timer'></span>
-        <form method='post' id='questions' action='/students/test'>
-           <legend class='head' ><h2>Test</h2></legend>
-        
-        </form>
-        
-        <script> var ques_arr = {{{questions}}}
-            
-           </script>
-        <script src="/js/testpage.js"></script>
-        
+        <div class="content">
+            <span id ='timer'></span>
+            <form method='post' id='questions' action='/students/test'>
+            <legend class='head' ><h2>Test</h2></legend>
+            </form>
+            <script> 
+                var ques_arr = {{{questions}}}    
+            </script>
+            <script src="/js/testpage.js"></script> 
+        </div>
     </body>
 </html>

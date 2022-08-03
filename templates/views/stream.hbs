@@ -6,28 +6,27 @@
             var subject_code = {{conclusion}}
             var subject_key = {{{subject_key}}}
             var stream_sugg = subject_key[subject_code]
-            
         </script>
         <title>Stream</title>
         <link rel="icon" href="../../utils/img/searchW2.png">
     </head>
     <body>
-        <div class= "headStream">
-            <h3>Your Recommended Stream is : </h3>
+        <div class="content">
+            <div class= "headStream">
+                <h3>Your Recommended Stream is : </h3>
+            </div>
+            <hr>
+            <h1 class = "announceStream"></h1>
+            <br>
+            <div>
+                <button href = "/students/dashboard" class="button">Dashboard</button>
+            </div>
+            <div>
+                <button href = "/students/results" class="button">Results</button>
+            </div>
+            <script>var stream = document.querySelector('.announceStream')
+                stream.innerHTML=stream_sugg
+            </script>
         </div>
-        <hr>
-        <h1 class = "announceStream"></h1>
-        </div>
-        <br>
-        <div>
-            <button href = "/students/dashboard" class="button">Dashboard</button>
-        </div>
-        <div>
-            <button href = "/students/results" class="button">Results</button>
-        </div>
-        <script>var stream = document.querySelector('.announceStream')
-            stream.innerHTML=stream_sugg
-        </script>
-       
     </body>
 </html>
