@@ -13,7 +13,7 @@
         
     
     <br>
-    <button><a href="/{{type}}/dashboard" class="getDashboard" method = "get">Dashboard</a></button>
+    <button href="/{{type}}/dashboard" class="button">Dashboard</button>
     <br>
     <script>    
     </script>
@@ -23,7 +23,7 @@
             <p id='subjectele'>Subject: {{subject}}</p>
             <p>Number of Tests {{diffString}} : {{noTests}}</p>
         <br>
-            <button><a href="/{{type}}/profile/patch" class="updateProfile" method = "get">Update Profile</a></button>
+            <button href="/{{type}}/profile/patch" class="button updateProfile" >Update Profile</button>
         <br>
             <hr>
             <div>
@@ -44,9 +44,6 @@
             }
         </script>
         
-
-
-
-    
+        <script defer src="/js/buttons.js"></script>
     </body>
 </html>

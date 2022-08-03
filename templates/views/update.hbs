@@ -10,7 +10,7 @@
         <h1>{{title}}</h1>
         </div>
         <br>
-        <button><a href="/{{type}}/dashboard" class="getDashboard" method = "get">Dashboard</a></button>
+        <button href="/{{type}}/dashboard" class="getDashboard button">Dashboard</button>
         <br>
         <h3>Fill Those Fields which are required to be updated and Leave others blank</h3>
 
@@ -20,9 +20,9 @@
             <p>Click here to Upload an Image, Select Image and then Click Upload to Set new Profile Picture </p>
         </label>
         <button class="btn btn-lg btn-primary" type="submit">Update Profile Picture</button>
-        <button><a href="/{{type}}/profile/avatar/delete" id="clearImage" method = "get">Remove</a></button>
         <p class='message' style='display:none'></p>
     </form>
+     <button href="/{{type}}/profile/avatar/delete" id="clearImage" class="button">Remove Profile Picture</button>
     <br>
     
 
@@ -72,6 +72,6 @@
          })
          
         </script>
-        
+        <script defer src="/js/buttons.js"></script>
     </body>
 </html>
