@@ -239,7 +239,8 @@ router.get('/students/pretest',auth('students'),async (req,res)=> {
       title: 'Test List',
       goto:'/students/test', 
       test_list:JSON.stringify(tests),
-      subject: req.query.category
+      subject: req.query.category,
+      name: req.user.name,
    })
 })
 
@@ -287,7 +288,8 @@ router.get('/students/test',auth('students'),async (req,res)=> {
           
           res.render('test',{
             questions:JSON.stringify(ques),
-            title:'Test'
+            title:'Test',
+            name:req.user.name
          })
       })
       }  
@@ -388,7 +390,8 @@ router.post('/students/test', auth('students'), async (req,res)=>{
       ques : JSON.stringify(questions),
       prob : JSON.stringify(problems),
       att : JSON.stringify(attempted),
-      title:'Score'
+      title:'Score',
+      name:req.user.name
    })
 
 })
