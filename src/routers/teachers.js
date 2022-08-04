@@ -137,11 +137,12 @@ router.post('/teachers/register', async (req, res)=>{
 
  router.get('/teachers/profile/patch', auth('teachers'), async (req,res)=>{
    try{
-      res.render("update", {
+      res.render("update_teachers", {
         title: "Update Teacher Profile",
         goto: "/teachers/profile/patch",
         type: "teachers",
         type_str: JSON.stringify("teachers"),
+        name: req.user.name,
       });
    }catch(e){
       res.status(500).render(e)
@@ -205,11 +206,9 @@ router.post('/teachers/profile/patch', auth('teachers'), async (req, res)=>{
  })
  
  router.get('/teachers/dashboard',auth('teachers') ,async (req,res)=> {
-     res.render('dashboard', { name: req.user.name,
+     res.render('dashboard_teachers', { name: req.user.name,
       type:'teachers',
       type_str:JSON.stringify(req.user_type),
-      goto: '/teachers/createtest',
-      destination: 'Create New Test',
       title: 'Teacher Dashboard'
    })
  })
@@ -218,7 +217,7 @@ router.post('/teachers/profile/patch', auth('teachers'), async (req, res)=>{
 
 
  router.get("/teachers/createtest", auth("teachers"), (req, res) => {
-   res.render("test_create", { title: "New Test" });
+   res.render("test_create", { title: "New Test", name:req.user.name, });
  });
 
 
@@ -291,7 +290,7 @@ router.get('/teachers/profile', auth('teachers'), async(req,res)=>{
    }else{
       var pic = req.user.avatar.toString('base64')
    }
-   res.render('profile', {
+   res.render('profile_teachers', {
       title : 'Teacher Profile',
       type: 'teachers',
       type_js:JSON.stringify('teachers'),

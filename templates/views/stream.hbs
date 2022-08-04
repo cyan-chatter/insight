@@ -7,26 +7,21 @@
             var subject_key = {{{subject_key}}}
             var stream_sugg = subject_key[subject_code]
         </script>
-        <title>Stream</title>
+        <title>Insight</title>
         <link rel="icon" href="../../utils/img/searchW2.png">
     </head>
     <body>
         <div class="content">
-            <div class= "headStream">
-                <h3>Your Recommended Stream is : </h3>
+            {{> header_students}}
+            <div class="main-content">
+                <h3>Your Recommended Stream is:</h3>
+                <h1 class = "announceStream"></h1>
+                <br>
             </div>
-            <hr>
-            <h1 class = "announceStream"></h1>
-            <br>
-            <div>
-                <button href = "/students/dashboard" class="button">Dashboard</button>
-            </div>
-            <div>
-                <button href = "/students/results" class="button">Results</button>
-            </div>
-            <script>var stream = document.querySelector('.announceStream')
-                stream.innerHTML=stream_sugg
-            </script>
         </div>
+        <script>var stream = document.querySelector('.announceStream')
+            stream.innerHTML=stream_sugg
+        </script>
+        <script defer src="/js/buttons.js"> </script>
     </body>
 </html>

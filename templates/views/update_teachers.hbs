@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/css/common.css">
+        <title>Insight</title>
+        <link rel="icon" href="../../utils/img/searchW2.png">
+    </head>
+    <body>
+        <div class="content">
+            {{> header_teachers}}
+            <div class="main-content"> {{> update_partial}} </div>
+        </div>
+        <script>
+            if({{{type_str}}}=='students'){
+                var sub_options = document.querySelector('#subjects')
+                sub_options.remove()
+            }
+            var update_picture= document.querySelector("#theImageForm > button.btn.btn-lg.btn-primary")
+            update_picture.addEventListener('click',(e)=>{
+                if(document.querySelector('[type="file"]').value===''){
+                    e.preventDefault()
+                    alert('Please Select an Image first')
+                }                    
+            })    
+        </script>
+        <script defer src="/js/buttons.js"></script>
+    </body>
+</html>

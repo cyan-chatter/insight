@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://kit.fontawesome.com/a392ca20cf.js" crossorigin="anonymous"></script>
+        <script rel="javascript" src="/js/reload_on_back.js"></script>
+        <link rel="stylesheet" href="/css/common.css">
+        <title>Insight</title>
+    </head>
+    <body>
+      <div class="content">
+        {{> header_students }}
+        <div class="main-content">
+          <form action="/students/pretest" method='get' id = 'studenttest'>
+          <label for="category">Choose a subject:</label>
+            <select name="category" id="subjects">
+              <option value="22">Geography</option>
+              <option value="17">Science and Nature</option>
+              <option value="19">Mathematics</option>
+              <option value="11">Entertainment:Movies</option>
+            </select>
+            <button type='submit'>Start Test</button>
+          </form>
+        </div>
+      </div>
+      <script defer src="/js/buttons.js"></script>
+    </body>
+</html>

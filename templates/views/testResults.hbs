@@ -2,46 +2,46 @@
 <html>
     <head>
         
-        <title>Test Results</title>
+        <title>Insight</title>
         <link rel="stylesheet" href="/css/common.css">
         <script src="https://kit.fontawesome.com/a392ca20cf.js" crossorigin="anonymous"></script>
       
     </head>
     <body>
         <div class="content">
-            <div id="print_div">
-                <h4>{{message}}</h4>
-                <h4>Total Marks Scored:</h4>
-                <h3 id='totalmarks'></h3>
-                <div id='questions'></div>
-            </div>
-            <br>
-            <div id='not-printable'>
-                <div class ="download">
-                    <p>Download a Copy of this Page Here</p>
-                    <button class="print_button" onclick="printresult()">Download</button>
+            {{> header_students }}
+            <div class="main-content">
+                <div id="print_div">
+                    <h4>{{message}}</h4>
+                    <h4>Total Marks Scored:</h4>
+                    <h3 id='totalmarks'></h3>
+                    <div id='questions'></div>
                 </div>
-                <div>
-                    <button href = "/students/dashboard" class="button">Dashboard</button>
+                <br>
+                <div id='not-printable'>
+                    <div class ="download">
+                        <p>Download a Copy of this Page Here</p>
+                        <button class="print_button" onclick="printresult()">Download</button>
+                    </div>
                 </div>
             </div>
-            <script> 
-                var questions = {{{ques}}}
-                var answers = {{{ans}}}
-                var problems = {{{prob}}}
-                var correct = {{{correctMap}}}
-                var attempted = {{{att}}}
-                const totalmarks_DOM = document.querySelector('#totalmarks')
-                totalmarks_DOM.innerHTML= {{{totalMarks}}}+'/'+questions.length
-                function printresult(){
-                    const download_Div= document.querySelector('#not-printable')
-                    download_Div.style.display= 'none'
-                    window.print()
-                    download_Div.style.display='block'
-                }
-            </script>
-            <script defer src="/js/buttons.js"></script>
-            <script src="/js/testResults.js"></script>
         </div>
+        <script> 
+            var questions = {{{ques}}}
+            var answers = {{{ans}}}
+            var problems = {{{prob}}}
+            var correct = {{{correctMap}}}
+            var attempted = {{{att}}}
+            const totalmarks_DOM = document.querySelector('#totalmarks')
+            totalmarks_DOM.innerHTML= {{{totalMarks}}}+'/'+questions.length
+            function printresult(){
+                const download_Div= document.querySelector('#not-printable')
+                download_Div.style.display= 'none'
+                window.print()
+                download_Div.style.display='block'
+            }
+        </script>
+        <script defer src="/js/buttons.js"></script>
+        <script src="/js/testResults.js"></script>
     </body>
 </html>

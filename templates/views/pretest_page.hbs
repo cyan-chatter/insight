@@ -1,23 +1,23 @@
 <html>
     <head>
-        <title>Test choice</title>
+        <title>Insight</title>
         <link rel="stylesheet" href="/css/common.css">
     </head>
     <body>
         <div class="content">
-            <p>
-                <h3>Select a Test from following :</h3>
-            </p>
-            <div id ='testOptions'>
-                <form action={{goto}} method="get" id= 'testoptionform' >
-                    <label><input type = 'radio' name = 'testchoice' value= {{subject}} required>Random Generated Test</label><br>
-                    <button type ='submit'>Start Test</button>
-                </form>
+             {{> header_students }}
+            <div class="main-content">
+                <h3>Select a Test</h3>
+                <div id ='testOptions'>
+                    <form action={{goto}} method="get" id= 'testoptionform' >
+                        <label><input type = 'radio' name = 'testchoice' value= {{subject}} required>Random Generated Test</label><br>
+                        <button type ='submit'>Start Test</button>
+                    </form>
+                </div>
             </div>
-            <script>
-                const test_list = {{{test_list}}}
-            </script>
-            <script src="/js/pretest.js"></script>
         </div>
+        <script> const test_list = {{{test_list}}} </script>
+        <script src="/js/pretest.js"></script>
+        <script defer src="/js/buttons.js"> </script>
     </body>
 </html>

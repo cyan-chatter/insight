@@ -1,0 +1,19 @@
+<div class = "details">
+        <p>Name : {{name}}</p>
+        <p id='subjectele'>Subject: {{subject}}</p>
+        <p>Number of Tests {{diffString}} : {{noTests}}</p>
+    <br>
+        <button href="/{{type}}/profile/patch" class="button updateProfile" >Update Profile</button>
+    <br>
+    <div><img id='profilepic'></div>
+</div>
+<script>
+    var picture = document.getElementById('profilepic')
+    var pic = {{{pic}}}
+    picture.src= "data:image/png;base64, "+pic
+    var subjectele= document.querySelector('#subjectele')
+    if({{{type_js}}}==='students')
+    {
+        subjectele.remove()
+    }
+</script>

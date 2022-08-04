@@ -1,0 +1,11 @@
+<div class="header">
+    <div class="title"><h1>{{title}}</h1></div>
+    <div class="always-present-buttons">
+        <button class="button header-profile-link" href='/students/profile'>{{name}}</button>
+        <button href = "/students/dashboard" class="button">Dashboard</button>
+        <button class="button header-results" href='/students/results'> Results </button>
+        <form style='display:inline' action="/students/logout" method='post'><button type='submit'>Logout</button></form>
+        <form style='display:inline' action="/students/logoutAll" method='post'><button type='submit'>LogoutAll</button></form>
+    </div>
+</div>
+

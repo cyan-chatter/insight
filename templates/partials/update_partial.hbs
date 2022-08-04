@@ -1,0 +1,33 @@
+<h3>Fill Those Fields which are required to be updated and Leave others blank</h3>
+<form id="theImageForm" action = "/{{type}}/profile/avatar" method = "post" enctype="multipart/form-data">
+    <label for="theImageField" id="theImageContainer">
+        <input type="file" id="theImageField" accept="image/png, image/jpeg" name="avatar">
+        <p>Click here to Upload an Image, Select Image and then Click Upload to Set new Profile Picture </p>
+    </label>
+    <button class="btn btn-lg btn-primary" type="submit">Update Profile Picture</button>
+    <p class='message' style='display:none'></p>
+</form>
+<button href="/{{type}}/profile/avatar/delete" id="clearImage" class="button">Remove Profile Picture</button>
+<br>
+<form id="updateForm" method ="post" action = {{goto}}>
+    
+    <label for="name">Name</label><br>
+    <input type="text" name="name" id="name" ><br>
+    <label for="age">Age</label><br>
+    <input type="number" name="age" id="age" ><br>
+    <label for="email">Email</label><br>
+    <input type="email" name="email" id="email" ><br>
+    <label id = 'subjects'>Choose a subject:<br>
+        <select name="subject" id="subjects">
+            <option value=''></option>
+            <option value="22">Geography</option>
+            <option value="17">Science and Nature</option>
+            <option value="19">Mathematics</option>
+            <option value="11">Entertainment:Movies</option>
+        </select><br>
+    </label>
+    <label for="password">Password</label><br>
+    <input type="password" name="password" id="password" minlength=6 ><br>
+    <button type="submit" form="updateForm" id="submit">Submit</button>
+</form>
+<br>

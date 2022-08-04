@@ -9,18 +9,22 @@
                 window.location.href='/students/dashboard';
             }
         </script>
-        <title>Test</title>
+        <title>Insight</title>
     </head>
     <body>
         <div class="content">
-            <span id ='timer'></span>
-            <form method='post' id='questions' action='/students/test'>
-            <legend class='head' ><h2>Test</h2></legend>
-            </form>
-            <script> 
-                var ques_arr = {{{questions}}}    
-            </script>
-            <script src="/js/testpage.js"></script> 
+            {{> header_students }} 
+            <div class="main-content">
+                <span id ='timer'></span>
+                <form method='post' id='questions' action='/students/test'>
+                <legend class='head' ><h2>Test</h2></legend>
+                </form> 
+            </div>
         </div>
+        <script> 
+            var ques_arr = {{{questions}}}    
+        </script>
+        <script defer src="/js/buttons.js"> </script>
+        <script src="/js/testpage.js"></script>
     </body>
 </html>

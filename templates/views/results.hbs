@@ -10,38 +10,28 @@
                 border:1px solid;
             }
         </style>        
-        <title>Results</title>
+        <title>Insight</title>
         <link rel="icon" href="../../utils/img/searchW2.png">
     </head>
     <body>
         <div class="content">
-            <div class= "header">
-                <h2>Results</h2>
-            </div>
-            <hr>
-            <div class="generateResults">
-            
-                <div class = "result">
-            
+            {{> header_students }}
+            <div class="main-content">
+                <div class="generateResults"><div class = "result"></div></div>
+                <br>
+                <div>
+                    <button id='streamrecommender' onclick="check()">Check Stream Recommendation</button>
+                    <p id='streamMessage'></p>
                 </div>
-            
             </div>
-            <br>
-            <div>
-                <button href = "/students/dashboard" class="button">Dashboard</button>
-            </div>
-            <div>
-                <button id='streamrecommender' onclick="check()">Check Stream Recommendation</button>
-                <p id='streamMessage'></p>
-            </div>
-            <script>
-                const time_str={{{time}}}
-                const marks= {{{marks}}}
-                const marksOutOf={{{marksOutOf}}}
-                const subjects = {{{subjects}}}
-            </script>
-            <script src="/js/results.js"></script>
-            <script defer src="/js/buttons.js"></script>
         </div>
+        <script>
+            const time_str={{{time}}}
+            const marks= {{{marks}}}
+            const marksOutOf={{{marksOutOf}}}
+            const subjects = {{{subjects}}}
+        </script>
+        <script src="/js/results.js"></script>
+        <script defer src="/js/buttons.js"></script>
     </body>
 </html>

@@ -150,11 +150,12 @@ router.post('/students/logoutAll', auth('students'), async(req,res)=>{
 
  router.get('/students/profile/patch', auth('students'), async (req,res)=>{
     try{
-       res.render('update',{
+       res.render('update_students',{
           title: 'Update Student Profile',
           goto: '/students/profile/patch',
           type: 'students',
-          type_str: JSON.stringify('students')
+          type_str: JSON.stringify('students'),
+          name: req.user.name
        })
     }catch(e){
        res.status(500).render(e)
@@ -216,13 +217,12 @@ router.post('/students/logoutAll', auth('students'), async(req,res)=>{
 })
 
 router.get('/students/dashboard',auth('students') ,async (req,res)=> {
-    res.render('dashboard', { 
+    res.render('dashboard_students', { 
       title:' Student Dashboard', 
       name: req.user.name, 
       type: 'students', 
       type_str:JSON.stringify(req.user_type),
-      goto: '/students/results', 
-      destination: 'Results'
+      header_name: 'header_students'
    })
 })
 
@@ -439,7 +439,8 @@ router.get('/students/results',auth('students') ,async (req,res)=>{
       subjects : JSON.stringify(subjects),
       time: JSON.stringify(timeObjArr),
       marksOutOf: JSON.stringify(marksOutOfArr),
-      title:'Results'
+      title:'Results',
+      name:req.user.name
    })
    }
    catch(e){
@@ -469,7 +470,7 @@ router.get('/students/profile', auth('students'), async(req,res)=>{
       var pic = req.user.avatar.toString('base64')
    }
 
-   res.render('profile', {
+   res.render('profile_students', {
       title : 'Student Profile',
       type: 'students',
       type_js:JSON.stringify('students'),
