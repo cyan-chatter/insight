@@ -206,12 +206,10 @@ router.post('/teachers/profile/patch', auth('teachers'), async (req, res)=>{
  
  router.get('/teachers/dashboard',auth('teachers') ,async (req,res)=> {
      res.render('dashboard', { name: req.user.name,
-       type:'teachers',
-       type_str:JSON.stringify(req.user_type),
-       goto2: '/teachers/profile', 
-       destination2: 'Profile',
-       goto3: '/teachers/createtest',
-      destination3: 'Create a New Test',
+      type:'teachers',
+      type_str:JSON.stringify(req.user_type),
+      goto: '/teachers/createtest',
+      destination: 'Create New Test',
       title: 'Teacher Dashboard'
    })
  })

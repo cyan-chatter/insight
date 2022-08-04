@@ -10,7 +10,7 @@
       <div class="content">
        
         <div class="header">
-          <div class="title"><h1>DashBoard</h1></div>
+          <div class="title"><h1>{{title}}</h1></div>
           <div class="always-present-buttons">
             <button class="button header-profile-link" href='/{{type}}/profile'> <i class="fas fa-user"></i> <span>{{name}}</span></button>
             <form style='display:inline' action="/{{type}}/logout" method='post'>
@@ -32,22 +32,15 @@
               <option value="19">Mathematics</option>
               <option value="11">Entertainment:Movies</option>
             </select>
-            <button type='submit'>Create Test</button>
+            <button type='submit'>Start Test</button>
           </form>
         
           <span>
             <button class = "diffun button" href = "{{goto}}">{{destination}}</button>
-            <button class = "diffun2 button" href = "{{goto2}}">{{destination2}}</button>
-            <button class = "diffun3 button" href = "{{goto3}}">{{destination3}}</button>
           </span>
-
           <script>
             var student_test = document.getElementById('studenttest')
-            var result_button = document.querySelector('.diffun')
-            if({{{type_str}}}=='teachers')
-            {student_test.remove()
-            result_button.remove()}
-            else document.querySelector('.diffun3').remove()
+            if({{{type_str}}}=='teachers') student_test.remove()
           </script>
           <script defer src="/js/buttons.js"></script>
         </div>

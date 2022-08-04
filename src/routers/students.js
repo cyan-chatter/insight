@@ -222,9 +222,7 @@ router.get('/students/dashboard',auth('students') ,async (req,res)=> {
       type: 'students', 
       type_str:JSON.stringify(req.user_type),
       goto: '/students/results', 
-      destination: 'Results', 
-      goto2: '/students/profile', 
-      destination2: 'Profile'
+      destination: 'Results'
    })
 })
 
