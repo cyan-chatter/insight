@@ -9,6 +9,8 @@ body{
     margin: auto;
     min-height: 100vh;
     border-radius: 0.3rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .header{
@@ -31,19 +33,21 @@ body{
 
 .main-content{
     padding: 10px;
-    max-width: 960px;
+    width: 70%;
+    flex: 1;
     margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: 2px solid rgb(218, 214, 214);
+    border-bottom: 0px;
 }
 
 .face-level{
     padding: 10px;
-    max-width: 30%;
-    width: 30%;
-    margin: auto;
+    width: 70%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;

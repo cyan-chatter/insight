@@ -209,6 +209,11 @@ router.post('/teachers/profile/patch', auth('teachers'), async (req, res)=>{
  // FILE UPLOADS
 
 
+ router.get("/teachers/createtest", auth("teachers"), (req, res) => {
+   res.render("test_create", { title: "New Test" });
+ });
+
+
  router.post('/teachers/createtest',auth('teachers'),async (req,res)=> {
     try{
     const questions = req.body
@@ -236,8 +241,7 @@ router.post('/teachers/profile/patch', auth('teachers'), async (req, res)=>{
    }
  })
 
- router.get('/teachers/testcreated',auth('teachers'),(req,res)=>{
-    
+ router.get('/teachers/testcreated',auth('teachers'),(req,res)=>{   
     res.render('tempPage',{name:req.user.name,
     message:"Test Created Successfully",
     goto: '/teachers/dashboard',

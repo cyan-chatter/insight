@@ -37,7 +37,8 @@ router.post('/students/register', async (req, res)=>{
          status:'400',
          message: 'E-mail already registered.',
          goto: '/students',
-         destination: 'Students Page'
+         destination: 'Students Page',
+         title: 'Error'
       })
    }
    try{
@@ -55,7 +56,8 @@ router.post('/students/register', async (req, res)=>{
          message: 'You are successfully Registered as a Student.',
          goto: '/students/dashboard',
          destination: 'Dashboard',
-         name: user.name
+         name: user.name,
+         title: 'Success'
          
       })
    }catch(e){
@@ -63,7 +65,8 @@ router.post('/students/register', async (req, res)=>{
          status:'400 :(',
          message: 'Error Occurred while generating Token',
          goto: '/students',
-         destination: 'Students Page'
+         destination: 'Students Page',
+         title: 'Error'
       })
    }
 
@@ -84,7 +87,8 @@ router.post('/students/register', async (req, res)=>{
          status:'400 :(',
          message: E,
          goto: '/students',
-         destination: 'Students Page'
+         destination: 'Students Page',
+         title: 'Error'
       })
     }
  })
@@ -102,7 +106,7 @@ router.post('/students/logout', auth('students'), async (req,res)=>{
       await req.user.save()
       res.clearCookie('token')
       res.render('tempPage', {
-         
+         title: 'Success',
          message: 'You have Logged Out successfully',
          destination: 'Home Page',
          goto: '/'
@@ -113,7 +117,8 @@ router.post('/students/logout', auth('students'), async (req,res)=>{
          status:'500 :(',
          message: 'Error in Logging Out, ' + e,
          goto: '/students',
-         destination: 'Students Page'
+         destination: 'Students Page',
+         title: 'Error'
       })
    }
 })
@@ -125,7 +130,7 @@ router.post('/students/logoutAll', auth('students'), async(req,res)=>{
       await req.user.save()
       res.clearCookie('token')
       res.render('tempPage', {
-         
+         title: 'Success',
          message: 'You have Logged Out successfully from all your Devices',
          destination: 'Home Page',
          goto: '/'
@@ -135,7 +140,8 @@ router.post('/students/logoutAll', auth('students'), async(req,res)=>{
          status:'500 :(',
          message: 'Error in Logging Out, '+ e,
          goto: '/students',
-         destination: 'Students Page'
+         destination: 'Students Page',
+         title: 'Error'
       })
    }
 })
@@ -145,7 +151,7 @@ router.post('/students/logoutAll', auth('students'), async(req,res)=>{
  router.get('/students/profile/patch', auth('students'), async (req,res)=>{
     try{
        res.render('update',{
-          title: 'Students Update Profile',
+          title: 'Update Student Profile',
           goto: '/students/profile/patch',
           type: 'students',
           type_str: JSON.stringify('students')
@@ -182,7 +188,8 @@ router.post('/students/logoutAll', auth('students'), async(req,res)=>{
          name: req.user.name,
          message: 'Profile Data Updated',
          goto: '/students/dashboard',
-         destination: 'Dashboard'
+         destination: 'Dashboard',
+         title: 'Success'
       })
    }
 
@@ -191,7 +198,8 @@ router.post('/students/logoutAll', auth('students'), async(req,res)=>{
          status: '400',
          message: e + 'Unable to Update Profile Data. Please Try Again',
          goto: '/students/dashboard',
-         destination: 'Dashboard'
+         destination: 'Dashboard',
+         title: 'Error'
       })
    }
    
@@ -208,7 +216,7 @@ router.post('/students/logoutAll', auth('students'), async(req,res)=>{
 })
 
 router.get('/students/dashboard',auth('students') ,async (req,res)=> {
-    res.render('dashboard', { name: req.user.name, type: 'students', type_str:JSON.stringify(req.user_type),goto: '/students/results', destination: 'Results', goto2: '/students/profile', destination2: 'Profile'})
+    res.render('dashboard', { title:'Dashboard', name: req.user.name, type: 'students', type_str:JSON.stringify(req.user_type),goto: '/students/results', destination: 'Results', goto2: '/students/profile', destination2: 'Profile'})
 })
 
 router.get('/students/pretest',auth('students'),async (req,res)=> {
@@ -220,9 +228,12 @@ router.get('/students/pretest',auth('students'),async (req,res)=> {
       }
    })
    
-   res.render('pretest_page',{goto:'/students/test', 
-                           test_list:JSON.stringify(tests),
-                           subject: req.query.category})
+   res.render('pretest_page',{
+      title: 'Test List',
+      goto:'/students/test', 
+      test_list:JSON.stringify(tests),
+      subject: req.query.category
+   })
 })
 
 router.get('/students/test',auth('students'),async (req,res)=> {
@@ -267,7 +278,10 @@ router.get('/students/test',auth('students'),async (req,res)=> {
 
            const ques= await Promise.all(ques_arr)
           
-          res.render('test',{questions:JSON.stringify(ques)})
+          res.render('test',{
+            questions:JSON.stringify(ques),
+            title:'Test'
+         })
       })
       }  
       else{
@@ -288,7 +302,10 @@ router.get('/students/test',auth('students'),async (req,res)=> {
          questions.forEach(question => {
             parsed_questions.push(question.parse_into_question())
          })
-         res.render('test',{questions:JSON.stringify(parsed_questions)})
+         res.render("test", {
+           questions: JSON.stringify(parsed_questions),
+           title: "Test"
+         });
          
       }
       
@@ -357,13 +374,14 @@ router.post('/students/test', auth('students'), async (req,res)=>{
    console.log(Test)
 
    res.render('testResults', {
-      message : 'You have Successfully Completed The Test. Here are the Results.',
+      message : 'You have Successfully Completed The Test. Here are your Results',
       totalMarks : JSON.stringify(Test.marks),
       correctMap : JSON.stringify(correct),
       ans: JSON.stringify(answers),
       ques : JSON.stringify(questions),
       prob : JSON.stringify(problems),
-      att : JSON.stringify(attempted)
+      att : JSON.stringify(attempted),
+      title:'Score'
    })
 
 })
@@ -409,10 +427,13 @@ router.get('/students/results',auth('students') ,async (req,res)=>{
       subjects[i]=subject_key[subArr[i]]
    }
       
-   res.render('results', {marks : JSON.stringify(marksArr),
-       subjects : JSON.stringify(subjects),
-        time: JSON.stringify(timeObjArr),
-      marksOutOf: JSON.stringify(marksOutOfArr)})
+   res.render('results', {
+      marks : JSON.stringify(marksArr),
+      subjects : JSON.stringify(subjects),
+      time: JSON.stringify(timeObjArr),
+      marksOutOf: JSON.stringify(marksOutOfArr),
+      title:'Results'
+   })
    }
    catch(e){
       console.log(e)
@@ -420,7 +441,7 @@ router.get('/students/results',auth('students') ,async (req,res)=>{
 })
 
 router.get('/students/stream',auth('students') ,async (req,res)=>{
-   res.render('stream',{conclusion: req.cookies.stream,subject_key:JSON.stringify(subject_key)})
+   res.render('stream',{conclusion: req.cookies.stream,subject_key:JSON.stringify(subject_key), title:'Stream'})
 })
 
 
@@ -482,7 +503,8 @@ router.post('/students/profile/avatar', auth('students'), uploadS.single('avatar
       message: 'Choose an image before Pressing Upload Button',
       status: '400',
       destination: 'Students Profile',
-      goto: '/students/profile/patch'
+      goto: '/students/profile/patch',
+      title: 'Error'
    })
   }
   
@@ -500,7 +522,8 @@ router.get('/students/profile/avatar/delete', auth('students'), async (req,res)=
          message: e,
          status: '400',
          destination: 'Students Profile',
-         goto: '/students/profile/patch'
+         goto: '/students/profile/patch',
+         title: 'Error'
       })
    } 
  }) 

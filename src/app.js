@@ -132,19 +132,13 @@ app.get('/admins/login', (req,res)=>{
     })
 })
 
-app.get('/teachers/createtest',auth('teachers'),(req,res)=>{
-    
-    res.render('test_create')
-})
-
-
-
 app.get('*',(req,res)=>{
     res.render('error404',{
         status: '404',
         message: 'Page Not Found',
         destination: 'Home Page',
-        goto: '/'
+        goto: '/',
+        title: 'Error'
     })
 })
 
