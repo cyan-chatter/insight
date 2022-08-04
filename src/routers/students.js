@@ -216,7 +216,16 @@ router.post('/students/logoutAll', auth('students'), async(req,res)=>{
 })
 
 router.get('/students/dashboard',auth('students') ,async (req,res)=> {
-    res.render('dashboard', { title:'Dashboard', name: req.user.name, type: 'students', type_str:JSON.stringify(req.user_type),goto: '/students/results', destination: 'Results', goto2: '/students/profile', destination2: 'Profile'})
+    res.render('dashboard', { 
+      title:' Student Dashboard', 
+      name: req.user.name, 
+      type: 'students', 
+      type_str:JSON.stringify(req.user_type),
+      goto: '/students/results', 
+      destination: 'Results', 
+      goto2: '/students/profile', 
+      destination2: 'Profile'
+   })
 })
 
 router.get('/students/pretest',auth('students'),async (req,res)=> {

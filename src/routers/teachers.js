@@ -24,7 +24,8 @@ router.post('/teachers/register', async (req, res)=>{
           status:'400',
           message: 'E-mail already registered.',
           destination: 'Teachers Page',
-          goto: '/teachers'
+          goto: '/teachers',
+          title: 'Error'
        })
     }
     try{
@@ -43,7 +44,8 @@ router.post('/teachers/register', async (req, res)=>{
           message: 'You are successfully Registered as a Teacher.',
           goto: '/teachers/dashboard',
           destination: 'Dashboard',
-          name: user.name
+          name: user.name,
+          title: 'Success'
           
        })
     }catch(e){
@@ -68,12 +70,13 @@ router.post('/teachers/register', async (req, res)=>{
        res.redirect('/teachers/dashboard')
      }catch(e){
        const E = e.toString() 
-       res.status(400).render('error404',{
-          status:'400 :(',
-          message: E,
-          destination: 'Teachers Page',
-          goto: '/teachers'
-       })
+       res.status(400).render("error404", {
+         status: "400 :(",
+         message: E,
+         destination: "Teachers Page",
+         goto: "/teachers",
+         title: "Error",
+       });
      }
   })
  
@@ -93,16 +96,18 @@ router.post('/teachers/register', async (req, res)=>{
           
           message: 'You have Logged Out successfully',
           destination: 'Home Page',
-          goto: '/'
+          goto: '/',
+          title: 'Success'
  
        }) 
     }catch(e){
-       res.status(500).render('error404',{
-        status:'500 :(',
-        message: 'Error in Logging Out, '+ e,
-        destination: 'Teachers Page',
-        goto: '/teachers'
-     })
+       res.status(500).render("error404", {
+         status: "500 :(",
+         message: "Error in Logging Out, " + e,
+         destination: "Teachers Page",
+         goto: "/teachers",
+         title: "Error",
+       });
     }
  })
  
@@ -112,31 +117,32 @@ router.post('/teachers/register', async (req, res)=>{
        req.user.tokens = []
        await req.user.save()
        res.clearCookie('token')
-       res.render('tempPage', {
-          
-          message: 'You have Logged Out successfully from all your Devices',
-          destination: 'Home Page',
-          goto: '/'
-       })
+       res.render("tempPage", {
+         message: "You have Logged Out successfully from all your Devices",
+         destination: "Home Page",
+         goto: "/",
+         title: "Success",
+       });
     }catch(e){
-       res.status(500).render('error404',{
-        status:'500 :(',
-        message: 'Error in Logging Out, '+ e,
-        destination: 'Teachers Page',
-        goto: '/teachers'
-     })
+       res.status(500).render("error404", {
+         status: "500 :(",
+         message: "Error in Logging Out, " + e,
+         destination: "Teachers Page",
+         goto: "/teachers",
+         title: "Error",
+       });
     }
  })
  //////////////////
 
  router.get('/teachers/profile/patch', auth('teachers'), async (req,res)=>{
    try{
-      res.render('update',{
-         title: 'Teachers Update Profile',
-         goto: '/teachers/profile/patch',
-         type: 'teachers',
-         type_str:JSON.stringify('teachers')
-      })
+      res.render("update", {
+        title: "Update Teacher Profile",
+        goto: "/teachers/profile/patch",
+        type: "teachers",
+        type_str: JSON.stringify("teachers"),
+      });
    }catch(e){
       res.status(500).render(e)
    }  
@@ -166,21 +172,23 @@ router.post('/teachers/profile/patch', auth('teachers'), async (req, res)=>{
 
      await req.user.save()       
 
-     res.status(200).render('tempPage',{
-        name: req.user.name,
-        message: 'Profile Data Updated',
-        goto: '/teachers/dashboard',
-        destination: 'Dashboard'
-     })
+     res.status(200).render("tempPage", {
+       name: req.user.name,
+       message: "Profile Data Updated",
+       goto: "/teachers/dashboard",
+       destination: "Dashboard",
+       title: "Success",
+     });
   }
 
   catch(e){
-     return res.render('error404', {
-        status: '400',
-        message: e + 'Unable to Update Profile Data. Please Try Again',
-        goto: '/teachers/dashboard',
-        destination: 'Dashboard'
-     })
+     return res.render("error404", {
+       status: "400",
+       message: e + "Unable to Update Profile Data. Please Try Again",
+       goto: "/teachers/dashboard",
+       destination: "Dashboard",
+       title: "Error",
+     });
   }
   
 })
@@ -203,7 +211,9 @@ router.post('/teachers/profile/patch', auth('teachers'), async (req, res)=>{
        goto2: '/teachers/profile', 
        destination2: 'Profile',
        goto3: '/teachers/createtest',
-      destination3: 'Create a New Test'})
+      destination3: 'Create a New Test',
+      title: 'Teacher Dashboard'
+   })
  })
  
  // FILE UPLOADS
@@ -234,18 +244,24 @@ router.post('/teachers/profile/patch', auth('teachers'), async (req, res)=>{
     
     res.redirect('/teachers/testcreated')
    }catch(e){
-      res.render('tempPage',{name:req.user.name,
-         message:"Error in test Creation",
-         goto: '/teachers/dashboard',
-         destination: 'Dashboard'})
+      res.render("tempPage", {
+        name: req.user.name,
+        message: "Error in test Creation",
+        goto: "/teachers/dashboard",
+        destination: "Dashboard",
+        title: "Success",
+      });
    }
  })
 
  router.get('/teachers/testcreated',auth('teachers'),(req,res)=>{   
-    res.render('tempPage',{name:req.user.name,
-    message:"Test Created Successfully",
-    goto: '/teachers/dashboard',
-    destination: 'Dashboard'})
+    res.render("tempPage", {
+      name: req.user.name,
+      message: "Test Created Successfully",
+      goto: "/teachers/dashboard",
+      destination: "Dashboard",
+      title: "Success",
+    });
  })
 
 const uploadS = multer({
@@ -278,7 +294,7 @@ router.get('/teachers/profile', auth('teachers'), async(req,res)=>{
       var pic = req.user.avatar.toString('base64')
    }
    res.render('profile', {
-      title : 'Teachers Profile',
+      title : 'Teacher Profile',
       type: 'teachers',
       type_js:JSON.stringify('teachers'),
       subject:subject_key[req.user.subject],
@@ -303,7 +319,8 @@ router.post('/teachers/profile/avatar', auth('teachers'), uploadS.single('avatar
       message: 'Choose an image before Pressing Upload Button',
       status: '400',
       destination: 'Teachers Profile',
-      goto: '/teachers/profile/patch'
+      goto: '/teachers/profile/patch',
+      title: 'Error'
    })
   }
   
@@ -321,7 +338,8 @@ router.get('/teachers/profile/avatar/delete', auth('teachers'), async (req,res)=
          message: e,
          status: '400',
          destination: 'Teachers Profile',
-         goto: '/teachers/profile'
+         goto: '/teachers/profile',
+         title: 'Error'
       })
    } 
  }) 
