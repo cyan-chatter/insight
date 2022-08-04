@@ -2,23 +2,15 @@
 <html>
     <head>
         <title>Insight</title>
-        <link rel="icon" href="../../utils/img/searchW2.png">
+        <link rel="icon" href="/img/title-logo.png">
          <link rel="stylesheet" href="/css/common.css">
         <script rel="javascript" src="/js/reload_on_back.js"></script>
     </head>
     <body>
         <div class="content">
-            <div class= "header">
-            <h1>Hi, {{name}}</h1>
-            </div>
-            <div class= "statusMessage">
-                <h4>{{message}}</h4>
-            </div>
-            <br>
-            <div class="main-content">  
-                <p>Click Here to Redirect to the {{destination}}</p>
-                <br>
-                <a href= "{{goto}}">{{destination}}</a>
+            <div class="main-content">
+                <h4>{{message}}</h4>  
+                <button class="button" href= "{{goto}}">{{destination}}</button>
             </div>
         </div> 
         <script defer src="/js/buttons.js"> </script>

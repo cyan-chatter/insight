@@ -7,8 +7,7 @@ function check(){
     
     if (new Set(subjects).size<3){
         const stream_button=document.querySelector('#streamrecommender')
-        
-     messageDOM.innerHTML='<h3>Please give Tests of atleast 3 subjects for Stream Recommendation<h3>' 
+        messageDOM.innerHTML='<b>Please give Tests of atleast 3 subjects for Stream Recommendation</b>' 
     }
     else{
         window.location.href='/students/stream'

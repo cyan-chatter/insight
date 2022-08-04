@@ -3,23 +3,17 @@
     <head>
         <link rel="stylesheet" href="/css/common.css">
         <title>Insight</title>
-        <link rel="icon" href="../../utils/img/errorW.png">    
+        <link rel="icon" href="/img/title-logo.png"> 
     </head>
 
     <body>
         <div class="content">
-        <div class="main-content"> 
-            
-            <h1>{{status}}</h1>
-            <br>
-            <h3>{{message}}</h3>
-            <br>
-            <h4>Click here to go to the {{destination}}</h4>
-            <br>
-            <h3><a href = "{{goto}}">{{destination}}</a></h3>
+            <div class="main-content"> 
+                <h3>Error {{status}}</h3>
+                <h4>{{message}}</h4>
+                <button class="button" href = "{{goto}}">{{destination}}</button>
+            </div>
         </div>
-
-        </div>
-         <script defer src="/js/buttons.js"> </script>
+        <script defer src="/js/buttons.js"> </script>
     </body>
 </html>
