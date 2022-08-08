@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const parsedDate = require('../../utils/js/dateparser.js')
 
 const testMapSchema = new mongoose.Schema({
     subject: {
@@ -29,6 +30,12 @@ const testMapSchema = new mongoose.Schema({
     timestamps: true
 })
 
+testMapSchema.methods.filterForDashboard = function (){
+    const test = this
+    const date = Date.parse(test.createdAt)
+    let created = parsedDate(Date.parse(test.createdAt),"dd MMM yyyy")
+    return {value:test._id,name:"",questions:test.marksOutOf,created}
+}
 
 
 const TestMap = new mongoose.model('TestMap',testMapSchema)

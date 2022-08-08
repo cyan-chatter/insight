@@ -1,0 +1,23 @@
+.testcards{
+    display:grid;
+    grid-template-columns : repeat(auto-fill,minmax(225px,1fr));
+   gap : 5px;
+   width:100%;
+}
+
+.testcard{
+    padding : 10px;
+    border : 1px solid;
+    border-radius : 5px;
+    box-shadow : 0 0 3px black;
+  }
+
+  .testcard:hover{
+    box-shadow : 0 0 10px black;
+  }
+
+  .test_card_content{
+    margin : 0 auto;
+    text-align : center;
+    padding : 5px 0;
+  }

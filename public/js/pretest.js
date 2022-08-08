@@ -1,7 +1,6 @@
 const test_list_DOM = document.querySelector('#testoptionform')
-console.log(test_list)
 
-const submit = document.querySelector("[type='submit']")
+const submit = document.querySelector("#testoptionform_submit")
 
 const setAttributes= (ele,params)=> {
     for(attribute in params)

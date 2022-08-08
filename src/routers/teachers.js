@@ -206,11 +206,25 @@ router.post('/teachers/profile/patch', auth('teachers'), async (req, res)=>{
  })
  
  router.get('/teachers/dashboard',auth('teachers') ,async (req,res)=> {
-     res.render('dashboard_teachers', { name: req.user.name,
+   try{
+      const teacher_tests = await TestMap.find({teacher:req.user._id})
+      //getting filtered data about test
+      let test_filtered = []
+      teacher_tests.forEach((test)=>{
+         test_filtered.push(test.filterForDashboard())
+      })
+
+
+      res.render('dashboard_teachers', { name: req.user.name,
       type:'teachers',
       type_str:JSON.stringify(req.user_type),
-      title: 'Teacher Dashboard'
-   })
+      title: 'Teacher Dashboard',
+      tests: JSON.stringify(test_filtered)
+      })
+   }catch(e){
+      console.log(e)
+      res.status(500).send()
+   }
  })
  
  // FILE UPLOADS
@@ -225,12 +239,16 @@ router.post('/teachers/profile/patch', auth('teachers'), async (req, res)=>{
     try{
     const questions = req.body
     const quesNo = questions
-    const test_map= new TestMap({subject:req.user.subject,teacher:req.user._id})
+    let questionCount = 0
+    for(i=1;questions['q'+i]!==undefined;i++){
+      questionCount++;
+    }
+    const test_map= new TestMap({subject:req.user.subject,teacher:req.user._id,marksOutOf:questionCount})
     await test_map.save()
     console.log(test_map)
     for(i=1;questions['q'+i]!==undefined;i+=1)
     { var options=[]
-       for(j=1;j<=4;j++)
+      for(j=1;j<=4;j++)
       {
          options.push(questions['o'+i+j])
       }
@@ -241,6 +259,7 @@ router.post('/teachers/profile/patch', auth('teachers'), async (req, res)=>{
     
     res.redirect('/teachers/testcreated')
    }catch(e){
+      console.log(e)
       res.render("tempPage", {
         name: req.user.name,
         message: "Error in test Creation",
@@ -260,6 +279,10 @@ router.post('/teachers/profile/patch', auth('teachers'), async (req, res)=>{
       title: "Success",
     });
  })
+
+router.get('/teachers/gettests',auth('teachers'),(req,res)=>{
+   
+})
 
 const uploadS = multer({
     //dest: 'avatars',
