@@ -7,6 +7,8 @@ const multer = require('multer')
 const sharp = require('sharp')
 const bodyParser = require('body-parser')
 const Questions= require('../db/test_questions')
+const { ObjectID } = require('mongodb')
+const { Mongoose } = require('mongoose')
 
 
 //const { sendWelcomeEmail, sendCancellationEmail} = require('../emails/account')
@@ -237,27 +239,27 @@ router.post('/teachers/profile/patch', auth('teachers'), async (req, res)=>{
 
  router.post('/teachers/createtest',auth('teachers'),async (req,res)=> {
     try{
-    const questions = req.body
-    const quesNo = questions
-    let questionCount = 0
-    for(i=1;questions['q'+i]!==undefined;i++){
-      questionCount++;
-    }
-    const test_map= new TestMap({subject:req.user.subject,teacher:req.user._id,marksOutOf:questionCount})
-    await test_map.save()
-    console.log(test_map)
-    for(i=1;questions['q'+i]!==undefined;i+=1)
-    { var options=[]
-      for(j=1;j<=4;j++)
-      {
-         options.push(questions['o'+i+j])
+      const questions = req.body
+      const quesNo = questions
+      let questionCount = 0
+      for(i=1;questions['q'+i]!==undefined;i++){
+         questionCount++;
       }
-      const ques =new  Questions( {question:questions['q'+i],options,correct_answer:questions['c'+i],test:test_map._id})
-      await ques.save()
-      console.log(ques)
-    }
-    
-    res.redirect('/teachers/testcreated')
+      const test_map= new TestMap({name:questions['testName'],subject:req.user.subject,teacher:req.user._id,marksOutOf:questionCount})
+      await test_map.save()
+      console.log(test_map)
+      for(i=1;questions['q'+i]!==undefined;i+=1)
+      { var options=[]
+         for(j=1;j<=4;j++)
+         {
+            options.push(questions['o'+i+j])
+         }
+         const ques =new  Questions( {question:questions['q'+i],options,correct_answer:questions['c'+i],test:test_map._id})
+         await ques.save()
+         console.log(ques)
+      }
+      
+      res.redirect('/teachers/testsaved')
    }catch(e){
       console.log(e)
       res.render("tempPage", {
@@ -265,24 +267,86 @@ router.post('/teachers/profile/patch', auth('teachers'), async (req, res)=>{
         message: "Error in test Creation",
         goto: "/teachers/dashboard",
         destination: "Dashboard",
-        title: "Success",
+        title: "Error",
       });
    }
  })
 
- router.get('/teachers/testcreated',auth('teachers'),(req,res)=>{   
-    res.render("tempPage", {
-      name: req.user.name,
-      message: "Test Created Successfully",
-      goto: "/teachers/dashboard",
-      destination: "Dashboard",
-      title: "Success",
-    });
- })
-
-router.get('/teachers/gettests',auth('teachers'),(req,res)=>{
-   
+router.get('/teachers/testsaved',auth('teachers'),(req,res)=>{   
+   res.render("tempPage", {
+   name: req.user.name,
+   message: "Test Saved Successfully",
+   goto: "/teachers/dashboard",
+   destination: "Dashboard",
+   title: "Success",
+   });
 })
+
+
+
+router.get('/teachers/edittest',auth('teachers'),async (req,res)=>{
+   try{
+      const questions = await Questions.find({test:ObjectID(req.query.value)})
+      let test_map = await TestMap.findOne({_id: ObjectID(req.query.value), teacher : ObjectID(req.user._id)}) 
+      let testData = {}
+      questions.forEach((question,currq)=>{
+         testData[`q${currq+1}`] = question.question
+         testData[`c${currq+1}`] = question.correct_answer
+         question.options.forEach((option,curro)=>{
+            testData[`o${currq+1}${curro+1}`] = option
+         })
+      })
+      testData['totalQuestions'] = questions.length
+      testData['testName'] = test_map.name
+
+      res.render("test_edit", { title: "Edit Test", name:req.user.name, 
+                                 testData : JSON.stringify(testData), testValue : req.query.value});
+
+   }catch(e){
+      console.log(e)
+      return res.render("error404", {
+         status: "400",
+         message: "Unable to Update Test. Please Try Again",
+         goto: "/teachers/dashboard",
+         destination: "Dashboard",
+         title: "Error",
+       });
+   }
+})
+
+router.post('/teachers/edittest',auth('teachers'), async(req,res)=>{
+   try{
+      const questions = req.body
+      let questionCount = 0
+      for(i=1;questions['q'+i]!==undefined;i++){
+         questionCount++;
+      }
+      const test_map= await  TestMap.findOneAndUpdate({teacher:req.user._id,_id:ObjectID(req.query.value)},{marksOutOf:questionCount,name:questions.testName})
+      console.log(test_map)
+      await Questions.deleteMany({test:ObjectID(req.query.value)})
+      for(i=1;questions['q'+i]!==undefined;i+=1)
+      { var options=[]
+         for(j=1;j<=4;j++)
+         {
+            options.push(questions['o'+i+j])
+         }
+         const ques =new  Questions( {question:questions['q'+i],options,correct_answer:questions['c'+i],test:test_map._id})
+         await ques.save()
+      }    
+      res.redirect('/teachers/testsaved')
+
+   }catch(e){
+      console.log(e)
+      res.render("tempPage", {
+        name: req.user.name,
+        message: "Error in Saving Test",
+        goto: "/teachers/dashboard",
+        destination: "Dashboard",
+        title: "Error",
+      });
+   }
+})
+
 
 const uploadS = multer({
     //dest: 'avatars',

@@ -9,10 +9,28 @@ const setAttributes= (ele,params)=> {
 const cardsDOM = document.createElement('div');
 setAttributes(cardsDOM,{'class':'testcards'})
 
+if(tests.length==0){
+    cardsDOM.innerText = "No Test Created Yet" 
+    cardsDOM.classList.remove("testcards")
+    cardsDOM.classList.add("notestcards")
+}else{
+    const myTestLabelDOM = document.createElement('h2');
+    myTestLabelDOM.innerText = "My Tests";
+    mainContentDOM.appendChild(myTestLabelDOM);
+}
+
+const redirect = (val) =>{
+    console.log(val)
+    location.href = `/teachers/edittest?value=${val}`
+}
+
 for(i = 1;i<=tests.length;i++){
     const cardDOM = document.createElement('div');
-    setAttributes(cardDOM,{'class':'testcard','id':`testcard_${i}`})
-    const testNameDOM = document.createElement('div')
+    setAttributes(cardDOM,{'class':'testcard','id':`testcard_${i}`,'value':tests[i-1].value})
+    cardDOM.onclick = function () {
+        redirect(this.getAttribute("value"))
+    }
+    const testNameDOM = document.createElement('h3')
     setAttributes(testNameDOM,{'class':'test_card_content test_name','id':`test_name${i}`})
     if(tests[i-1].name===""){
         testNameDOM.innerText =     `Test ${i}`
@@ -25,14 +43,12 @@ for(i = 1;i<=tests.length;i++){
     testQuestionNoDOM.innerText = `${tests[i-1].questions} Questions`
     const testCreatedDOM = document.createElement('div')
     setAttributes(testCreatedDOM,{'class':'test_card_content test_created','id':`test_created${i}`})
-    testCreatedDOM.innerText =  `Created On: ${tests[i-1].created}`
+    testCreatedDOM.innerText =  `${tests[i-1].created}`
     
     cardDOM.appendChild(testNameDOM)
     cardDOM.appendChild(testQuestionNoDOM)
     cardDOM.appendChild(testCreatedDOM)
     cardsDOM.appendChild(cardDOM);
 }
-
-if(tests.length==0)cardsDOM.innerText = "No Test Created Yet"
 
 mainContentDOM.appendChild(cardsDOM)

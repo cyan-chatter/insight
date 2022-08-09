@@ -11,15 +11,18 @@
         <div class="content">
             {{> header_teachers }}
             <div class="main-content">
-                <form id='questionsblock' action='/teachers/createtest' method='post'>
+                <form id='questionsblock' action='/teachers/edittest?value={{testValue}}' method='post'>
                     <input type="text" name="testName" id = "test_name" placeholder="Test Name" required>
                     <button type = "button" id='addquestion'>Add Question</button>
                     <br><br>
-                    <button type='submit'>Create New Test</button>
+                    <button type='submit'>Save Changes</button>
                 </form>
             </div>
         </div>
+        <script>
+            let testData = {{{testData}}}
+        </script>
         <script defer src="/js/buttons.js"> </script>
-        <script defer src="/js/test_create.js"> </script>
+        <script defer src="/js/test_edit.js"> </script>
     </body>
 </html>

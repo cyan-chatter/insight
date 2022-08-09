@@ -1,23 +1,30 @@
 .testcards{
-    display:grid;
-    grid-template-columns : repeat(auto-fill,minmax(225px,1fr));
-   gap : 5px;
-   width:100%;
+  display:grid;
+  grid-template-columns : repeat(auto-fill,minmax(225px,1fr));
+  gap : 10px;
+  width:100%;
+}
+
+.notestcards{
+margin:0 auto;
+font-size : 30px;
 }
 
 .testcard{
-    padding : 10px;
-    border : 1px solid;
-    border-radius : 5px;
-    box-shadow : 0 0 3px black;
-  }
+  padding : 10px;
+  border : 1px solid;
+  border-radius : 5px;
+  box-shadow : 0 0 3px black;
+  background-color: rgb(78 71 212 / 15%);
+  cursor : pointer;
+}
 
-  .testcard:hover{
-    box-shadow : 0 0 10px black;
-  }
+.testcard:hover{
+  box-shadow : 0 0 10px black;
+}
 
-  .test_card_content{
-    margin : 0 auto;
-    text-align : center;
-    padding : 5px 0;
-  }
+.test_card_content{
+  margin : 0 auto;
+  text-align : center;
+  padding : 5px 0;
+}

@@ -1,4 +1,3 @@
 require("datejs")
-
-const date = new Date(1469433907836)
-console.log(date.toString("dd MMM yyyy"))
+const today = Date.today().toString("dd MMM yyyy")
+console.log(today)

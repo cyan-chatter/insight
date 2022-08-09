@@ -10,3 +10,18 @@
 .question::-webkit-scrollbar{
     width : 0px;
 }
+
+#test_name{
+    padding-bottom: 0px;
+    font-size : 20px;
+    border : none;
+    border-bottom: 3px solid black;
+    border-radius:  0px;
+    background-color: rgba(255,255,255,1);
+}
+
+#test_name:focus{
+    border-bottom-color: blue;
+}
+
+
