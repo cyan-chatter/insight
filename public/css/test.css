@@ -7,13 +7,13 @@ body{
     position: fixed;
 width: 500px; 
 left:0;
+top : 0px;
 margin: auto; /* Will not center vertically and won't work in IE6/7.  */
 text-align: center;
 background-color: #888888;
 right: 0;
 border-radius:5px;
 color:#ffffff;
-
 }
 
 

@@ -254,6 +254,7 @@ router.get('/students/test',auth('students'),async (req,res)=> {
        await api(category,async (questions,category)=>{
           const test = new TestMap({subject: category})
           await test.save() 
+          
         
           const ques_arr = await questions.map(async (que)=>{
               
@@ -274,7 +275,7 @@ router.get('/students/test',auth('students'),async (req,res)=> {
               await result.save()
                   // each question gets saved to database with user id as parent field
               const quesParsed = result.parse_into_question()
-                  
+             
               res.cookie('test',test,{
                   maxAge:1000*60*60,
                   httpOnly:true
@@ -296,9 +297,11 @@ router.get('/students/test',auth('students'),async (req,res)=> {
       else{
          
          const test_map = await TestMap.findById(req.query.testchoice)
+         
          const questions = await Questions.find({test:ObjectID(req.query.testchoice)})
+         
          var parsed_questions=[]
-         const test = new TestMap({subject: test_map.subject})
+         const test = new TestMap({subject: test_map.subject,name : test_map.name,marksOutOf : test_map.marksOutOf})
           test.student= req.user._id
           test.testconnect= ObjectID(category)
           await test.save()
@@ -307,6 +310,7 @@ router.get('/students/test',auth('students'),async (req,res)=> {
             maxAge:1000*60*60,
             httpOnly:true
          })
+         
          
          questions.forEach(question => {
             parsed_questions.push(question.parse_into_question())
